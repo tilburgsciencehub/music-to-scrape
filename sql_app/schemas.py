@@ -27,8 +27,11 @@ class UserFindClass(BaseModel):
         orm_mode = True
 
 # TO support list and get APIs
-class User(UserFindClass):
+class User(BaseModel):
     username: str
+    age: int
+    country: str
+    description: str
 
     class Config:
         orm_mode = True
