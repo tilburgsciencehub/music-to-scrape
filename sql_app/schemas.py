@@ -3,12 +3,12 @@ from pydantic import BaseModel
 
 # TO support creation and update APIs
 class CreateAndUpdateCar(BaseModel):
+    id: int
     user: str
     date: str
     timestamp: int
     artist: str
     track: str
-    id: str
 
 # TO support creation and update APIs
 class SecondResponse(BaseModel):
@@ -21,8 +21,7 @@ class SecondResponse(BaseModel):
 class UserFindClass(BaseModel):
     user_info: SecondResponse
     total_plays: int
-    favorite_artist: str
-    favorite_track: str
+    favourite_artist: str
 
     class Config:
         orm_mode = True
@@ -41,28 +40,7 @@ class PaginatedUserInfo(BaseModel):
     offset: int
     data: List[User]
 
-# Count Plays Response Model
+# TO support creation and update APIs
 class CountPlays(BaseModel):
     username: str
     plays: int
-
-# Recent Users Response Model in List
-class RecentResponseModel(BaseModel):
-    user: str
-    timestamp: int
-
-# Recent User Info
-class RecentlyActive(RecentResponseModel):
-    user: str
-    
-    class Config:
-        orm_mode = True
-
-# Recent User Info (Main Response Model)
-class PaginatedRecentUserInfo(BaseModel):
-    limit: int
-    offset: int
-    data: List[RecentlyActive]
-
-
-

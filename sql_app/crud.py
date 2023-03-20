@@ -1,9 +1,8 @@
 # crud.py
 from typing import List
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, func
 from exceptions import CarInfoNotFoundError
 from models import UserInfo, UserListening
-from sqlalchemy import func
 
 
 # Function to get list of car info
@@ -15,10 +14,9 @@ def get_user_info_by_username(session: Session, _username: str) -> UserInfo:
     user_info = session.query(UserInfo).get(_username)
     count_plays = session.query(UserListening).filter_by(user=_username).count()
     favorite_artist = session.query(UserListening.artist, func.count(UserListening.artist)).filter_by(user=_username).group_by(UserListening.artist).order_by(func.count(UserListening.artist).desc()).first()
-    favorite_track = session.query(UserListening.track, func.count(UserListening.track)).filter_by(user=_username).group_by(UserListening.track).order_by(func.count(UserListening.track).desc()).first()
     user_info2 = user_info.__dict__
 
-    user_dict = {'user_info': user_info2, 'total_plays' : count_plays, 'favorite_artist' : str(favorite_artist[0]), 'favorite_track' : str(favorite_track[0])}
+    user_dict = {'user_info': user_info2, 'total_plays' : count_plays, 'favorite_artist' : favorite_artist[0]}
 
     if user_dict is None:
         raise CarInfoNotFoundError
@@ -34,7 +32,3 @@ def count_plays_by_username(session: Session, _username: str) -> UserListening:
 
     count_dict = {'username': _username, 'plays': count_plays}
     return count_dict
-
-# Function to get recently active users
-def recent_active_users(session: Session, limit: int, offset: int) -> List[UserListening]:
-    return session.query(UserListening).order_by(UserListening.timestamp.desc()).offset(offset).limit(limit).all()
