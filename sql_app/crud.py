@@ -1,9 +1,9 @@
 # crud.py
 from typing import List
-from sqlalchemy.orm import Session, func
+from sqlalchemy.orm import Session
 from exceptions import CarInfoNotFoundError
 from models import UserInfo, UserListening
-
+from sqlalchemy import func
 
 # Function to get list of car info
 def get_all_users(session: Session, limit: int, offset: int) -> List[UserInfo]:
@@ -16,7 +16,7 @@ def get_user_info_by_username(session: Session, _username: str) -> UserInfo:
     favorite_artist = session.query(UserListening.artist, func.count(UserListening.artist)).filter_by(user=_username).group_by(UserListening.artist).order_by(func.count(UserListening.artist).desc()).first()
     user_info2 = user_info.__dict__
 
-    user_dict = {'user_info': user_info2, 'total_plays' : count_plays, 'favorite_artist' : favorite_artist[0]}
+    user_dict = {'user_info': user_info2, 'total_plays' : count_plays, 'favourite_artist' : favorite_artist[0]}
 
     if user_dict is None:
         raise CarInfoNotFoundError
