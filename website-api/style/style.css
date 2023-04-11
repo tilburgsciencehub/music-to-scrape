@@ -33,8 +33,6 @@ button {
 
 body {
     font-family: Rubik, Arial, sans-serif;
-    font-weight: 400;
-    font-size: 1rem;
     overflow-x: hidden;
     color: #607289;
 }
@@ -43,8 +41,8 @@ h5 {
     font-size: 1rem;
     line-height: 1.375;
     font-family: Rubik, Arial, sans-serif;
-    font-weight: 500;
-    color: #030929;
+    font-weight: bolder;
+    color: rgb(1, 51, 101) !important
 }
 
 footer a {
@@ -174,4 +172,64 @@ a:hover {
     /* Add underline on hover */
     color: inherit;
     /* Use the same color as the parent element */
+}
+
+.top-bar {
+    background-color: #FE9C00;
+    color: #fff;
+    text-align: center;
+    height:25px;
+}
+
+.album_single_img {
+    width: 240px;
+    float: left;
+}
+
+.album_single_img img {
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(4, 4, 4, 0.4);
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+
+.top-bar {
+    background-color: #FE9C00;
+    color: #fff;
+    text-align: center;
+    height:25px;
+}
+
+.form-button{
+    background-color: rgb(1, 51, 101) !important;
+}
+
+.page-item.active .page-link {
+    background-color: rgb(1, 51, 101) !important;
+    border-color: rgb(1, 51, 101) !important;
+    color: white !important;
+  }
+
+.page-item a {
+color: rgb(1, 51, 101) !important;
+}
+
+.list-group-item-action.active{
+    background-color: rgb(1, 51, 101) !important;
+    border-color: rgb(1, 51, 101) !important;
+}
+
+.img-fluid-user{
+    box-shadow: none !important;
+    border-radius: none !important;
+    max-width: 100%;
+    height: auto;
 }
