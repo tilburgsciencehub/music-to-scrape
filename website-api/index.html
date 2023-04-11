@@ -10,9 +10,23 @@
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
     <script src="https://kit.fontawesome.com/4e7776d591.js" crossorigin="anonymous"></script>
     <link href="style/style.css" rel="stylesheet">
+
+    <style>
+        .top-bar {
+			background-color: #FE9C00;
+			color: #fff;
+			text-align: center;
+            height:25px;
+		}
+    </style>
 </head>
 
 <body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+		<p>We are a demo site without real data - use us to learn collecting data with web scraping and APIs</p>
+	</div>
+    <!-- End Top Bar -->
 
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -44,7 +58,7 @@
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search for artists, songs, and users" aria-label="Search" style="width:300px">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
@@ -66,8 +80,6 @@
                             Post Malone, Ed Hardy, Timmy Turner and many more...
                         </p>
                         <div class="ms_banner_btn">
-                            <a href="#" class="ms_btn">Listen Now</a>
-                            <a href="#" class="ms_btn">Add To Queue</a>
                         </div>
                     </div>
                 </div>
@@ -609,6 +621,41 @@
 
         </section>
         <!-- End of Recently Played Section -->
+
+        <!-- Recent Users -->
+        <section class="container">
+            <h2>Recent Active Users</h2>
+            <div class="table-responsive my-3">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Track</th>
+                            <th>Artist</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>User 1</td>
+                            <td>Song 1</td>
+                            <td>Artist 1</td>
+                        </tr>
+                        <tr>
+                            <td>User 2</td>
+                            <td>Song 2</td>
+                            <td>Artist 2</td>
+                        </tr>
+                        <tr>
+                            <td>User 3</td>
+                            <td>Song 3</td>
+                            <td>Artist 3</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- End Recent Users-->
 
     </div>
     <!-- End Main Container-->
