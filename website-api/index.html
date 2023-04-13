@@ -12,20 +12,67 @@
     <link href="style/style.css" rel="stylesheet">
 
     <style>
+        .avatar-span {
+            display: none;
+            position: absolute;
+            left: 70%;
+            font-size: 8px;
+            color: white;
+            background-color: rgba(0, 0, 0, 1);
+            padding: 4px 8px;
+            border-radius: 4px;
+            top:-5px;
+            transition: 0.5s linear;
+            width:75px;
+            text-align: center;
+        }
+
+        .avatar-container {
+            position: relative;
+            display: inline-block;
+        }
+
         .top-bar {
-			background-color: #FE9C00;
-			color: #fff;
-			text-align: center;
-            height:25px;
-		}
+            background-color: #FE9C00;
+            color: #fff;
+            text-align: center;
+            height: 25px;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 10px;
+            border: #FE9C00 5px solid;
+            box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+            position: relative;
+        }
+
+        .avatar:hover {
+            box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+            transition: 0.25s linear;
+            transform: scale(1.05)
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .avatar-container:hover .avatar-span {
+            display: block;
+        }
     </style>
 </head>
 
 <body>
     <!-- Top Bar -->
     <div class="top-bar">
-		<p>We are a demo site without real data - use us to learn collecting data with web scraping and APIs</p>
-	</div>
+        <p>We are a demo site without real data - use us to learn collecting data with web scraping and APIs</p>
+    </div>
     <!-- End Top Bar -->
 
     <!-- NavBar -->
@@ -58,7 +105,8 @@
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search for artists, songs, and users" aria-label="Search" style="width:300px">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search for artists, songs, and users"
+                    aria-label="Search" style="width:300px">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
@@ -71,12 +119,14 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12">
                     <div class="ms_banner_img">
-                        <img src="https://www.mytractice.com/wp-content/uploads/2021/08/guitarist_hero_player.png" alt="" class="img-fluid">
+                        <img src="https://www.mytractice.com/wp-content/uploads/2021/08/guitarist_hero_player.png"
+                            alt="" class="img-fluid">
                     </div>
                     <div class="ms_banner_text center-vertical">
                         <h1>This Month’s</h1>
                         <h1 class="ms_color">Record Breaking Artists !</h1>
-                        <p class="banner_text_par">So many great artists have been destroying records the past year, <br>
+                        <p class="banner_text_par">So many great artists have been destroying records the past year,
+                            <br>
                             Post Malone, Ed Hardy, Timmy Turner and many more...
                         </p>
                         <div class="ms_banner_btn">
@@ -623,38 +673,63 @@
         <!-- End of Recently Played Section -->
 
         <!-- Recent Users -->
-        <section class="container">
+        <section class="mb-2">
             <h2>Recent Active Users</h2>
-            <div class="table-responsive my-3">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>User</th>
-                            <th>Track</th>
-                            <th>Artist</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>User 1</td>
-                            <td>Song 1</td>
-                            <td>Artist 1</td>
-                        </tr>
-                        <tr>
-                            <td>User 2</td>
-                            <td>Song 2</td>
-                            <td>Artist 2</td>
-                        </tr>
-                        <tr>
-                            <td>User 3</td>
-                            <td>Song 3</td>
-                            <td>Artist 3</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="my-4 mb-5">
+                <div class="row">
+                    <div class="col-sm-2 d-flex justify-content-center">
+                        <div class="avatar-container">
+                            <div class="avatar">
+                                <img src="https://cdn-icons-png.flaticon.com/512/168/168726.png">
+                            </div>
+                            <span class="avatar-span">Artist - Title</span>
+                            <h5 style="text-align:center;margin-left: -10px;margin-top: 5px;">Username</h5>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 d-flex justify-content-center">
+                        <div class="avatar-container">
+                            <div class="avatar">
+                                <img src="https://cdn-icons-png.flaticon.com/512/168/168726.png">
+                            </div>
+                            <span class="avatar-span">Artist - Title</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 d-flex justify-content-center">
+                        <div class="avatar-container">
+                            <div class="avatar">
+                                <img src="https://cdn-icons-png.flaticon.com/512/168/168726.png">
+                            </div>
+                            <span class="avatar-span">Artist - Title</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 d-flex justify-content-center">
+                        <div class="avatar-container">
+                            <div class="avatar">
+                                <img src="https://cdn-icons-png.flaticon.com/512/168/168726.png">
+                            </div>
+                            <span class="avatar-span">Artist - Title</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 d-flex justify-content-center">
+                        <div class="avatar-container">
+                            <div class="avatar">
+                                <img src="https://cdn-icons-png.flaticon.com/512/168/168726.png">
+                            </div>
+                            <span class="avatar-span">Artist - Title</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 d-flex justify-content-center">
+                        <div class="avatar-container">
+                            <div class="avatar">
+                                <img src="https://cdn-icons-png.flaticon.com/512/168/168726.png">
+                            </div>
+                            <span class="avatar-span">Artist - Title</span>
+                        </div><br>
+                    </div>
+                </div>
             </div>
         </section>
-        
+
         <!-- End Recent Users-->
 
     </div>
@@ -685,8 +760,8 @@
                     <div class="col-md-4 col-sm-6 col-6 p-0 mb-3 float-left">
                         <h5 class="mb-4 font-weight-bold text-uppercase">API Sources</h5>
                         <ul class="list-group">
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a
-                                    href="">API Documentation</a></li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">API
+                                    Documentation</a></li>
                         </ul>
                     </div>
 

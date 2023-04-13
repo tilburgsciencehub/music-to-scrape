@@ -9,11 +9,7 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
     <script src="https://kit.fontawesome.com/4e7776d591.js" crossorigin="anonymous"></script>
-    <link href="style/style.css" rel="stylesheet">
-
-    <style>
-        
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static_css', path='style.css') }}">
 </head>
 
 <body>
@@ -25,7 +21,7 @@
 
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"><img src="images/logo.svg" class=""></a>
+        <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='images/logo.svg') }}" class=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -60,87 +56,177 @@
     </nav>
     <!-- End navbar -->
 
+    <!-- Banner -->
+    <div class="ms-banner">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="ms_banner_img">
+                        <img src="https://www.mytractice.com/wp-content/uploads/2021/08/guitarist_hero_player.png" alt="" class="img-fluid">
+                    </div>
+                    <div class="ms_banner_text center-vertical">
+                        <h1>This Month’s</h1>
+                        <h1 class="ms_color">Record Breaking Artists !</h1>
+                        <p class="banner_text_par">So many great artists have been destroying records the past year, <br>
+                            Post Malone, Ed Hardy, Timmy Turner and many more...
+                        </p>
+                        <div class="ms_banner_btn">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Banner -->
+
     <!-- Main Container-->
     <div class="container">
 
-        <!-- User Info -->
-        <section>
-            <div class="row my-3">
-                <div class="col-lg-4 album_single_img">
-                    <img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-512.png" class="img-fluid-user">
+        <!-- Recently Played Row-->
+        <section name="recently_played" class="py-4">
+
+            <!-- Headline-->
+            <div class="row align-items-center mb-3">
+                <div class="col">
+                    <h2>Recently Played</h2>
                 </div>
-                <div class="col-lg-8 album_single_text mt-5">
-                        <h2>Username1</h2>
-                        <div class="about_artist">
-                            <h5>Country:</h5>
-                            <p>Germany</p>
-                            <h5>Age:</h5>
-                            <p>29</p>
-                        </div>
+                <div class="col-auto">
+                    <span class="float-end">View More</span>
                 </div>
             </div>
-        </section>
-        <!-- End User Info -->
-        
-        <!-- Tracks -->
-        <section></section>
-            <div class="row my-3">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col">
-                            <h2>Weekly Top 15</h2>
-                        </div>
-                        <div class="col-auto">
-                            <span class="float-end">
-                                <div class="dropdown">
-                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      Select a week
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                      <a class="dropdown-item" href="#">Week 1</a>
-                                      <a class="dropdown-item" href="#">Week 2</a>
-                                      <a class="dropdown-item" href="#">Week 3</a>
+            <!-- End of Headline -->
+
+            <!-- Swiper Container -->
+            <div class="row">
+                <div class="col-lg-12" style="overflow-x: hidden;">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+
+                            {% for track in tracks %}
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <img src="https://picsum.photos/id/100/100/100" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ track.Title }}</h5>
+                                        <p class="card-text">{{ track.ArtistName }}</p>
                                     </div>
-                                  </div>
-                            </span>
+                                </div>
+                            </div>
+                            {% endfor %}
+
                         </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Song Title</th>
-                                    <th>Artist</th>
-                                    <th>Number of Plays</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Song 1</td>
-                                    <td>Artist 1</td>
-                                    <td>10</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Song 2</td>
-                                    <td>Artist 2</td>
-                                    <td>8</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Song 3</td>
-                                    <td>Artist 3</td>
-                                    <td>5</td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
+            <!-- End of Swiper Container -->
+
         </section>
-        <!-- End of Tracks-->
+        <!-- End of Recently Played Section -->
+
+        <!-- Weekly Top 15-->
+        <section name="weekly_15" class="my-4">
+            <div class="row">
+                <div class="col">
+                    <h2>Top 15 Weekly Tracks</h2>
+                </div>
+            </div>
+            <div class="row">
+                {% for column in top_songs|batch(5) %}
+                <div class="col-md-4">
+                    <div class="list-group list-group-flush">
+                        {% for song in column %}
+                        <div class="list-group-item list-group-item-action border">
+                            <div class="row justify-content-center">
+                                <div class="col-sm-2" style="height:125px;">
+                                    <div class="center-vertical text-center">
+                                        <h2>{{ song.rank }}</h2>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="center-vertical">
+                                        <img src="https://picsum.photos/id/237/50/50" class="align-self-center">
+                                    </div>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="center-vertical">
+                                        <h6>{{ song.ArtistName }}</h6>
+                                        <p>{{ song.Title }}</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        <!-- End of Weekly Top 15-->
+
+        <!-- Featured Artists-->
+        <section name="featured_artists" class="py-4">
+
+            <!-- Headline-->
+            <div class="row align-items-center mb-3">
+                <div class="col">
+                    <h2>Featured Artists</h2>
+                </div>
+                <div class="col-auto">
+                    <span class="float-end">View More</span>
+                </div>
+            </div>
+            <!-- End of Headline -->
+
+            <!-- Swiper -->
+            <div class="row">
+                <div class="col-lg-12" style="overflow-x: hidden;">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+
+                            {% for artist in featured_artists %}
+                            <div class="swiper-slide">
+                                <a href="artist?artist-id={{ artist.ArtistID }}">
+                                <div class="card">
+                                    <img src="https://picsum.photos/id/100/100/100" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ artist.ArtistName }}</h5>
+                                    </div>
+                                </div>
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Swiper -->
+
+        </section>
+        <!-- End of Recently Played Section -->
+
+        <!-- Recent Users -->
+        <section class="container">
+            <h2>Recent Active Users</h2>
+            <div class="my-4 mb-5">
+                <div class="row">
+
+                    {% for artist in recent_users %}
+                    <div class="col-sm-2 d-flex justify-content-center">
+                        <div class="avatar-container">
+                            <div class="avatar">
+                                <img src="https://cdn-icons-png.flaticon.com/512/168/168726.png">
+                            </div>
+                            <span class="avatar-span">{{ artist.ArtistName }} - {{ artist.Title }}</span>
+                            <h5 style="text-align:center;margin-left: -10px;margin-top: 5px;">{{ artist.user }}</h5>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        
+        <!-- End Recent Users-->
 
     </div>
     <!-- End Main Container-->
@@ -150,7 +236,7 @@
         <div class="container pt-5 border-bottom">
             <div class="row">
                 <div class="col-md-3 col-sm-12 mb-3">
-                    <img src="images/logo.svg"><br><br>
+                    <img src="{{ url_for('static', filename='images/logo.svg') }}" class=""><br><br>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et bibendum orci, et vestibulum
                         nibh. Donec a sapien pulvinar enim venenatis pretium. Sed non dictum enim. </p>
                 </div>

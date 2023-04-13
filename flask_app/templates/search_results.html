@@ -9,11 +9,7 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
     <script src="https://kit.fontawesome.com/4e7776d591.js" crossorigin="anonymous"></script>
-    <link href="style/style.css" rel="stylesheet">
-
-    <style>
-        
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static_css', path='style.css') }}">
 </head>
 
 <body>
@@ -25,7 +21,7 @@
 
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"><img src="images/logo.svg" class=""></a>
+        <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='images/logo.svg') }}" class=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -61,86 +57,47 @@
     <!-- End navbar -->
 
     <!-- Main Container-->
-    <div class="container">
+    <div class="container my-3">
 
-        <!-- User Info -->
-        <section>
-            <div class="row my-3">
-                <div class="col-lg-4 album_single_img">
-                    <img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-512.png" class="img-fluid-user">
+        <!-- Search Results -->
+        <h1 style="text-align: center;">Search Results</h1>
+        <div class="d-flex justify-content-center">
+            <form class="form-inline">
+                <div class="form-group mx-sm-3 mb-2">
+                <label for="search-query" class="sr-only">Search for artists, songs or users</label>
+                <input style="width:300px" type="text" class="form-control" id="search-query" placeholder="Search for artists, songs or users">
                 </div>
-                <div class="col-lg-8 album_single_text mt-5">
-                        <h2>Username1</h2>
-                        <div class="about_artist">
-                            <h5>Country:</h5>
-                            <p>Germany</p>
-                            <h5>Age:</h5>
-                            <p>29</p>
-                        </div>
-                </div>
-            </div>
-        </section>
-        <!-- End User Info -->
-        
-        <!-- Tracks -->
-        <section></section>
-            <div class="row my-3">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col">
-                            <h2>Weekly Top 15</h2>
-                        </div>
-                        <div class="col-auto">
-                            <span class="float-end">
-                                <div class="dropdown">
-                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      Select a week
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                      <a class="dropdown-item" href="#">Week 1</a>
-                                      <a class="dropdown-item" href="#">Week 2</a>
-                                      <a class="dropdown-item" href="#">Week 3</a>
-                                    </div>
-                                  </div>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Song Title</th>
-                                    <th>Artist</th>
-                                    <th>Number of Plays</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Song 1</td>
-                                    <td>Artist 1</td>
-                                    <td>10</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Song 2</td>
-                                    <td>Artist 2</td>
-                                    <td>8</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Song 3</td>
-                                    <td>Artist 3</td>
-                                    <td>5</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End of Tracks-->
+                <button type="submit" class="btn mb-2 text-white form-button">Search</button>
+            </form>
+        </div>
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action active">
+              Search Result 1
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+              Search Result 2
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+              Search Result 3
+            </a>
+        </div><br>
+        <nav aria-label="Search results pagination" class="d-flex justify-content-center">
+            <ul class="pagination">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+            </ul>
+        </nav>
+        <!-- End Search Results-->
+
 
     </div>
     <!-- End Main Container-->
@@ -150,7 +107,7 @@
         <div class="container pt-5 border-bottom">
             <div class="row">
                 <div class="col-md-3 col-sm-12 mb-3">
-                    <img src="images/logo.svg"><br><br>
+                    <img src="{{ url_for('static', filename='images/logo.svg') }}" class=""><br><br>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et bibendum orci, et vestibulum
                         nibh. Donec a sapien pulvinar enim venenatis pretium. Sed non dictum enim. </p>
                 </div>

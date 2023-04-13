@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
     <script src="https://kit.fontawesome.com/4e7776d591.js" crossorigin="anonymous"></script>
-    <link href="style/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static_css', path='style.css') }}">
 
     <style>
         
@@ -25,7 +25,7 @@
 
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"><img src="images/logo.svg" class=""></a>
+        <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='images/logo.svg') }}" class=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -86,25 +86,7 @@
         <section></section>
             <div class="row my-3">
                 <div class="col-md-12">
-                    <div class="row">
-                        <div class="col">
-                            <h2>Weekly Top 15</h2>
-                        </div>
-                        <div class="col-auto">
-                            <span class="float-end">
-                                <div class="dropdown">
-                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      Select a week
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                      <a class="dropdown-item" href="#">Week 1</a>
-                                      <a class="dropdown-item" href="#">Week 2</a>
-                                      <a class="dropdown-item" href="#">Week 3</a>
-                                    </div>
-                                  </div>
-                            </span>
-                        </div>
-                    </div>
+                    <h2>Weekly Track Chart</h2>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -150,7 +132,7 @@
         <div class="container pt-5 border-bottom">
             <div class="row">
                 <div class="col-md-3 col-sm-12 mb-3">
-                    <img src="images/logo.svg"><br><br>
+                    <img src="{{ url_for('static', filename='images/logo.svg') }}" class=""><br><br>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et bibendum orci, et vestibulum
                         nibh. Donec a sapien pulvinar enim venenatis pretium. Sed non dictum enim. </p>
                 </div>
