@@ -30,7 +30,7 @@ If you want to check the documentation, you can go to following address when uvi
 - `http://127.0.0.1:8000/docs`
 - The port number (`:8000`) can be different for your operating system. Uvicorn will show you which link + port is used when running the application.
 
-## How to start the flask API
+## How to start the flask app
 - clone repository locally
 - open terminal
 - go to the `flask_app` folder inside the repository
