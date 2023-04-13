@@ -50,7 +50,7 @@ history = rbindlist(lapply(usernames, function(user) {
     
     unix = cumsum(c(offset, rev(rev(selected_songs$Duration)[-1])))
       
-    usage = data.table(user = user, date = date, timestamp = unix, artist_id=selected_songs$ArtistID, song_id = selected_songs$SongID)
+    usage = data.table(user = user, date = date, timestamp = unix, artist_id=selected_songs$ArtistID, song_id = selected_songs$SongID, unique_id = paste0(unix,selected_songs$ArtistID,selected_songs$SongID))
     return(usage)
   }))
 }))
@@ -67,6 +67,11 @@ artists[, ':=' (sampled=NULL, popularity=NULL)]
 
 songs[, ':=' (artist_popularity=NULL)]
 
+# minimized version of listening
+history_min <- head(history, 50000)
+
+#write csv's
+fwrite(history_min, 'listening_min.csv')
 fwrite(artists, '../../artists.csv')
 fwrite(songs, '../../songs.csv')
 fwrite(history, '../../listening.csv')

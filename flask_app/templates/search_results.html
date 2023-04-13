@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tilburg Science Hub API Scraper</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4e7776d591.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static_css', path='style.css') }}">
+</head>
+
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+		<p>We are a demo site without real data - use us to learn collecting data with web scraping and APIs</p>
+	</div>
+    <!-- End Top Bar -->
+
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='images/logo.svg') }}" class=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto align-content-center" style="color: rgb(1,51,101)">
+                <li class="nav-item active" style="color: rgb(1,51,101)">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search for artists, songs, and users" aria-label="Search" style="width:300px">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <!-- End navbar -->
+
+    <!-- Main Container-->
+    <div class="container my-3">
+
+        <!-- Search Results -->
+        <h1 style="text-align: center;">Search Results</h1>
+        <div class="d-flex justify-content-center">
+            <form class="form-inline">
+                <div class="form-group mx-sm-3 mb-2">
+                <label for="search-query" class="sr-only">Search for artists, songs or users</label>
+                <input style="width:300px" type="text" class="form-control" id="search-query" placeholder="Search for artists, songs or users">
+                </div>
+                <button type="submit" class="btn mb-2 text-white form-button">Search</button>
+            </form>
+        </div>
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action active">
+              Search Result 1
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+              Search Result 2
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+              Search Result 3
+            </a>
+        </div><br>
+        <nav aria-label="Search results pagination" class="d-flex justify-content-center">
+            <ul class="pagination">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+            </ul>
+        </nav>
+        <!-- End Search Results-->
+
+
+    </div>
+    <!-- End Main Container-->
+
+    <!-- Footer -->
+    <footer>
+        <div class="container pt-5 border-bottom">
+            <div class="row">
+                <div class="col-md-3 col-sm-12 mb-3">
+                    <img src="{{ url_for('static', filename='images/logo.svg') }}" class=""><br><br>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et bibendum orci, et vestibulum
+                        nibh. Donec a sapien pulvinar enim venenatis pretium. Sed non dictum enim. </p>
+                </div>
+                <div class="col-md-9 col-sm-12">
+
+                    <div class="col-md-4 col-sm-6 col-6 p-0 float-left mb-3">
+                        <h5 class="mb-4 font-weight-bold text-uppercase">Pages</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6 col-6 p-0 mb-3 float-left">
+                        <h5 class="mb-4 font-weight-bold text-uppercase">API Sources</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a
+                                    href="">API Documentation</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-3 col-sm-6 col-6 mb-3 p-0 float-left">
+                        <h5 class="mb-4 font-weight-bold text-uppercase">Connect</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2">
+                                <a href=""><i class="fa fa-linkedin mr-1"></i>
+                                    LinkedIn</a>
+                            </li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2">
+                                <a href="" target="_blank"><i class="fa fa-github mr-1"></i>
+                                    Github</a>
+                            </li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2">
+                                <a href="" target="_blank"><i class="fa fa-facebook mr-1"></i> Facebook</a>
+                            </li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2">
+                                <a href="" target="_blank"><i class="fa fa-youtube mr-1"></i> YouTube</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="col-md-12">
+                    <div class="py-4 d-flex justify-content-center align-items-center">
+                        <a class="mr-4" href="">Privacy & terms</a>
+                        <a href="">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End of Footer -->
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 4,
+            spaceBetween: 20,
+            loop: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 2
+                },
+                992: {
+                    slidesPerView: 4
+                }
+            }
+        });
+    </script>
+    <!-- End of Scripts-->
+</body>
+
+</html>
