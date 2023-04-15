@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
     <script src="https://kit.fontawesome.com/4e7776d591.js" crossorigin="anonymous"></script>
-    <link href="style/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static_css', path='style.css') }}">
 
     <style>
         
@@ -25,7 +25,7 @@
 
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"><img src="images/logo.svg" class=""></a>
+        <a class="navbar-brand" href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/logo.svg') }}" class=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -70,12 +70,12 @@
                     <img src="https://images.unsplash.com/photo-1605722243979-fe0be8158232?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80" class="img-fluid">
                 </div>
                 <div class="col-lg-8 album_single_text">
-                        <h2>Ava Cornish</h2>
+                        <h2>{{ artist_info.ArtistName }}</h2>
                         <div class="about_artist">
                             <h5>Location:</h5>
-                            <p>New York</p>
+                            <p>{{ artist_info.ArtistLocation }}</p>
                             <h5>Number of tracks:</h5>
-                            <p>12</p>
+                            <p>{{ num_songs }}</p>
                             <h5>Number of Playlists:</h5>
                             <p>24</p>
                         </div>
@@ -100,24 +100,14 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for song in top_songs %}
                                 <tr>
-                                    <td>1</td>
-                                    <td>Song 1</td>
-                                    <td>Artist 1</td>
-                                    <td>10</td>
+                                    <td>{{ song.rank }}</td>
+                                    <td>{{ song.Title }}</td>
+                                    <td>{{ song.ArtistName }}</td>
+                                    <td>{{ song.count }}</td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Song 2</td>
-                                    <td>Artist 2</td>
-                                    <td>8</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Song 3</td>
-                                    <td>Artist 3</td>
-                                    <td>5</td>
-                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -134,7 +124,7 @@
         <div class="container pt-5 border-bottom">
             <div class="row">
                 <div class="col-md-3 col-sm-12 mb-3">
-                    <img src="images/logo.svg"><br><br>
+                    <img src="{{ url_for('static', filename='images/logo.svg') }}" class=""><br><br>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et bibendum orci, et vestibulum
                         nibh. Donec a sapien pulvinar enim venenatis pretium. Sed non dictum enim. </p>
                 </div>
