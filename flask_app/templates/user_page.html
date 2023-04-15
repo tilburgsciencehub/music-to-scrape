@@ -10,10 +10,6 @@
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
     <script src="https://kit.fontawesome.com/4e7776d591.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ url_for('static_css', path='style.css') }}">
-
-    <style>
-        
-    </style>
 </head>
 
 <body>
@@ -25,7 +21,7 @@
 
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='images/logo.svg') }}" class=""></a>
+        <a class="navbar-brand" href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/logo.svg') }}" class=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -70,12 +66,12 @@
                     <img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-512.png" class="img-fluid-user">
                 </div>
                 <div class="col-lg-8 album_single_text mt-5">
-                        <h2>Username1</h2>
+                        <h2>{{ user_info.username }}</h2>
                         <div class="about_artist">
                             <h5>Country:</h5>
-                            <p>Germany</p>
+                            <p>{{ user_info.country }}</p>
                             <h5>Age:</h5>
-                            <p>29</p>
+                            <p>{{ user_info.age }}</p>
                         </div>
                 </div>
             </div>
@@ -86,7 +82,34 @@
         <section></section>
             <div class="row my-3">
                 <div class="col-md-12">
-                    <h2>Weekly Track Chart</h2>
+                    <div class="row">
+                        <div class="col">
+                            <h2>Recently Played</h2>
+                        </div>
+                        <div class="col-auto">
+                            <span class="float-end">
+
+                                <!-- Week Selector -->
+                                <nav aria-label="Search results pagination" class="d-flex justify-content-center">
+                                    <ul class="pagination">
+                                    <li class="page-item">
+                                        <a class="page-link" href="user?username={{ user_info.username }}&week={{ nav_dict.prev_week }}">Previous</a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="user?username={{ user_info.username }}&week={{ nav_dict.week_min_one }}">{{ nav_dict.week_min_one }}</a></li>
+                                    <li class="page-item active" aria-current="page">
+                                        <a class="page-link" href="user?username={{ user_info.username }}&week={{ nav_dict.curr_week }}">{{ nav_dict.curr_week }}</a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" href="user?username={{ user_info.username }}&week={{ nav_dict.week_plus_one }}">{{ nav_dict.week_plus_one }}</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="user?username={{ user_info.username }}&week={{ nav_dict.next_week }}">Next</a>
+                                    </li>
+                                    </ul>
+                                </nav>
+                                <!-- End Week Selector -->
+
+                            </span>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -98,24 +121,16 @@
                                 </tr>
                             </thead>
                             <tbody>
+
+                                {% for song in top_songs %}
                                 <tr>
-                                    <td>1</td>
-                                    <td>Song 1</td>
-                                    <td>Artist 1</td>
-                                    <td>10</td>
+                                    <td>{{ song.rank }}</td>
+                                    <td>{{ song.Title }}</td>
+                                    <td>{{ song.ArtistName }}</td>
+                                    <td>{{ song.count }}</td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Song 2</td>
-                                    <td>Artist 2</td>
-                                    <td>8</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Song 3</td>
-                                    <td>Artist 3</td>
-                                    <td>5</td>
-                                </tr>
+                                {% endfor %}
+
                             </tbody>
                         </table>
                     </div>
