@@ -17,6 +17,7 @@ pip install sqlalchemy
 pip install pydantic
 pip install uvicorn
 pip install gunicorn
+pip install flask
 ```
 
 ## How to start the API
