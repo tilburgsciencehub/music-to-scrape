@@ -12,7 +12,7 @@ We'll post a link to the website and API here eventually.
 
 ```
 pip install fastapi
-pip install astapi_utils
+pip install fastapi_utils
 pip install sqlalchemy
 pip install pydantic
 pip install uvicorn
