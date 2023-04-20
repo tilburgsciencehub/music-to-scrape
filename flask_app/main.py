@@ -71,14 +71,14 @@ class songs(db.Model):
 def index():
 
     #recent tracks query
-    recent_tracks = db.session.query(listening.timestamp, songs.ArtistName, songs.Title)\
+    recent_tracks = db.session.query(listening.timestamp, songs.ArtistName, songs.Title, songs.ArtistID)\
                 .join(songs, listening.song_id == songs.SongID)\
                 .order_by(listening.timestamp.desc())\
                 .limit(10)\
                 .all()
     
     #weekly top 15
-    top_songs = db.session.query(listening.song_id, songs.Title, songs.ArtistName, 
+    top_songs = db.session.query(listening.song_id, songs.Title, songs.ArtistName, songs.ArtistID,
                     func.count(listening.song_id), 
                     func.row_number().over(order_by=func.count(listening.song_id).desc()).label('rank'))\
             .join(songs, listening.song_id == songs.SongID)\
@@ -173,22 +173,27 @@ def user_page():
     end_date = start_date + timedelta(days=6)
 
     #top 10 songs
-    top_songs = db.session.query(
-                    db.func.row_number().over(order_by=db.func.count(listening.song_id).desc()).label('rank'),
-                    listening.song_id,
-                    db.func.count(listening.song_id).label('count'),
-                    songs.Title,
-                    songs.ArtistName
-                ).\
+    top_songs = db.session.query(songs.Title, songs.ArtistName, listening.timestamp).\
                 join(songs, listening.song_id == songs.SongID).\
                 filter(listening.user == username).\
                 filter(listening.date >= start_date.date(), listening.date <= end_date.date()).\
-                group_by(listening.song_id).\
-                order_by(db.func.count(listening.song_id).desc()).\
+                group_by(listening.timestamp).\
+                order_by(listening.timestamp.desc()).\
                 limit(10).all()
+    
+    # Create a list to store the formatted data
+    formatted_songs = []
+
+    # Loop through each record and format the timestamp
+    for song in top_songs:
+        title, artist_name, timestamp = song
+        datetime_obj = datetime.fromtimestamp(float(timestamp))
+        formatted_date = datetime_obj.strftime('%Y-%m-%d')
+        formatted_time = datetime_obj.strftime('%H:%M:%S')
+        formatted_songs.append((title, artist_name, formatted_date, formatted_time))
 
     #render template
-    return render_template('user_page.html', user_info = user_info, top_songs = top_songs, nav_dict = nav_dict)
+    return render_template('user_page.html', user_info = user_info, top_songs = formatted_songs, nav_dict = nav_dict)
 
 #route for search
 @app.route('/search')
@@ -234,8 +239,25 @@ def search():
     prev_url = url_for('search', query=query, page=page-1) if page > 1 else None
     next_url = url_for('search', query=query, page=page+1) if page < total_pages else None
 
+    #number of results on a page
+    start_result = ((page - 1) * 10) + 1
+
+    if (start_result + 9) > total_results:
+        end_result = total_results
+    
+    else:
+        end_result = start_result + 9
+
+
     # Render the results for the current page
-    return render_template('search_results.html',total_results=total_results, max_pages=max_pages, results=current_page_results, page=page, query=query, total_pages=total_pages, prev_url = prev_url, next_url = next_url)
+    return render_template('search_results.html',total_results=total_results, max_pages=max_pages, results=current_page_results, page=page, query=query, total_pages=total_pages, prev_url = prev_url, next_url = next_url, start_result=start_result, end_result=end_result)
+
+#route for privacy & terms
+@app.route('/privacy_terms')
+def privacy_terms():
+
+    #render template
+    return render_template('privacy_terms.html')
 
 # Add a static route for CSS
 @app.route('/static/css/<path:path>')

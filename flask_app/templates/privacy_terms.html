@@ -63,94 +63,47 @@
     <!-- Main Container-->
     <div class="container">
 
-        <!-- User Info -->
-        <section>
-            <div class="row my-3">
-                <div class="col-lg-4 album_single_img">
-                    <img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-512.png"
-                        class="img-fluid-user">
-                </div>
-                <div class="col-lg-8 album_single_text mt-5">
-                    <h2>{{ user_info.username }}</h2>
-                    <div class="about_artist">
-                        <h5>Country:</h5>
-                        <p>{{ user_info.country }}</p>
-                        <h5>Age:</h5>
-                        <p>{{ user_info.age }}</p>
-                    </div>
-                </div>
+        <!-- Recently Played Row-->
+        <section name="recently_played" class="py-4">
+
+            <!-- Headline-->
+            <div class="row mb-3">
+                    <h2>Privacy & Terms</h2>
             </div>
-        </section>
-        <!-- End User Info -->
+            <!-- End of Headline -->
 
-        <!-- Tracks -->
-        <section></section>
-        <div class="row my-3">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col">
-                        <h2>Recently Played</h2>
-                    </div>
-                    <div class="col-auto">
-                        <span class="float-end">
+            <!-- Privacy & Terms -->
+            <div class="row">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend sagittis mauris et laoreet.
+                    Cras rhoncus consequat magna, eget fringilla neque convallis et. Etiam porttitor sapien ac erat
+                    varius accumsan sit amet nec nulla. Integer nec aliquam felis. Ut vel odio quis diam luctus suscipit
+                    sagittis vitae nulla. Phasellus eu lectus dictum, pharetra orci a, luctus libero. Ut eget laoreet
+                    tortor. Fusce a massa quam. Donec nec semper sem, vehicula consectetur leo. Integer quis nisi et
+                    lorem mollis blandit consectetur vitae nunc. Fusce eget eros magna. Quisque pharetra mi et lectus
+                    malesuada, non sodales elit tempor. Nulla porta aliquam dignissim. Sed nec malesuada risus.
 
-                            <!-- Week Selector -->
-                            <nav aria-label="Search results pagination" class="d-flex justify-content-center">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        <a class="page-link"
-                                            href="user?username={{ user_info.username }}&week={{ nav_dict.prev_week }}">Previous</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link"
-                                            href="user?username={{ user_info.username }}&week={{ nav_dict.week_min_one }}">{{
-                                            nav_dict.week_min_one }}</a></li>
-                                    <li class="page-item active" aria-current="page">
-                                        <a class="page-link"
-                                            href="user?username={{ user_info.username }}&week={{ nav_dict.curr_week }}">{{
-                                            nav_dict.curr_week }}</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link"
-                                            href="user?username={{ user_info.username }}&week={{ nav_dict.week_plus_one }}">{{
-                                            nav_dict.week_plus_one }}</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link"
-                                            href="user?username={{ user_info.username }}&week={{ nav_dict.next_week }}">Next</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                            <!-- End Week Selector -->
+                    Praesent cursus diam non eros interdum, sit amet pulvinar elit iaculis. Vestibulum eu purus ac massa
+                    tristique tempor a vitae nibh. Fusce rutrum velit id mi iaculis, in vestibulum mauris imperdiet.
+                    Morbi congue enim nec metus placerat, ut volutpat tortor luctus. Integer nec fringilla metus.
+                    Curabitur non dolor laoreet, dictum eros a, suscipit enim. Praesent ut aliquet est. Nullam sed
+                    posuere nulla, nec pharetra felis. Quisque a erat imperdiet, aliquam enim rhoncus, ullamcorper erat.
+                    Vivamus non urna a metus posuere vestibulum. Fusce semper quam sed ornare tincidunt. Sed vestibulum
+                    nisl mauris, ut auctor urna maximus et. In mattis neque tempus semper lobortis. Praesent eu est at
+                    ex aliquet accumsan. Nam diam magna, commodo eu lobortis vitae, facilisis vel felis.
 
-                        </span>
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Song Title</th>
-                                <th>Artist</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            {% for song in top_songs %}
-                            <tr>
-                                <td>{{ song[0] }}</td>
-                                <td>{{ song[1] }}</td>
-                                <td>{{ song[2] }}</td>
-                                <td>{{ song[3] }}</td>
-                            </tr>
-                            {% endfor %}
-
-                        </tbody>
-                    </table>
-                </div>
+                    Nunc porttitor rutrum nibh vel porta. Vestibulum ante ipsum primis in faucibus orci luctus et
+                    ultrices posuere cubilia curae; Vivamus aliquam interdum orci, id cursus magna dapibus nec.
+                    Curabitur vehicula dictum imperdiet. Vestibulum ante ipsum primis in faucibus orci luctus et
+                    ultrices posuere cubilia curae; Nullam facilisis posuere mauris id convallis. Donec massa arcu,
+                    pellentesque at arcu vitae, feugiat eleifend libero. Curabitur aliquet imperdiet nibh, vel aliquet
+                    ex egestas volutpat. Nunc placerat dictum turpis, non fermentum purus lacinia ac. Duis augue est,
+                    finibus ut sem posuere, molestie tristique ex. Curabitur dui lorem, malesuada ut risus a, congue
+                    ultricies justo. Phasellus iaculis nulla sit amet nulla imperdiet, a ornare velit mollis.</p>
             </div>
-        </div>
+            <!-- End of Privacy & Termsr -->
+
         </section>
-        <!-- End of Tracks-->
+        <!-- End of Recently Played Section -->
 
     </div>
     <!-- End Main Container-->
@@ -169,9 +122,12 @@
                     <div class="col-md-4 col-sm-6 col-6 p-0 mb-3 float-left">
                         <h5 class="mb-4 font-weight-bold text-uppercase">Learn how to scrape</h5>
                         <ul class="list-group">
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Tutorial: How to scrape the site</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Tutorial: Using the API</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">API Documentation</a></li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Tutorial: How to
+                                    scrape the site</a></li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Tutorial: Using the
+                                    API</a></li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">API
+                                    Documentation</a></li>
                         </ul>
                     </div>
 

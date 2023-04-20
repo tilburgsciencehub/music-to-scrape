@@ -25,7 +25,7 @@
 
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/logo.svg') }}" class=""></a>
+        <a class="navbar-brand" href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/logo.png') }}" class="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -34,15 +34,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto align-content-center" style="color: rgb(1,51,101)">
                 <li class="nav-item active" style="color: rgb(1,51,101)">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="#">Learn how to scrape</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Learn how to use API</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
+                        More Resources
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Action</a>
@@ -52,8 +55,9 @@
                     </div>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search for artists, songs, and users" aria-label="Search" style="width:300px">
+            <form action="{{ url_for('search') }}" class="form-inline my-2 my-lg-0" method="get">
+                <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search for artists, songs, and users" aria-label="Search" style="width:300px">
+                <input type="hidden" name="page" value="{{ page }}">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
@@ -88,7 +92,7 @@
         <section></section>
             <div class="row my-3">
                 <div class="col-md-12">
-                    <h2>Top 10 Songs</h2>
+                    <h2>Top 10 Songs All Time</h2>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -124,28 +128,29 @@
         <div class="container pt-5 border-bottom">
             <div class="row">
                 <div class="col-md-3 col-sm-12 mb-3">
-                    <img src="{{ url_for('static', filename='images/logo.svg') }}" class=""><br><br>
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo_footer"><br><br>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et bibendum orci, et vestibulum
                         nibh. Donec a sapien pulvinar enim venenatis pretium. Sed non dictum enim. </p>
                 </div>
                 <div class="col-md-9 col-sm-12">
 
-                    <div class="col-md-4 col-sm-6 col-6 p-0 float-left mb-3">
-                        <h5 class="mb-4 font-weight-bold text-uppercase">Pages</h5>
+                    <div class="col-md-4 col-sm-6 col-6 p-0 mb-3 float-left">
+                        <h5 class="mb-4 font-weight-bold text-uppercase">Learn how to scrape</h5>
                         <ul class="list-group">
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Tutorial: How to scrape the site</a></li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Tutorial: Using the API</a></li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">API Documentation</a></li>
                         </ul>
                     </div>
 
-                    <div class="col-md-4 col-sm-6 col-6 p-0 mb-3 float-left">
-                        <h5 class="mb-4 font-weight-bold text-uppercase">API Sources</h5>
+                    <div class="col-md-4 col-sm-6 col-6 p-0 float-left mb-3">
+                        <h5 class="mb-4 font-weight-bold text-uppercase">More Resources</h5>
                         <ul class="list-group">
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a
-                                    href="">API Documentation</a></li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
                         </ul>
                     </div>
 
@@ -172,8 +177,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="py-4 d-flex justify-content-center align-items-center">
-                        <a class="mr-4" href="">Privacy & terms</a>
-                        <a href="">Sitemap</a>
+                        <a class="mr-4" href="{{ url_for('privacy_terms') }}">Privacy & terms</a>
                     </div>
                 </div>
             </div>
