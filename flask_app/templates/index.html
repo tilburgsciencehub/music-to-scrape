@@ -21,7 +21,7 @@
 
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/logo.svg') }}" class=""></a>
+        <a class="navbar-brand" href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/logo.png') }}" class="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -30,15 +30,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto align-content-center" style="color: rgb(1,51,101)">
                 <li class="nav-item active" style="color: rgb(1,51,101)">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="#">Learn how to scrape</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Learn how to use API</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
+                        More Resources
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Action</a>
@@ -105,6 +108,7 @@
 
                             {% for track in tracks %}
                             <div class="swiper-slide">
+                                <a href="artist?artist-id={{ track.ArtistID }}" style="color:rgb(1, 51, 101) !important;text-decoration:none">
                                 <div class="card">
                                     <img src="https://picsum.photos/id/100/100/100" class="card-img-top" alt="...">
                                     <div class="card-body">
@@ -112,6 +116,7 @@
                                         <p class="card-text">{{ track.ArtistName }}</p>
                                     </div>
                                 </div>
+                            </a>
                             </div>
                             {% endfor %}
 
@@ -136,6 +141,7 @@
                 <div class="col-md-4">
                     <div class="list-group list-group-flush">
                         {% for song in column %}
+                        <a href="artist?artist-id={{ song.ArtistID }}">
                         <div class="list-group-item list-group-item-action border">
                             <div class="row justify-content-center">
                                 <div class="col-sm-2" style="height:125px;">
@@ -150,13 +156,14 @@
                                 </div>
                                 <div class="col-sm-7">
                                     <div class="center-vertical">
-                                        <h6>{{ song.ArtistName }}</h6>
+                                        <h5><b>{{ song.ArtistName }}</b></h5>
                                         <p>{{ song.Title }}</p>
                                     </div>
                                 </div>
 
                             </div>
                         </div>
+                        </a>
                         {% endfor %}
                     </div>
                 </div>
@@ -239,7 +246,7 @@
         <div class="container pt-5 border-bottom">
             <div class="row">
                 <div class="col-md-3 col-sm-12 mb-3">
-                    <img src="{{ url_for('static', filename='images/logo.svg') }}" class=""><br><br>
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo_footer"><br><br>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et bibendum orci, et vestibulum
                         nibh. Donec a sapien pulvinar enim venenatis pretium. Sed non dictum enim. </p>
                 </div>
@@ -257,10 +264,11 @@
                     </div>
 
                     <div class="col-md-4 col-sm-6 col-6 p-0 mb-3 float-left">
-                        <h5 class="mb-4 font-weight-bold text-uppercase">API Sources</h5>
+                        <h5 class="mb-4 font-weight-bold text-uppercase">Learn how to scrape</h5>
                         <ul class="list-group">
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a
-                                    href="">API Documentation</a></li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Tutorial: How to scrape the site</a></li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Tutorial: Using the API</a></li>
+                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">API Documentation</a></li>
                         </ul>
                     </div>
 
@@ -288,7 +296,6 @@
                 <div class="col-md-12">
                     <div class="py-4 d-flex justify-content-center align-items-center">
                         <a class="mr-4" href="">Privacy & terms</a>
-                        <a href="">Sitemap</a>
                     </div>
                 </div>
             </div>

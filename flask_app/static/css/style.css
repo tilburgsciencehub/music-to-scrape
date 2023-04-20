@@ -38,7 +38,7 @@ body {
 }
 
 h5 {
-    font-size: 1rem;
+    font-size: 20px;
     line-height: 1.375;
     font-family: Rubik, Arial, sans-serif;
     font-weight: bolder;
@@ -69,7 +69,8 @@ footer {
 }
 
 .ms-banner {
-    background-color: #e1f7ff;
+    background: rgb(225,247,255);
+background: linear-gradient(211deg, rgba(225,247,255,1) 0%, rgba(78,131,185,1) 100%);
     padding-left: 200px;
 }
 
@@ -178,7 +179,7 @@ a:hover {
     background-color: #FE9C00;
     color: #fff;
     text-align: center;
-    height:25px;
+    height: 25px;
 }
 
 .album_single_img {
@@ -205,10 +206,10 @@ img {
     background-color: #FE9C00;
     color: #fff;
     text-align: center;
-    height:25px;
+    height: 25px;
 }
 
-.form-button{
+.form-button {
     background-color: rgb(1, 51, 101) !important;
 }
 
@@ -216,18 +217,18 @@ img {
     background-color: rgb(1, 51, 101) !important;
     border-color: rgb(1, 51, 101) !important;
     color: white !important;
-  }
-
-.page-item a {
-color: rgb(1, 51, 101) !important;
 }
 
-.list-group-item-action.active{
+.page-item a {
+    color: rgb(1, 51, 101) !important;
+}
+
+.list-group-item-action.active {
     background-color: rgb(1, 51, 101) !important;
     border-color: rgb(1, 51, 101) !important;
 }
 
-.img-fluid-user{
+.img-fluid-user {
     box-shadow: none !important;
     border-radius: none !important;
     max-width: 100%;
@@ -243,9 +244,9 @@ color: rgb(1, 51, 101) !important;
     background-color: rgba(0, 0, 0, 1);
     padding: 4px 8px;
     border-radius: 4px;
-    top:-5px;
+    top: -5px;
     transition: 0.5s linear;
-    width:75px;
+    width: 75px;
     text-align: center;
 }
 
@@ -286,4 +287,14 @@ color: rgb(1, 51, 101) !important;
 
 .avatar-container:hover .avatar-span {
     display: block;
+}
+
+.logo{
+    width:300px;
+    height:auto;
+}
+
+.logo_footer{
+    width:200px;
+    height:auto;
 }
