@@ -2,10 +2,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi_utils.cbv import cbv
 from sqlalchemy.orm import Session
-from crud import get_all_users, get_user_info_by_username, count_plays_by_username, get_recent_tracks_by_username, get_top_artists_for_user, get_top_tracks_for_user, get_weekly_track_chart_for_user, get_weekly_artist_chart_for_user, get_top_tracks_for_artist, get_chart_top_tracks, get_chart_top_artists, get_recent_active_users
+from crud import get_all_users, get_user_info_by_username, count_plays_by_username, get_recent_tracks_by_username, get_top_artists_for_user, get_top_tracks_for_user, get_weekly_track_chart_for_user, get_weekly_artist_chart_for_user, get_top_tracks_for_artist, get_chart_top_tracks, get_chart_top_artists, get_recent_active_users, get_featured_artists, get_artist_info
 from database import get_db
 from exceptions import CarInfoException
-from schemas import User, CreateAndUpdateCar, PaginatedUserInfo, CountPlays, UserFindClass, RecentTracks, TopArtistsUser, TopTracksUser, WeeklyTrackUserChart, WeeklyArtistUserChart, TopTracksArtist, ChartTopTracks, ChartTopArtists, RecentActiveUsers
+from schemas import User, CreateAndUpdateCar, PaginatedUserInfo, CountPlays, UserFindClass, RecentTracks, TopArtistsUser, TopTracksUser, WeeklyTrackUserChart, WeeklyArtistUserChart, TopTracksArtist, ChartTopTracks, ChartTopArtists, RecentActiveUsers, ArtistFeaturedList, ArtistInfo
 
 router = APIRouter()
     
@@ -165,6 +165,28 @@ def get_recently_active_users(limit: int = 5, session: Session = Depends(get_db)
     try:
         users = get_recent_active_users(session, limit)
         return {"users": users}
+
+    except CarInfoException as cie:
+        raise HTTPException(**cie.__dict__)
+
+#artist.featured
+@router.get("/featured-artists", response_model = ArtistFeaturedList)
+def featured_artist(limit: int = 5, session: Session = Depends(get_db)):
+
+    try:
+        artists = get_featured_artists(session, limit)
+        return {"artists": artists}
+
+    except CarInfoException as cie:
+        raise HTTPException(**cie.__dict__)
+
+#artist.getInfo
+@router.get("/artist-info", response_model = ArtistInfo)
+def artist_info(artist: str, session: Session = Depends(get_db)):
+
+    try:
+        artists = get_artist_info(session, artist)
+        return artists
 
     except CarInfoException as cie:
         raise HTTPException(**cie.__dict__)

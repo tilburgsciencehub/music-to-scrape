@@ -52,7 +52,7 @@ class CountPlays(BaseModel):
 class TrackDetails(BaseModel):
     artist: str
     track: str
-    timestamp: int
+    timestamp: float
 
 class RecentTracks(BaseModel):
     username: str
@@ -94,6 +94,7 @@ class WeeklyArtistUserChart(BaseModel):
 # response classes Chart Top Tracks
 class ChartTopTracksBase(BaseModel):
     name: str
+    artist: str
     count: int
 
 class ChartTopTracks(BaseModel):
@@ -121,3 +122,17 @@ class RecentUser(BaseModel):
 
 class RecentActiveUsers(BaseModel):
     users: List[RecentUser]
+
+class ArtistFeaturedArtist(BaseModel):
+    artist: str
+    featured: str
+
+class ArtistFeaturedList(BaseModel):
+    artists: List[ArtistFeaturedArtist]
+
+class ArtistInfo(BaseModel):
+    artistid: str
+    artistname: str
+    artistlocation: str
+    artistfeatured: str
+    total_plays: int
