@@ -69,8 +69,8 @@ footer {
 }
 
 .ms-banner {
-    background: rgb(225,247,255);
-background: linear-gradient(211deg, rgba(225,247,255,1) 0%, rgba(78,131,185,1) 100%);
+    background: rgb(225, 247, 255);
+    background: linear-gradient(211deg, rgba(225, 247, 255, 1) 0%, rgba(78, 131, 185, 1) 100%);
     padding-left: 200px;
 }
 
@@ -116,56 +116,17 @@ background: linear-gradient(211deg, rgba(225,247,255,1) 0%, rgba(78,131,185,1) 1
     color: #FE9C00 !important;
 }
 
-@media (max-width: 1200px) {
-    .ms-banner {
-        padding-bottom: 0;
-        padding-left: 100px;
-    }
-
-    .ms_banner_img {
-        max-width: 50%;
-    }
-
-    .ms_banner_text .ms_banner_btn .ms_btn {
-        max-width: 125px;
-    }
-
-    .ms_banner_text {
-        width: calc(100% - 50%);
-    }
+.ms_banner_img {
+    max-width: 470px;
 }
 
-@media (max-width: 992px) {
-    .ms_banner_img {
-        max-width: 100%;
-    }
-
-    .ms-banner {
-        padding-left: 0px;
-        padding-bottom: 30px;
-    }
-
-    .ms_banner_text {
-        width: 100%;
-        padding-left: 30px;
-        text-align: center;
-    }
+.ms_banner_text {
+    width: calc(100% - 470px);
 }
 
-
-@media (max-width: 1400px) {
-    .ms_banner_img {
-        max-width: 470px;
-    }
-
-    .ms_banner_text {
-        width: calc(100% - 470px);
-    }
-
-    .ms_banner_text {
-        width: calc(100% - 511px);
-        float: left;
-    }
+.ms_banner_text {
+    width: calc(100% - 511px);
+    float: left;
 }
 
 a:hover {
@@ -289,12 +250,157 @@ img {
     display: block;
 }
 
-.logo{
-    width:300px;
-    height:auto;
+.logo {
+    width: 200px;
+    height: auto;
 }
 
-.logo_footer{
-    width:200px;
-    height:auto;
+.logo_footer {
+    width: 200px;
+    height: auto;
+}
+
+.rank-column {
+    height: 125px;
+}
+
+/* Mobile Styling */
+@media only screen and (max-width: 600px) {
+    .top-bar {
+        height: 50px;
+    }
+
+    .logo {
+        width: 200px;
+        height: auto;
+    }
+
+    .ms_banner_img {
+        display: none;
+    }
+
+    .ms_banner_text {
+        width: 100%;
+        padding-left: 0px;
+        text-align: center;
+    }
+
+    .ms-banner {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 0px;
+    }
+
+    .center-text {
+        text-align: center;
+    }
+
+    .mobile-center {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .col-lg-12 {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .mobile-user-margin {
+        margin-bottom: 20px;
+    }
+
+    .rank-column {
+        height: 50px;
+    }
+
+    .card-img-top {
+        height: 250px;
+        width: 250px;
+        border-radius: 10px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .card {
+        width: 100%;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    .banner_text_par {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .album_single_img {
+        width: 100%;
+        float: none
+    }
+
+    .about_artist {
+        text-align: center;
+    }
+
+    .artist_info_title {
+        margin-top: 25px;
+    }
+
+    .pagination {
+        margin: 0 auto;
+    }
+
+    .col-auto {
+        width: 100%;
+        margin-bottom: 25px;
+    }
+
+    .logo_footer {
+        width: 200px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .footer_description {
+        text-align: center;
+    }
+}
+
+/* Styling for other sizes */
+@media (max-width: 992px) {
+    .ms_banner_img {
+        max-width: 100%;
+    }
+
+    .ms-banner {
+        padding-left: 0px;
+        padding-bottom: 30px;
+    }
+
+    .ms_banner_text {
+        width: 100%;
+        padding-left: 30px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 1200px) {
+    .ms-banner {
+        padding-bottom: 0;
+        padding-left: 100px;
+    }
+
+    .ms_banner_img {
+        max-width: 50%;
+    }
+
+    .ms_banner_text .ms_banner_btn .ms_btn {
+        max-width: 125px;
+    }
+
+    .ms_banner_text {
+        width: calc(100% - 50%);
+    }
 }

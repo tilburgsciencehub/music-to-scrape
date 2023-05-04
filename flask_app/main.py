@@ -145,18 +145,22 @@ def user_page():
     week = request.args.get('week')
     year_number = request.args.get('year')
 
+    #current week
+    current_date = datetime.now()
+    current_week = current_date.isocalendar()[1]
+
     #if statement to check if week & year have been set
     if week:
         week_number = week
 
     else:
-        week_number = 1
+        week_number = current_week
 
     if year_number:
         year = year_number
     
     else:
-        year = 2023
+        year = datetime.now().year
 
     #previous and next week
     next_week = int(week_number) + 1
@@ -193,7 +197,7 @@ def user_page():
         formatted_songs.append((title, artist_name, formatted_date, formatted_time))
 
     #render template
-    return render_template('user_page.html', user_info = user_info, top_songs = formatted_songs, nav_dict = nav_dict)
+    return render_template('user_page.html', user_info = user_info, top_songs = formatted_songs, nav_dict = nav_dict, start_date=start_date.date(), end_date=end_date.date(), current_week=current_week)
 
 #route for search
 @app.route('/search')

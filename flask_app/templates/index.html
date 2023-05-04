@@ -71,7 +71,7 @@
                     <div class="ms_banner_text center-vertical">
                         <h1>This Month’s</h1>
                         <h1 class="ms_color">Record Breaking Artists !</h1>
-                        <p class="banner_text_par">So many great artists have been destroying records the past year, <br>
+                        <p class="banner_text_par">So many great artists have been destroying records the past year,
                             Post Malone, Ed Hardy, Timmy Turner and many more...
                         </p>
                         <div class="ms_banner_btn">
@@ -95,7 +95,6 @@
                     <h2>Recently Played</h2>
                 </div>
                 <div class="col-auto">
-                    <span class="float-end">View More</span>
                 </div>
             </div>
             <!-- End of Headline -->
@@ -111,7 +110,7 @@
                                 <a href="artist?artist-id={{ track.ArtistID }}" style="color:rgb(1, 51, 101) !important;text-decoration:none">
                                 <div class="card">
                                     <img src="https://picsum.photos/id/100/100/100" class="card-img-top" alt="...">
-                                    <div class="card-body">
+                                    <div class="card-body center-text">
                                         <h5 class="card-title">{{ track.Title }}</h5>
                                         <p class="card-text">{{ track.ArtistName }}</p>
                                     </div>
@@ -144,18 +143,18 @@
                         <a href="artist?artist-id={{ song.ArtistID }}">
                         <div class="list-group-item list-group-item-action border">
                             <div class="row justify-content-center">
-                                <div class="col-sm-2" style="height:125px;">
+                                <div class="col-sm-2 rank-column">
                                     <div class="center-vertical text-center">
                                         <h2>{{ song.rank }}</h2>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="center-vertical">
-                                        <img src="https://picsum.photos/id/237/50/50" class="align-self-center">
+                                        <img src="https://picsum.photos/id/237/50/50" class="align-self-center mobile-center">
                                     </div>
                                 </div>
                                 <div class="col-sm-7">
-                                    <div class="center-vertical">
+                                    <div class="center-vertical center-text">
                                         <h5><b>{{ song.ArtistName }}</b></h5>
                                         <p>{{ song.Title }}</p>
                                     </div>
@@ -180,9 +179,6 @@
                 <div class="col">
                     <h2>Featured Artists</h2>
                 </div>
-                <div class="col-auto">
-                    <span class="float-end">View More</span>
-                </div>
             </div>
             <!-- End of Headline -->
 
@@ -197,7 +193,7 @@
                                 <a href="artist?artist-id={{ artist.ArtistID }}">
                                 <div class="card">
                                     <img src="https://picsum.photos/id/100/100/100" class="card-img-top" alt="...">
-                                    <div class="card-body">
+                                    <div class="card-body center-text">
                                         <h5 class="card-title">{{ artist.ArtistName }}</h5>
                                     </div>
                                 </div>
@@ -214,13 +210,13 @@
         <!-- End of Recently Played Section -->
 
         <!-- Recent Users -->
-        <section class="container">
+        <section>
             <h2>Recent Active Users</h2>
             <div class="my-4 mb-5">
                 <div class="row">
 
                     {% for user in recent_users %}
-                    <div class="col-sm-2 d-flex justify-content-center">
+                    <div class="col-sm-2 d-flex justify-content-center mobile-user-margin">
                         <a href="user?username={{ user.user }}">
                         <div class="avatar-container">
                             <div class="avatar">
@@ -310,7 +306,6 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
         var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 4,
             spaceBetween: 20,
             loop: true,
             navigation: {
@@ -318,8 +313,9 @@
                 prevEl: '.swiper-button-prev',
             },
             breakpoints: {
-                768: {
-                    slidesPerView: 2
+                600: {
+                    slidesPerView: 2,
+                    spaceBetween: 10
                 },
                 992: {
                     slidesPerView: 4
