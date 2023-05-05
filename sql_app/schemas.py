@@ -130,9 +130,16 @@ class ArtistFeaturedArtist(BaseModel):
 class ArtistFeaturedList(BaseModel):
     artists: List[ArtistFeaturedArtist]
 
+class TopSongs(BaseModel):
+    title: str
+    plays: int
+
 class ArtistInfo(BaseModel):
     artistid: str
     artistname: str
     artistlocation: str
     artistfeatured: str
+    total_songs: int
     total_plays: int
+    plays_last_week: int
+    top_songs: List[TopSongs]

@@ -264,6 +264,11 @@ img {
     height: 125px;
 }
 
+.mobile-col{
+    text-align: center; 
+    margin-right:20px;
+}
+
 /* Mobile Styling */
 @media only screen and (max-width: 600px) {
     .top-bar {
@@ -356,6 +361,20 @@ img {
         margin-bottom: 25px;
     }
 
+    .mobile-col{
+        width:100%;
+        margin-right:0px;
+        margin-bottom:20px;
+    }
+
+    .width_set{
+        width:100%;
+    }
+
+    .mobile-disable{
+        display: none;
+    }
+
     .logo_footer {
         width: 200px;
         height: auto;
@@ -403,4 +422,5 @@ img {
     .ms_banner_text {
         width: calc(100% - 50%);
     }
+
 }

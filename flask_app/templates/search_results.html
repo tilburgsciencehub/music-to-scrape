@@ -75,12 +75,12 @@
             <a href="#" class="list-group-item list-group-item-action">
                 <div class="row">
                     <div style="display: flex; justify-content: center; align-items: center;">
-                        <div class="col-lg-1" style="text-align: center; margin-right:20px;">
-                            <i class="fa-solid fa-music fa-2xl"></i>
+                        <div class="col-lg-1 mobile-col" style="text-align: center; margin-right:20px;">
+                            <i class="fa-solid fa-music fa-2xl search_icon"></i>
                         </div>
                     </div>
-                    <div class="col-lg-11">
-                        <p><i>Song</i></p>
+                    <div class="col-lg-11 center-text">
+                        <p>Song</p>
                         {{ result.Title }}
                     </div>
                 </div>
@@ -90,11 +90,11 @@
             <a href="artist?artist-id={{ result.ArtistID }}" class="list-group-item list-group-item-action">
                 <div class="row">
                     <div style="display: flex; justify-content: center; align-items: center;">
-                        <div class="col-lg-1" style="text-align: center; margin-right:20px;">
-                            <i class="fa-solid fa-head-side-cough fa-2xl"></i>
+                        <div class="col-lg-1 mobile-col" style="text-align: center; margin-right:20px;">
+                            <i class="fa-solid fa-head-side-cough fa-2xl search_icon"></i>
                         </div>
                     </div>
-                    <div class="col-lg-11">
+                    <div class="col-lg-11 center-text">
                         <p><i>Artist</i></p>
                         {{ result.ArtistName }}
                     </div>
@@ -104,12 +104,12 @@
             {% else %}
             <a href="user?username={{ result.username }}" class="list-group-item list-group-item-action">
                 <div class="row">
-                    <div style="display: flex; justify-content: center; align-items: center;">
-                        <div class="col-lg-1" style="text-align: center; margin-right:20px;">
-                            <i class="fa-solid fa-user fa-2xl"></i>
+                    <div class="width_set" style="display: flex; justify-content: center; align-items: center;">
+                        <div class="col mobile-col">
+                            <i class="fa-solid fa-user fa-2xl search_icon"></i>
                         </div>
                     </div>
-                    <div class="col-lg-11">
+                    <div class="col-lg-11 center-text">
                         <p><i>User</i></p>
                         {{ result.username }}
                     </div>
@@ -136,11 +136,11 @@
         
                 {% for page_num in range(1, total_pages + 1) %}
                 {% if page_num == page %}
-                <li class="page-item active" aria-current="page">
+                <li class="page-item active mobile-disable" aria-current="page">
                     <span class="page-link">{{ page_num }}</span>
                 </li>
                 {% else %}
-                <li class="page-item">
+                <li class="page-item mobile-disable">
                     <a class="page-link" href="{{ url_for('search', query=query, page=page_num) }}">{{ page_num }}</a>
                 </li>
                 {% endif %}
