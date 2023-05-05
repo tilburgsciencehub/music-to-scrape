@@ -22,19 +22,20 @@ pip install flask_sqlalchemy
 ```
 
 ## How to start the API
-- clone repository locally
-- open terminal
-- go to the `sql_app` folder inside the repository
-- Run the following command: `uvicorn main:app --reload`
+- Clone repository locally
+- Open terminal
+- Go to the `sql_app` folder inside the repository
+- Run the following command: `uvicorn main:app --port 8080`
 
 ## How to open the documentation;
 If you want to check the documentation, you can go to following address when uvicorn is started: 
-- `http://127.0.0.1:8000/docs`
-- The port number (`:8000`) can be different for your operating system. Uvicorn will show you which link + port is used when running the application.
+- `http://127.0.0.1:8080/docs`
+- Uvicorn will show you which link is used when running the application.
 
 ## How to start the flask app
-- clone repository locally
-- open terminal
-- go to the `flask_app` folder inside the repository
-- Run the following command: `gunicorn main:app`
+- Clone repository locally
+- Open terminal
+- Go to the `flask_app` folder inside the repository
+- Run the following command: `gunicorn main:app --bind 0.0.0.0:8000
+`
 
