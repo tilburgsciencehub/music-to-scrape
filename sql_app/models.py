@@ -45,7 +45,7 @@ class Artists(Base):
 class Songs(Base):
     __tablename__ = "songs"
 
-    artistid = Column(String, ForeignKey("artists.artistid"))
+    artistid = Column(String, ForeignKey("artists.ArtistID"))
     artistname = Column(String)
     songid = Column(String, primary_key=True)
     albumid = Column(Integer)

@@ -3,7 +3,7 @@ from typing import List
 from sqlalchemy.orm import Session
 from exceptions import CarInfoNotFoundError
 from models import UserInfo, UserListening, Songs, Artists
-from sqlalchemy import func
+from sqlalchemy import func, desc
 import time
 import datetime
 from datetime import timedelta
@@ -437,6 +437,13 @@ def get_featured_artists(session: Session, _limit: int):
 # function for artist.getInfo
 def get_artist_info(session: Session,artist: str):
 
+    today = datetime.datetime.today()
+    start_of_week = today - timedelta(days=today.weekday())
+    end_of_week = start_of_week + timedelta(days=6)
+
+    start_date_unix = int(start_of_week.timestamp())
+    end_date_unix = int(end_of_week.timestamp())
+
     # replace _ with space
     if "_" in artist:
         artist = artist.replace("_", " ")
@@ -446,14 +453,40 @@ def get_artist_info(session: Session,artist: str):
 
     artist_info = session.query(Artists.ArtistID, Artists.ArtistName, Artists.featured, Artists.artistlocation).filter(Artists.ArtistName == artist).first()
 
+    artist_id = artist_info[0]
     count_plays = session.query(
-        UserListening).filter_by(artist_id = artist_info[0]).count()
+        UserListening).filter_by(artist_id = artist_id).count()
+
+    count_songs = session.query(
+        Songs).filter_by(artistid = artist_id).count()
+    
+    count_plays_last_week = session.query(UserListening).filter_by(artist_id=artist_id).filter(UserListening.timestamp >= start_date_unix, UserListening.timestamp <= end_date_unix).count()
+
+    top_songs = session.query(UserListening.song_id, Songs.title, func.count(UserListening.song_id).label('plays')).\
+        filter(UserListening.artist_id == artist_id).\
+        join(UserListening.song).\
+        group_by(UserListening.song_id).\
+        order_by(desc('plays')).\
+        limit(5).all()
+    
+    top_songs_list = []
+
+    for song in top_songs:
+
+        song_dict = {}
+
+        song_dict['title'] = song[1]
+        song_dict['plays'] = song[2]
+
+        top_songs_list.append(song_dict)
     
     artists = {}
 
     artists['artistid'] = artist_info[0]
     artists['artistname'] = artist_info[1]
     artists['artistfeatured'] = artist_info[2]
+    artists['total_songs'] = count_songs
+    artists['top_songs'] = top_songs_list
 
     if (artist_info[3] is None):
         artists['artistlocation'] = str('Not Set')
@@ -462,6 +495,7 @@ def get_artist_info(session: Session,artist: str):
         artists['artistlocation'] = artist_info[3]
     
     artists['total_plays'] = count_plays
+    artists['plays_last_week'] = count_plays_last_week
 
     if artist_info is None:
         raise CarInfoNotFoundError
