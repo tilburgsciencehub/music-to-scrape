@@ -36,6 +36,6 @@ If you want to check the documentation, you can go to following address when uvi
 - Clone repository locally
 - Open terminal
 - Go to the `flask_app` folder inside the repository
-- Run the following command: `gunicorn main:app --bind 0.0.0.0:8000
+- Run the following command: `gunicorn main:app --bind 127.0.0.1:8000
 `
 
