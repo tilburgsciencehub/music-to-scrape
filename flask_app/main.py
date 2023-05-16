@@ -263,6 +263,13 @@ def privacy_terms():
     #render template
     return render_template('privacy_terms.html')
 
+#route for privacy & terms
+@app.route('/article')
+def article_single():
+
+    #render template
+    return render_template('article_single.html')
+
 # Add a static route for CSS
 @app.route('/static/css/<path:path>')
 def static_css(path):
