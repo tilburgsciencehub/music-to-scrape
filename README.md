@@ -21,22 +21,26 @@ pip install flask
 pip install flask_sqlalchemy
 ```
 
-- Clone the repository locally: `git clone https://github.com/tilburgsciencehub/apis-to-scrape`
-
-## How to start the front-end
-- Open terminal
-- Navigate to the `flask_app` folder inside the repository
-- Run `gunicorn main:app --bind 127.0.0.1:8000`
-
 ## How to start the API
+- Clone repository locally
 - Open terminal
-- Run the API
-- Navigate to the `sql_app` folder inside the repository
-- Run `uvicorn main:app --port 8080`
+- Go to the `fastapi` folder inside the repository
+- Run the following command: `uvicorn main:app --port 8080`
 
-### How to open the documentation of the API
+## How to open the documentation;
 If you want to check the documentation, you can go to following address when uvicorn is started: 
 - `http://127.0.0.1:8080/docs`
-- `uvicorn` will show you which link is used when running the application.
+- Uvicorn will show you which link is used when running the application.
 
+## How to start the flask app
+- Clone repository locally
+- Open terminal
+- Go to the `flask_app` folder inside the repository
+- Run the following command: `gunicorn main:app --bind 127.0.0.1:8000`
+
+## How to change the data
+- Clone repository locally
+- Open the simulate.R file within the src/simulate folder
+- Make your adjustments
+- Run the complete file and the databases within the Flask and FastAPI folder will be updated.
 

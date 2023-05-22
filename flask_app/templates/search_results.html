@@ -72,7 +72,7 @@
             {% for result in results %}
 
             {% if result.Title %}
-            <a href="#" class="list-group-item list-group-item-action">
+            <a href="song?song-id={{ result.SongID }}" class="list-group-item list-group-item-action">
                 <div class="row">
                     <div style="display: flex; justify-content: center; align-items: center;">
                         <div class="col-lg-1 mobile-col" style="text-align: center; margin-right:20px;">
@@ -80,8 +80,8 @@
                         </div>
                     </div>
                     <div class="col-lg-11 center-text">
-                        <p>Song</p>
-                        {{ result.Title }}
+                        <p><b>Song</b></p>
+                        {{ result.Title }} by <i>{{ result.ArtistName }}</i>
                     </div>
                 </div>
             </a>

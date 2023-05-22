@@ -97,14 +97,20 @@
                             <!-- Week Selector -->
                             <nav aria-label="Search results pagination" class="d-flex justify-content-center">
                                 <ul class="pagination">
+
+                                    {% if nav_dict['curr_week'] > 0 %}
                                     <li class="page-item">
                                         <a class="page-link"
                                             href="user?username={{ user_info.username }}&week={{ nav_dict.prev_week }}">Previous Week</a>
                                     </li>
-                                    <li class="page-item {% if nav_dict['curr_week'] >=  current_week %}disabled{% endif %}">
+                                    {% endif %}
+
+                                    {% if nav_dict['curr_week'] < current_week and nav_dict['curr_week'] >= 0 %}
+                                    <li class="page-item">
                                         <a class="page-link"
                                             href="user?username={{ user_info.username }}&week={{ nav_dict.next_week }}">Next Week</a>
                                     </li>
+                                    {% endif %}
                                 </ul>
                             </nav>
                             <!-- End Week Selector -->

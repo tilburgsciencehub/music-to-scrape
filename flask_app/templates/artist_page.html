@@ -105,7 +105,8 @@
                             </thead>
                             <tbody>
                                 {% for song in top_songs %}
-                                <tr>
+                                
+                                <tr onclick="window.location.href = 'song?song-id={{ song.song_id}}';">
                                     <td>{{ song.rank }}</td>
                                     <td>{{ song.Title }}</td>
                                     <td>{{ song.ArtistName }}</td>

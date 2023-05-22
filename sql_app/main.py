@@ -25,7 +25,7 @@ In case you haven't done so, visit our website at [https://music-to-scrape.com](
 """
 
 # Initialize the app docs_url=None, redoc_url="/docs"
-app = FastAPI(description = description, title = "Music To Scrape API", version = '0.1',
+app = FastAPI(description = description, title = "Music To Scrape API", version = '0.1', docs_url=None, redoc_url="/docs",
               contact = {"name": "Hannes Datta",
                          "url": "https://hannesdatta.com",
                          "email": "h.datta@tilburguniversity.edu"}

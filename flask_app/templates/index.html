@@ -66,7 +66,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12">
                     <div class="ms_banner_img">
-                        <img src="https://www.mytractice.com/wp-content/uploads/2021/08/guitarist_hero_player.png" alt="" class="img-fluid">
+                        <img src="{{ url_for('static', filename='images/copia.png') }}" alt="" class="img-fluid">
                     </div>
                     <div class="ms_banner_text center-vertical">
                         <h1>This Month’s</h1>
@@ -107,7 +107,7 @@
 
                             {% for track in tracks %}
                             <div class="swiper-slide">
-                                <a href="artist?artist-id={{ track.ArtistID }}" style="color:rgb(1, 51, 101) !important;text-decoration:none">
+                                <a href="song?song-id={{ track.SongID }}" style="color:rgb(1, 51, 101) !important;text-decoration:none">
                                 <div class="card">
                                     <img src="https://picsum.photos/id/100/100/100" class="card-img-top" alt="...">
                                     <div class="card-body center-text">
@@ -140,7 +140,7 @@
                 <div class="col-md-4">
                     <div class="list-group list-group-flush">
                         {% for song in column %}
-                        <a href="artist?artist-id={{ song.ArtistID }}">
+                        <a href="song?song-id={{ song.song_id }}">
                         <div class="list-group-item list-group-item-action border">
                             <div class="row justify-content-center">
                                 <div class="col-sm-2 rank-column">
