@@ -1,5 +1,7 @@
 # user
 library(data.table)
+library(DBI)
+library(RSQLite)
 
 set.seed(1234)
 
@@ -67,17 +69,39 @@ artists[, ':=' (sampled=NULL, popularity=NULL)]
 
 songs[, ':=' (artist_popularity=NULL)]
 
-# minimized version of listening
-history_min <- head(history, 50000)
+# Remove existing database files if they exist
+db_file_fastapi <- "../../sql_app/apistoscrape.db"
+if (file.exists(db_file_fastapi)) {
+  file.remove(db_file_fastapi)
+}
 
-#write csv's
-fwrite(history_min, 'listening_min.csv')
-fwrite(artists, '../../artists.csv')
-fwrite(songs, '../../songs.csv')
-fwrite(history, '../../listening.csv')
-fwrite(users, '../../users.csv')
+db_file_flask <- "../../flask_app/apistoscrape.db"
+if (file.exists(db_file_flask)) {
+  file.remove(db_file_flask)
+}
 
+# Convert the dates to character (string) format
+history$date <- as.character(history$date)
 
+#generate sqlite database for fastapi
+con_fastapi <- dbConnect(RSQLite::SQLite(), dbname = "../../sql_app/apistoscrape.db")
+
+dbWriteTable(con_fastapi, "users", users)
+dbWriteTable(con_fastapi, "songs", songs)
+dbWriteTable(con_fastapi, "artists", artists, field.types = c(featured = "TEXT"))
+dbWriteTable(con_fastapi, "listening", history)
+
+dbDisconnect(con_fastapi)
+
+#generate sqlite database for fastapi
+con_flask <- dbConnect(RSQLite::SQLite(), dbname = "../../flask_app/apistoscrape.db")
+
+dbWriteTable(con_flask, "users", users)
+dbWriteTable(con_flask, "songs", songs)
+dbWriteTable(con_flask, "artists", artists, field.types = c(featured = "TEXT"))
+dbWriteTable(con_flask, "listening", history, field.types = c(date = "TEXT"))
+
+dbDisconnect(con_flask)
 
 
 

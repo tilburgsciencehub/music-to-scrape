@@ -1,9 +1,9 @@
 # crud.py
 from typing import List
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, aliased
 from exceptions import CarInfoNotFoundError
 from models import UserInfo, UserListening, Songs, Artists
-from sqlalchemy import func, desc
+from sqlalchemy import func, desc, and_
 import time
 import datetime
 from datetime import timedelta
@@ -391,30 +391,35 @@ def get_chart_top_artists(session: Session, limit: int, year: int, week: int):
 
 # function for user.getRecentlyActive
 def get_recent_active_users(session: Session, _limit: int):
+    subquery = session.query(UserListening.user, func.max(UserListening.timestamp).label("max_timestamp")) \
+        .group_by(UserListening.user) \
+        .subquery()
 
-    recent_users = session.query(UserListening).order_by(
-        UserListening.timestamp.desc()).group_by(UserListening.user).limit(_limit).all()
+    recent_users = session.query(UserListening.user, UserListening.timestamp) \
+        .join(subquery, and_(UserListening.user == subquery.c.user, UserListening.timestamp == subquery.c.max_timestamp)) \
+        .order_by(desc(UserListening.timestamp)) \
+        .limit(_limit) \
+        .all()
 
     users = []
 
-    for user in recent_users:
-        date = datetime.date.fromtimestamp(float(user.timestamp))
+    for user, timestamp in recent_users:
+        date = datetime.date.fromtimestamp(float(timestamp))
         users.append({
-            "user": user.user,
+            "user": user,
             "date": date
         })
 
-    if recent_users is None:
+    if not users:
         raise CarInfoNotFoundError
 
-    else:
-        return users
+    return users
 
 # function for artist.featured
 def get_featured_artists(session: Session, _limit: int):
 
     featured_artists = session.query(Artists.ArtistName, Artists.featured).\
-        filter(Artists.featured == 'TRUE').\
+        filter(Artists.featured == '1').\
         order_by(func.random()).\
         limit(_limit).\
         all()
@@ -425,10 +430,11 @@ def get_featured_artists(session: Session, _limit: int):
 
         artists.append({
             "artist": artist[0],
-            "featured": artist[1]
+            "featured": 'TRUE'
         })
-
+    
     if featured_artists is None:
+
         raise CarInfoNotFoundError
 
     else:

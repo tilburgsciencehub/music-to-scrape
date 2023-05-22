@@ -20,7 +20,7 @@ class UserListening(Base):
     timestamp = Column(Float)
     artist_id = Column(String, ForeignKey("artists.ArtistID"))
     song_id = Column(String, ForeignKey("songs.songid"))
-    unique_id = Column(Integer, primary_key=True)
+    unique_id = Column(String, primary_key=True)
 
     # Relationship with UserInfo table
     user_info = relationship("UserInfo", back_populates="usersinfo")
@@ -49,12 +49,13 @@ class Songs(Base):
     artistname = Column(String)
     songid = Column(String, primary_key=True)
     albumid = Column(Integer)
-    danceability = Column(Numeric(1,0))
-    duration = Column(Numeric(15,5))
+    danceability = Column(Numeric)
+    duration = Column(Numeric)
     keysignature = Column(Integer)
-    tempo = Column(Numeric(20,3))
+    tempo = Column(Numeric)
     timesignature = Column(Integer)
     title = Column(String)
+    year = Column(Integer)
 
     # Relationship with UserListening table
     user_songs = relationship("UserListening", back_populates="song")
