@@ -8,6 +8,7 @@ We'll post a link to the website and API here eventually.
 
 ## Running this project on your own server
 
+- Run the simulate.R script in src/simulate folder to generate the databases for the Flask app and FastAPI
 - Install required Python packages
 
 ```
