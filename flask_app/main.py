@@ -7,7 +7,6 @@ import os
 from datetime import datetime, timedelta
 from math import ceil
 from urllib.parse import urlparse, urlunparse, parse_qsl
-import datetime
 
 # BASIC SETTINGS
 # initialize Flask App & Database
