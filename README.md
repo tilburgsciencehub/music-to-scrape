@@ -27,6 +27,7 @@ pip install flask_sqlalchemy
 - Open terminal
 - Go to the `fastapi` folder inside the repository
 - Run the following command: `uvicorn main:app --port 8080`
+- If you want to the FastAPI connection, press Ctrl + c in the terminal to quit.
 
 ## How to open the documentation;
 If you want to check the documentation, you can go to following address when uvicorn is started: 
@@ -38,6 +39,7 @@ If you want to check the documentation, you can go to following address when uvi
 - Open terminal
 - Go to the `flask_app` folder inside the repository
 - Run the following command: `gunicorn main:app --bind 127.0.0.1:8000`
+- If you want to the Flask connection, press Ctrl + c in the terminal to quit.
 
 ## How to change the data
 - Clone repository locally
