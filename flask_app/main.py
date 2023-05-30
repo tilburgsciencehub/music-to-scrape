@@ -364,7 +364,7 @@ def song():
     age_groups = {'group1':age_10_29_count,'group2':age_30_49_count,'group3':age_above_49_count}
 
     #plays per month
-    current_year = datetime.datetime.today().year
+    current_year = datetime.today().year
 
     plays_per_month = db.session.query(
             func.extract('month', listening.date).label('month'),

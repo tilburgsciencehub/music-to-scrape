@@ -220,7 +220,7 @@
                         <a href="user?username={{ user.user }}">
                         <div class="avatar-container">
                             <div class="avatar">
-                                <img src="https://cdn-icons-png.flaticon.com/512/168/168726.png">
+                                <img src="{{ url_for('static', filename='images/icon-user.png') }}">
                             </div>
                             <span class="avatar-span">{{ user.ArtistName }} - {{ user.Title }}</span>
                             <h5 style="text-align:center;margin-left: -10px;margin-top: 5px;">{{ user.user }}</h5>
