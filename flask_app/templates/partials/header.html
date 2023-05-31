@@ -1,0 +1,51 @@
+<body>
+
+<!-- Header -->
+<header>
+    <!-- Top Bar -->
+    <div class="top-bar">
+		<p>We are a demo site without real data - use us to learn collecting data with web scraping and APIs.</p>
+	</div>
+    <!-- End Top Bar -->
+
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/logo.png') }}" class="logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto align-content-center" style="color: rgb(1,51,101)">
+                <li class="nav-item active" style="color: rgb(1,51,101)">
+                    <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Learn how to scrape</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Learn how to use API</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        More Resources
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+            </ul>
+            <form action="{{ url_for('search') }}" class="form-inline my-2 my-lg-0" method="get">
+                <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search for artists, songs, and users" aria-label="Search" style="width:300px">
+                <input type="hidden" name="page" value="{{ page }}">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <!-- End navbar -->
+</header>

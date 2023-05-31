@@ -1,112 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>We love being scraped | music-to-scrape</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/4e7776d591.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{{ url_for('static_css', path='style.css') }}">
-</head>
-
-<body>
-    <!-- Top Bar -->
-    <div class="top-bar">
-		<p>We are a demo site without real data - use us to learn collecting data with web scraping and APIs.</p>
-	</div>
-    <!-- End Top Bar -->
-
-    <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/logo.png') }}" class="logo"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto align-content-center" style="color: rgb(1,51,101)">
-                <li class="nav-item active" style="color: rgb(1,51,101)">
-                    <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Learn how to scrape</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Learn how to use API</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        More Resources
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-            </ul>
-            <form action="{{ url_for('search') }}" class="form-inline my-2 my-lg-0" method="get">
-                <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search for artists, songs, and users" aria-label="Search" style="width:300px">
-                <input type="hidden" name="page" value="{{ page }}">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </nav>
-    <!-- End navbar -->
-
-    <!-- Banner -->
-    <div class="ms-banner">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12 col-md-12">
-                    <div class="ms_banner_img">
-                        <img src="{{ url_for('static', filename='images/copia.png') }}" alt="" class="img-fluid">
-                    </div>
-                    <div class="ms_banner_text center-vertical">
-                        <h1>This Month’s</h1>
-                        <h1 class="ms_color">Top Streamed Artists!</h1>
-                        <p class="banner_text_par">So many great artists have been hitting the streaming charts for the first time in the past year. Explore them now!
-                        </p>
-                        <div class="ms_banner_btn">
-                        </div>
+{% block content %}
+<!-- Banner -->
+<div class="ms-banner">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="ms_banner_img">
+                    <img src="{{ url_for('static', filename='images/copia.png') }}" alt="" class="img-fluid">
+                </div>
+                <div class="ms_banner_text center-vertical">
+                    <h1>This Month’s</h1>
+                    <h1 class="ms_color">Top Streamed Artists!</h1>
+                    <p class="banner_text_par">So many great artists have been hitting the streaming charts for the
+                        first time in the past year. Explore them now!
+                    </p>
+                    <div class="ms_banner_btn">
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- End Banner -->
+</div>
+<!-- End Banner -->
 
-    <!-- Main Container-->
-    <div class="container">
+<!-- Main Container-->
+<div class="container">
 
-        <!-- Recently Played Row-->
-        <section name="recently_played" class="py-4">
+    <!-- Recently Played Row-->
+    <section name="recently_played" class="py-4">
 
-            <!-- Headline-->
-            <div class="row align-items-center mb-3">
-                <div class="col">
-                    <h2>Recently Played</h2>
-                </div>
-                <div class="col-auto">
-                </div>
+        <!-- Headline-->
+        <div class="row align-items-center mb-3">
+            <div class="col">
+                <h2>Recently Played</h2>
             </div>
-            <!-- End of Headline -->
+            <div class="col-auto">
+            </div>
+        </div>
+        <!-- End of Headline -->
 
-            <!-- Swiper Container -->
-            <div class="row">
-                <div class="col-lg-12" style="overflow-x: hidden;">
-                    <div class="swiper-container">
-                        <div class="swiper-wrapper">
+        <!-- Swiper Container -->
+        <div class="row">
+            <div class="col-lg-12" style="overflow-x: hidden;">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
 
-                            {% for track in tracks %}
-                            <div class="swiper-slide">
-                                <a href="song?song-id={{ track.SongID }}" style="color:rgb(1, 51, 101) !important;text-decoration:none">
+                        {% for track in tracks %}
+                        <div class="swiper-slide">
+                            <a href="song?song-id={{ track.SongID }}"
+                                style="color:rgb(1, 51, 101) !important;text-decoration:none">
                                 <div class="card">
                                     <img src="https://picsum.photos/id/100/100/100" class="card-img-top" alt="...">
                                     <div class="card-body center-text">
@@ -115,31 +58,31 @@
                                     </div>
                                 </div>
                             </a>
-                            </div>
-                            {% endfor %}
-
                         </div>
+                        {% endfor %}
+
                     </div>
                 </div>
             </div>
-            <!-- End of Swiper Container -->
+        </div>
+        <!-- End of Swiper Container -->
 
-        </section>
-        <!-- End of Recently Played Section -->
+    </section>
+    <!-- End of Recently Played Section -->
 
-        <!-- Weekly Top 15-->
-        <section name="weekly_15" class="my-4">
-            <div class="row">
-                <div class="col">
-                    <h2>Top 15 Weekly Tracks</h2>
-                </div>
+    <!-- Weekly Top 15-->
+    <section name="weekly_15" class="my-4">
+        <div class="row">
+            <div class="col">
+                <h2>Top 15 Weekly Tracks</h2>
             </div>
-            <div class="row">
-                {% for column in top_songs|batch(5) %}
-                <div class="col-md-4">
-                    <div class="list-group list-group-flush">
-                        {% for song in column %}
-                        <a href="song?song-id={{ song.song_id }}">
+        </div>
+        <div class="row">
+            {% for column in top_songs|batch(5) %}
+            <div class="col-md-4">
+                <div class="list-group list-group-flush">
+                    {% for song in column %}
+                    <a href="song?song-id={{ song.song_id }}">
                         <div class="list-group-item list-group-item-action border">
                             <div class="row justify-content-center">
                                 <div class="col-sm-2 rank-column">
@@ -149,7 +92,8 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="center-vertical">
-                                        <img src="https://picsum.photos/id/237/50/50" class="align-self-center mobile-center">
+                                        <img src="https://picsum.photos/id/237/50/50"
+                                            class="align-self-center mobile-center">
                                     </div>
                                 </div>
                                 <div class="col-sm-7">
@@ -161,62 +105,62 @@
 
                             </div>
                         </div>
-                        </a>
-                        {% endfor %}
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </section>
-        <!-- End of Weekly Top 15-->
-
-        <!-- Featured Artists-->
-        <section name="featured_artists" class="py-4">
-
-            <!-- Headline-->
-            <div class="row align-items-center mb-3">
-                <div class="col">
-                    <h2>Featured Artists</h2>
+                    </a>
+                    {% endfor %}
                 </div>
             </div>
-            <!-- End of Headline -->
+            {% endfor %}
+        </div>
+    </section>
+    <!-- End of Weekly Top 15-->
 
-            <!-- Swiper -->
-            <div class="row">
-                <div class="col-lg-12" style="overflow-x: hidden;">
-                    <div class="swiper-container">
-                        <div class="swiper-wrapper">
+    <!-- Featured Artists-->
+    <section name="featured_artists" class="py-4">
 
-                            {% for artist in featured_artists %}
-                            <div class="swiper-slide">
-                                <a href="artist?artist-id={{ artist.ArtistID }}">
+        <!-- Headline-->
+        <div class="row align-items-center mb-3">
+            <div class="col">
+                <h2>Featured Artists</h2>
+            </div>
+        </div>
+        <!-- End of Headline -->
+
+        <!-- Swiper -->
+        <div class="row">
+            <div class="col-lg-12" style="overflow-x: hidden;">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+
+                        {% for artist in featured_artists %}
+                        <div class="swiper-slide">
+                            <a href="artist?artist-id={{ artist.ArtistID }}">
                                 <div class="card">
                                     <img src="https://picsum.photos/id/100/100/100" class="card-img-top" alt="...">
                                     <div class="card-body center-text">
                                         <h5 class="card-title">{{ artist.ArtistName }}</h5>
                                     </div>
                                 </div>
-                                </a>
-                            </div>
-                            {% endfor %}
+                            </a>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-            <!-- End of Swiper -->
+        </div>
+        <!-- End of Swiper -->
 
-        </section>
-        <!-- End of Recently Played Section -->
+    </section>
+    <!-- End of Recently Played Section -->
 
-        <!-- Recent Users -->
-        <section>
-            <h2>Recent Active Users</h2>
-            <div class="my-4 mb-5">
-                <div class="row">
+    <!-- Recent Users -->
+    <section>
+        <h2>Recent Active Users</h2>
+        <div class="my-4 mb-5">
+            <div class="row">
 
-                    {% for user in recent_users %}
-                    <div class="col-sm-2 d-flex justify-content-center mobile-user-margin">
-                        <a href="user?username={{ user.user }}">
+                {% for user in recent_users %}
+                <div class="col-sm-2 d-flex justify-content-center mobile-user-margin">
+                    <a href="user?username={{ user.user }}">
                         <div class="avatar-container">
                             <div class="avatar">
                                 <img src="{{ url_for('static', filename='images/icon-user.png') }}">
@@ -224,104 +168,15 @@
                             <span class="avatar-span">{{ user.ArtistName }} - {{ user.Title }}</span>
                             <h5 style="text-align:center;margin-left: -10px;margin-top: 5px;">{{ user.user }}</h5>
                         </div>
-                        </a>
-                    </div>
-                    {% endfor %}
+                    </a>
                 </div>
-            </div>
-        </section>
-        
-        <!-- End Recent Users-->
-
-    </div>
-    <!-- End Main Container-->
-
-    <!-- Footer -->
-    <footer>
-        <div class="container pt-5 border-bottom">
-            <div class="row">
-                <div class="col-md-3 col-sm-12 mb-3">
-                    <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo_footer"><br><br>
-                    <p>We’re a fictitious music streaming service with a real website and API. Built for educational purposes, you can use us to learn web scraping! </p>
-                </div>
-                <div class="col-md-9 col-sm-12">
-
-                    <div class="col-md-4 col-sm-6 col-6 p-0 float-left mb-3">
-                        <h5 class="mb-4 font-weight-bold text-uppercase">Pages</h5>
-                        <ul class="list-group">
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6 col-6 p-0 mb-3 float-left">
-                        <h5 class="mb-4 font-weight-bold text-uppercase">Learn how to scrape</h5>
-                        <ul class="list-group">
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Tutorial: How to scrape the site</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Tutorial: Using the API</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">API Documentation</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 col-6 mb-3 p-0 float-left">
-                        <h5 class="mb-4 font-weight-bold text-uppercase">Connect</h5>
-                        <ul class="list-group">
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2">
-                                <a href=""><i class="fa fa-linkedin mr-1"></i>
-                                    LinkedIn</a>
-                            </li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2">
-                                <a href="" target="_blank"><i class="fa fa-github mr-1"></i>
-                                    Github</a>
-                            </li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2">
-                                <a href="" target="_blank"><i class="fa fa-facebook mr-1"></i> Facebook</a>
-                            </li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2">
-                                <a href="" target="_blank"><i class="fa fa-youtube mr-1"></i> YouTube</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="col-md-12">
-                    <div class="py-4 d-flex justify-content-center align-items-center">
-                        <a class="mr-4" href="">Privacy & terms</a>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
-    </footer>
-    <!-- End of Footer -->
+    </section>
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script>
-        var swiper = new Swiper('.swiper-container', {
-            spaceBetween: 20,
-            loop: true,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            breakpoints: {
-                600: {
-                    slidesPerView: 2,
-                    spaceBetween: 10
-                },
-                992: {
-                    slidesPerView: 4
-                }
-            }
-        });
-    </script>
-    <!-- End of Scripts-->
-</body>
+    <!-- End Recent Users-->
 
-</html>
+</div>
+<!-- End Main Container-->
+{% endblock %}

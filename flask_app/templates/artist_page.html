@@ -1,215 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artists | music-to-scrape</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/4e7776d591.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{{ url_for('static_css', path='style.css') }}">
+{% block content %}
 
-    <style>
-        
-    </style>
-</head>
+<!-- Main Container-->
+<div class="container">
 
-<body>
-    <!-- Top Bar -->
-    <div class="top-bar">
-		<p>We are a demo site without real data - use us to learn collecting data with web scraping and APIs.</p>
-	</div>
-    <!-- End Top Bar -->
-
-    <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/logo.png') }}" class="logo"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto align-content-center" style="color: rgb(1,51,101)">
-                <li class="nav-item active" style="color: rgb(1,51,101)">
-                    <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Learn how to scrape</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Learn how to use API</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        More Resources
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-            </ul>
-            <form action="{{ url_for('search') }}" class="form-inline my-2 my-lg-0" method="get">
-                <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search for artists, songs, and users" aria-label="Search" style="width:300px">
-                <input type="hidden" name="page" value="{{ page }}">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+    <!-- Artist Info -->
+    <section>
+        <div class="row my-3">
+            <div class="col-lg-4 album_single_img">
+                <img src="https://images.unsplash.com/photo-1605722243979-fe0be8158232?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80"
+                    class="img-fluid">
+            </div>
+            <div class="col-lg-8 album_single_text">
+                <h2 class="artist_info_title">{{ artist_info.ArtistName }}</h2>
+                <div class="about_artist">
+                    <h5>Location:</h5>
+                    <p>{{ artist_info.ArtistLocation }}</p>
+                    <h5>Number of tracks:</h5>
+                    <p>{{ num_songs }}</p>
+                    <h5>Number of Playlists:</h5>
+                    <p>24</p>
+                </div>
+            </div>
         </div>
-    </nav>
-    <!-- End navbar -->
+    </section>
+    <!-- End Artist Info -->
 
-    <!-- Main Container-->
-    <div class="container">
+    <!-- Tracks -->
+    <section></section>
+    <div class="row my-3">
+        <div class="col-md-12">
+            <h2>Top 10 Songs All Time</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Song Title</th>
+                            <th>Artist</th>
+                            <th>Number of Plays</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for song in top_songs %}
 
-        <!-- Artist Info -->
-        <section>
-            <div class="row my-3">
-                <div class="col-lg-4 album_single_img">
-                    <img src="https://images.unsplash.com/photo-1605722243979-fe0be8158232?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80" class="img-fluid">
-                </div>
-                <div class="col-lg-8 album_single_text">
-                        <h2 class="artist_info_title">{{ artist_info.ArtistName }}</h2>
-                        <div class="about_artist">
-                            <h5>Location:</h5>
-                            <p>{{ artist_info.ArtistLocation }}</p>
-                            <h5>Number of tracks:</h5>
-                            <p>{{ num_songs }}</p>
-                            <h5>Number of Playlists:</h5>
-                            <p>24</p>
-                        </div>
-                </div>
+                        <tr onclick="window.location.href = 'song?song-id={{ song.song_id}}';">
+                            <td>{{ song.rank }}</td>
+                            <td>{{ song.Title }}</td>
+                            <td>{{ song.ArtistName }}</td>
+                            <td>{{ song.count }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
-        </section>
-        <!-- End Artist Info -->
-        
-        <!-- Tracks -->
-        <section></section>
-            <div class="row my-3">
-                <div class="col-md-12">
-                    <h2>Top 10 Songs All Time</h2>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Song Title</th>
-                                    <th>Artist</th>
-                                    <th>Number of Plays</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for song in top_songs %}
-                                
-                                <tr onclick="window.location.href = 'song?song-id={{ song.song_id}}';">
-                                    <td>{{ song.rank }}</td>
-                                    <td>{{ song.Title }}</td>
-                                    <td>{{ song.ArtistName }}</td>
-                                    <td>{{ song.count }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End of Tracks-->
-
+        </div>
     </div>
-    <!-- End Main Container-->
+    </section>
+    <!-- End of Tracks-->
 
-    <!-- Footer -->
-    <footer>
-        <div class="container pt-5 border-bottom">
-            <div class="row">
-                <div class="col-md-3 col-sm-12 mb-3">
-                    <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo_footer"><br><br>
-                    <p>We’re a fictitious music streaming service with a real website and API. Built for educational purposes, you can use us to learn web scraping! </p>
-                </div>
-                <div class="col-md-9 col-sm-12">
+</div>
+<!-- End Main Container-->
 
-                    <div class="col-md-4 col-sm-6 col-6 p-0 mb-3 float-left">
-                        <h5 class="mb-4 font-weight-bold text-uppercase">Learn how to scrape</h5>
-                        <ul class="list-group">
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Tutorial: How to scrape the site</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Tutorial: Using the API</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">API Documentation</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6 col-6 p-0 float-left mb-3">
-                        <h5 class="mb-4 font-weight-bold text-uppercase">More Resources</h5>
-                        <ul class="list-group">
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 col-6 mb-3 p-0 float-left">
-                        <h5 class="mb-4 font-weight-bold text-uppercase">Connect</h5>
-                        <ul class="list-group">
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2">
-                                <a href=""><i class="fa fa-linkedin mr-1"></i>
-                                    LinkedIn</a>
-                            </li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2">
-                                <a href="" target="_blank"><i class="fa fa-github mr-1"></i>
-                                    Github</a>
-                            </li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2">
-                                <a href="" target="_blank"><i class="fa fa-facebook mr-1"></i> Facebook</a>
-                            </li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2">
-                                <a href="" target="_blank"><i class="fa fa-youtube mr-1"></i> YouTube</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="col-md-12">
-                    <div class="py-4 d-flex justify-content-center align-items-center">
-                        <a class="mr-4" href="{{ url_for('privacy_terms') }}">Privacy & terms</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- End of Footer -->
-
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script>
-        var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 4,
-            spaceBetween: 20,
-            loop: true,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            breakpoints: {
-                768: {
-                    slidesPerView: 2
-                },
-                992: {
-                    slidesPerView: 4
-                }
-            }
-        });
-    </script>
-    <!-- End of Scripts-->
-</body>
-
-</html>
+{% endblock %}
