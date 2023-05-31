@@ -1,0 +1,89 @@
+<!-- Footer -->
+<footer>
+    <div class="container pt-5 border-bottom">
+        <div class="row">
+            <div class="col-md-3 col-sm-12 mb-3">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo_footer"><br><br>
+                <p>We’re a fictitious music streaming service with a real website and API. Built for educational purposes, you can use us to learn web scraping! </p>
+            </div>
+            <div class="col-md-9 col-sm-12">
+
+                <div class="col-md-4 col-sm-6 col-6 p-0 float-left mb-3">
+                    <h5 class="mb-4 font-weight-bold text-uppercase">Pages</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
+                        <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
+                        <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
+                        <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
+                        <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-6 p-0 mb-3 float-left">
+                    <h5 class="mb-4 font-weight-bold text-uppercase">Learn how to scrape</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Tutorial: How to scrape the site</a></li>
+                        <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Tutorial: Using the API</a></li>
+                        <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">API Documentation</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 col-sm-6 col-6 mb-3 p-0 float-left">
+                    <h5 class="mb-4 font-weight-bold text-uppercase">Connect</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item bg-transparent border-0 p-0 mb-2">
+                            <a href=""><i class="fa fa-linkedin mr-1"></i>
+                                LinkedIn</a>
+                        </li>
+                        <li class="list-group-item bg-transparent border-0 p-0 mb-2">
+                            <a href="" target="_blank"><i class="fa fa-github mr-1"></i>
+                                Github</a>
+                        </li>
+                        <li class="list-group-item bg-transparent border-0 p-0 mb-2">
+                            <a href="" target="_blank"><i class="fa fa-facebook mr-1"></i> Facebook</a>
+                        </li>
+                        <li class="list-group-item bg-transparent border-0 p-0 mb-2">
+                            <a href="" target="_blank"><i class="fa fa-youtube mr-1"></i> YouTube</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="col-md-12">
+                <div class="py-4 d-flex justify-content-center align-items-center">
+                    <a class="mr-4" href="{{ url_for('privacy_terms') }}">Privacy & terms</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End of Footer -->
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        spaceBetween: 20,
+        loop: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            600: {
+                slidesPerView: 2,
+                spaceBetween: 10
+            },
+            992: {
+                slidesPerView: 4
+            }
+        }
+    });
+</script>
+<!-- End of Scripts-->
+
+</body>
+</html>

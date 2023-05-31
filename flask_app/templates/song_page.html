@@ -1,362 +1,208 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Songs | music-to-scrape</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/4e7776d591.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{{ url_for('static_css', path='style.css') }}">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
+{% block content %}
+<!-- Main Container-->
+<div class="container">
 
-    </style>
-</head>
+    <!-- Song Info -->
+    <section>
+        <div class="row my-3">
 
-<body>
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <p>We are a demo site without real data - use us to learn collecting data with web scraping and APIs.</p>
-    </div>
-    <!-- End Top Bar -->
-
-    <!-- NavBar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{{ url_for('index') }}"><img
-                src="{{ url_for('static', filename='images/logo.png') }}" class="logo"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto align-content-center" style="color: rgb(1,51,101)">
-                <li class="nav-item active" style="color: rgb(1,51,101)">
-                    <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Learn how to scrape</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Learn how to use API</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        More Resources
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-            </ul>
-            <form action="{{ url_for('search') }}" class="form-inline my-2 my-lg-0" method="get">
-                <input class="form-control mr-sm-2" name="query" type="search"
-                    placeholder="Search for artists, songs, and users" aria-label="Search" style="width:300px">
-                <input type="hidden" name="page" value="{{ page }}">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </nav>
-    <!-- End navbar -->
-
-    <!-- Main Container-->
-    <div class="container">
-
-        <!-- Song Info -->
-        <section>
-            <div class="row my-3">
-
-                <!-- Basic Informartion Section-->
-                <div class="col-lg-4 album_single_text song_basic_information">
-                    <div class="song_basic_information_card">
+            <!-- Basic Informartion Section-->
+            <div class="col-lg-4 album_single_text song_basic_information">
+                <div class="song_basic_information_card">
                     <h2 class="artist_info_title">Basic Information</h2>
-                    <div class="about_artist">
-                    <div class="row">
-                        <div class="col-6">
-                            <h5>Title</h5>
-                            <p>{{ song_info.Title }}</p>
-                            <h5>Artist:</h5>
-                            <p>{{ song_info.ArtistName }}</p>
-                            <a href="artist?artist-id={{ song_info.ArtistID }}" class="btn btn-primary song_button">Go to Artist's Page</a>
-                        </div>
-                        <div class="col-6">
-                            <h5>Year:</h5>
-                            <p>{{ song_info.Year }}</p>
-                            <h5>Plays:</h5>
-                            <p>{{ num_plays }}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        
-                    </div>
-                    </div>
-                    </div>
-                </div>
-
-                <!-- Audio Metrics Section-->
-                <div class="col-lg-8 album_single_text song_audio_metrics">
-                    <h2 class="artist_info_title">Audio Metrics</h2>
                     <div class="about_artist">
                         <div class="row">
                             <div class="col-6">
-                                <h5>Danceability:</h5>
-                                <p>{{ song_info.Danceability }}</p>
-                                <h5>Duration:</h5>
-                                <p>{{ song_info.Duration }}</p>
-                                <h5>Key Signature:</h5>
-                                <p>{{ song_info.KeySignature }}</p>
+                                <h5>Title</h5>
+                                <p>{{ song_info.Title }}</p>
+                                <h5>Artist:</h5>
+                                <p>{{ song_info.ArtistName }}</p>
+                                <a href="artist?artist-id={{ song_info.ArtistID }}"
+                                    class="btn btn-primary song_button">Go to Artist's Page</a>
                             </div>
                             <div class="col-6">
-                                <h5>Tempo:</h5>
-                                <p>{{ song_info.Tempo }}</p>
-                                <h5>Time Signature:</h5>
-                                <p>{{ song_info.TimeSignature }}</p>
+                                <h5>Year:</h5>
+                                <p>{{ song_info.Year }}</p>
+                                <h5>Plays:</h5>
+                                <p>{{ num_plays }}</p>
                             </div>
+                        </div>
+                        <div class="row">
+
                         </div>
                     </div>
                 </div>
-
             </div>
-            <div class="row my-3">
 
-                <!-- Statistics section -->
-                <div class="col-lg-12 album_single_img song_statistics">
-                    <h2>Statistics</h2>
+            <!-- Audio Metrics Section-->
+            <div class="col-lg-8 album_single_text song_audio_metrics">
+                <h2 class="artist_info_title">Audio Metrics</h2>
+                <div class="about_artist">
+                    <div class="row">
+                        <div class="col-6">
+                            <h5>Danceability:</h5>
+                            <p>{{ song_info.Danceability }}</p>
+                            <h5>Duration:</h5>
+                            <p>{{ song_info.Duration }}</p>
+                            <h5>Key Signature:</h5>
+                            <p>{{ song_info.KeySignature }}</p>
+                        </div>
+                        <div class="col-6">
+                            <h5>Tempo:</h5>
+                            <p>{{ song_info.Tempo }}</p>
+                            <h5>Time Signature:</h5>
+                            <p>{{ song_info.TimeSignature }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                    <div class="row statistics-row">
-                        <div class="col-lg-auto statistics_col">
-                            <h5>Age Groups</h5>
-                            <canvas id="myChart"></canvas>
+        </div>
+        <div class="row my-3">
 
-                            <script>
-                                // Get the canvas element
-                                var ctx = document.getElementById('myChart').getContext('2d');
+            <!-- Statistics section -->
+            <div class="col-lg-12 album_single_img song_statistics">
+                <h2>Statistics</h2>
 
-                                // Define the chart data
-                                var data = {
-                                    labels: ['Age < 30', 'Age between 30-50', 'Age > 50'], // Labels for each segment
-                                    datasets: [{
-                                        data: [{{ age_groups.group1 }}, {{ age_groups.group2 }}, {{ age_groups.group3 }}], // Values for each segment
-                                backgroundColor: ['red', 'green', 'blue'], // Colors for each segment
+                <div class="row statistics-row">
+                    <div class="col-lg-auto statistics_col">
+                        <h5>Age Groups</h5>
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                        <canvas id="myChart"></canvas>
+
+                        <script>
+                            // Get the canvas element
+                            var ctx = document.getElementById('myChart').getContext('2d');
+
+                            // Define the chart data
+                            var data = {
+                                labels: ['Age < 30', 'Age between 30-50', 'Age > 50'], // Labels for each segment
+                                datasets: [{
+                                    data: [{{ age_groups.group1 }}, {{ age_groups.group2 }}, {{ age_groups.group3 }}], // Values for each segment
+                            backgroundColor: ['red', 'green', 'blue'], // Colors for each segment
                           }]
                         };
 
-                                // Create the chart
-                                var myChart = new Chart(ctx, {
-                                    type: 'pie',
-                                    data: data
-                                });
-                            </script>
-                        </div>
-                        <div class="col-lg-8 statistics_col">
-                            <h5>Plays This Year</h5>
-                            <canvas id="mylineChart"></canvas>
+                            // Create the chart
+                            var myChart = new Chart(ctx, {
+                                type: 'pie',
+                                data: data
+                            });
+                        </script>
+                    </div>
+                    <div class="col-lg-8 statistics_col">
+                        <h5>Plays This Year</h5>
+                        <canvas id="mylineChart"></canvas>
 
-                            <script>
-                                // Get the canvas element
-                                var ctx = document.getElementById('mylineChart').getContext('2d');
-                              
-                                // Define the chart data
-                                var data = {
-                                  labels: [{% for month, plays in plays_per_month %}'{{ month }}' ,{% endfor %}],
-                                  datasets: [{
-                                    label: 'Plays',
-                                    data: [{% for month, plays in plays_per_month %}{{ plays }} ,{% endfor %}],
-                                    borderColor: 'blue',
+                        <script>
+                            // Get the canvas element
+                            var ctx = document.getElementById('mylineChart').getContext('2d');
+
+                            // Define the chart data
+                            var data = {
+                                labels: [{% for month, plays in plays_per_month %}'{{ month }}', {% endfor %}],
+                            datasets: [{
+                                label: 'Plays',
+                                data: [{% for month, plays in plays_per_month %}{{ plays }}, {% endfor %}],
+                                borderColor: 'blue',
                                     fill: false
                                   }]
                                 };
-                              
-                                // Create the chart
-                                var mylineChart = new Chart(ctx, {
-                                  type: 'line',
-                                  data: data
-                                });
-                              </script>
-                        </div>
+
+                            // Create the chart
+                            var mylineChart = new Chart(ctx, {
+                                type: 'line',
+                                data: data
+                            });
+                        </script>
                     </div>
-                    <div class="row mt-4">
-                        <div class="col-lg-8 statistics_col">
-                            <h5>Plays & Listeners per country</h5>
-                            <canvas id="mylinebarChart"></canvas>
-                            <script>
-                                // Get the canvas element
-                                var ctx = document.getElementById('mylinebarChart').getContext('2d');
-                              
-                                // Define the chart data
-                                var data = {
-                                  labels: [{% for country, plays in plays_per_country %}'{{ country }}',{% endfor %}],
-                                  datasets: [
-                                    {
-                                      label: 'Plays',
-                                      data: [{% for country, plays in plays_per_country %}{{ plays }},{% endfor %}],
-                                      backgroundColor: 'rgba(75, 192, 192, 0.2)', // Bar color
-                                      borderColor: 'rgba(75, 192, 192, 1)', // Bar border color
-                                      borderWidth: 1,
-                                      type: 'bar', // Use bar chart type
-                                      yAxisID: 'bar-y-axis' // Use the 'bar-y-axis' scale
-                                    },
-                                    {
-                                      label: 'Listeners',
-                                      data: [{% for country, unique_listeners in unique_listeners_per_country %}{{ unique_listeners }},{% endfor %}],
-                                      backgroundColor: 'rgba(255, 99, 132, 0.2)', // Bar color
-                                      borderColor: 'rgba(255, 99, 132, 1)', // Bar border color
-                                      borderWidth: 1,
-                                      type: 'bar', // Use bar chart type
-                                      yAxisID: 'bar-y-axis' // Use the 'bar-y-axis' scale
-                                    }
-                                  ]
-                                };
-                              
-                                // Create the chart
-                                var mylinebarChart = new Chart(ctx, {
-                                  type: 'bar', // Use bar chart as the main chart type
-                                  data: data,
-                                  options: {
-                                    scales: {
-                                      x: {
-                                        stacked: false // Enable stacked mode for x-axis
-                                      },
-                                      'bar-y-axis': {
-                                        stacked: false // Enable stacked mode for y-axis of bar datasets
-                                      },
-                                      'line-y-axis': {
-                                        position: 'left', // Position the line dataset on the right y-axis
-                                        display: false
-                                      },
-                                    }
-                                  }
-                                });
-                            </script>
-                        </div>
-                        <div class="col-lg-4 statistics_col">
-                            <h5 class="artist_info_title">Top 5 Listeners</h5>
-                            <div class="about_artist mt-5">
-                                <div class="table-responsive">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>User</th>
-                                                <th>Number of Plays</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for listener in top_listeners %}
-                                            <tr>
-                                                <td>{{ listener.user }}</td>
-                                                <td>{{ listener.play_count }}</td>
-                                            </tr>
-                                            {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-lg-8 statistics_col">
+                        <h5>Plays & Listeners per country</h5>
+                        <canvas id="mylinebarChart"></canvas>
+                        <script>
+                            // Get the canvas element
+                            var ctx = document.getElementById('mylinebarChart').getContext('2d');
+                          
+                            // Define the chart data
+                            var data = {
+                              labels: [{% for country, plays in plays_per_country %}'{{ country }}',{% endfor %}],
+                              datasets: [
+                                {
+                                  label: 'Plays',
+                                  data: [{% for country, plays in plays_per_country %}{{ plays }},{% endfor %}],
+                                  backgroundColor: 'rgba(75, 192, 192, 0.2)', // Bar color
+                                  borderColor: 'rgba(75, 192, 192, 1)', // Bar border color
+                                  borderWidth: 1,
+                                  type: 'bar', // Use bar chart type
+                                  yAxisID: 'bar-y-axis' // Use the 'bar-y-axis' scale
+                                },
+                                {
+                                  label: 'Listeners',
+                                  data: [{% for country, unique_listeners in unique_listeners_per_country %}{{ unique_listeners }},{% endfor %}],
+                                  backgroundColor: 'rgba(255, 99, 132, 0.2)', // Bar color
+                                  borderColor: 'rgba(255, 99, 132, 1)', // Bar border color
+                                  borderWidth: 1,
+                                  type: 'bar', // Use bar chart type
+                                  yAxisID: 'bar-y-axis' // Use the 'bar-y-axis' scale
+                                }
+                              ]
+                            };
+                          
+                            // Create the chart
+                            var mylinebarChart = new Chart(ctx, {
+                              type: 'bar', // Use bar chart as the main chart type
+                              data: data,
+                              options: {
+                                scales: {
+                                  x: {
+                                    stacked: false // Enable stacked mode for x-axis
+                                  },
+                                  'bar-y-axis': {
+                                    stacked: false // Enable stacked mode for y-axis of bar datasets
+                                  },
+                                  'line-y-axis': {
+                                    position: 'left', // Position the line dataset on the right y-axis
+                                    display: false
+                                  },
+                                }
+                              }
+                            });
+                        </script>
+                    </div>
+                    <div class="col-lg-4 statistics_col">
+                        <h5 class="artist_info_title">Top 5 Listeners</h5>
+                        <div class="about_artist mt-5">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>User</th>
+                                            <th>Number of Plays</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for listener in top_listeners %}
+                                        <tr>
+                                            <td>{{ listener.user }}</td>
+                                            <td>{{ listener.play_count }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End Artist Info -->
-
-    </div>
-    <!-- End Main Container-->
-
-    <!-- Footer -->
-    <footer>
-        <div class="container pt-5 border-bottom">
-            <div class="row">
-                <div class="col-md-3 col-sm-12 mb-3">
-                    <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo_footer"><br><br>
-                    <p>We’re a fictitious music streaming service with a real website and API. Built for educational purposes, you can use us to learn web scraping! </p>>
-                </div>
-                <div class="col-md-9 col-sm-12">
-
-                    <div class="col-md-4 col-sm-6 col-6 p-0 mb-3 float-left">
-                        <h5 class="mb-4 font-weight-bold text-uppercase">Learn how to scrape</h5>
-                        <ul class="list-group">
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Tutorial: How to
-                                    scrape the site</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Tutorial: Using the
-                                    API</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">API
-                                    Documentation</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6 col-6 p-0 float-left mb-3">
-                        <h5 class="mb-4 font-weight-bold text-uppercase">More Resources</h5>
-                        <ul class="list-group">
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 col-6 mb-3 p-0 float-left">
-                        <h5 class="mb-4 font-weight-bold text-uppercase">Connect</h5>
-                        <ul class="list-group">
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2">
-                                <a href=""><i class="fa fa-linkedin mr-1"></i>
-                                    LinkedIn</a>
-                            </li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2">
-                                <a href="" target="_blank"><i class="fa fa-github mr-1"></i>
-                                    Github</a>
-                            </li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2">
-                                <a href="" target="_blank"><i class="fa fa-facebook mr-1"></i> Facebook</a>
-                            </li>
-                            <li class="list-group-item bg-transparent border-0 p-0 mb-2">
-                                <a href="" target="_blank"><i class="fa fa-youtube mr-1"></i> YouTube</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-                <div class="col-md-12">
-                    <div class="py-4 d-flex justify-content-center align-items-center">
-                        <a class="mr-4" href="{{ url_for('privacy_terms') }}">Privacy & terms</a>
                     </div>
                 </div>
             </div>
         </div>
-    </footer>
-    <!-- End of Footer -->
+    </section>
+    <!-- End Artist Info -->
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script>
-        var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 4,
-            spaceBetween: 20,
-            loop: true,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            breakpoints: {
-                768: {
-                    slidesPerView: 2
-                },
-                992: {
-                    slidesPerView: 4
-                }
-            }
-        });
-    </script>
-    <!-- End of Scripts-->
-</body>
+</div>
+<!-- End Main Container-->
 
-</html>
+{% endblock %}
