@@ -27,7 +27,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Learn how to use API</a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item active" style="color: rgb(1,51,101)">
+                    <a class="nav-link" href="{{ url_for('about') }}">About <span class="sr-only">(current)</span></a>
+                </li>
+                 
+                <!--<li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         More Resources
@@ -39,6 +43,7 @@
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </li>
+            -->
             </ul>
             <form action="{{ url_for('search') }}" class="form-inline my-2 my-lg-0" method="get">
                 <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search for artists, songs, and users" aria-label="Search" style="width:300px">

@@ -310,6 +310,13 @@ def privacy_terms():
     # render template
     return render_template('privacy_terms.html', head='partials/head.html', header='partials/header.html', footer='partials/footer.html')
 
+
+
+@app.route('/about')
+def about():
+
+    # render template
+    return render_template('about.html', head='partials/head.html', header='partials/header.html', footer='partials/footer.html')
 # route for article
 
 
