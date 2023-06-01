@@ -8,17 +8,6 @@
             </div>
             <div class="col-md-9 col-sm-12">
 
-                <div class="col-md-4 col-sm-6 col-6 p-0 float-left mb-3">
-                    <h5 class="mb-4 font-weight-bold text-uppercase">Pages</h5>
-                    <ul class="list-group">
-                        <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                        <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                        <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                        <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                        <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
-                    </ul>
-                </div>
-
                 <div class="col-md-4 col-sm-6 col-6 p-0 mb-3 float-left">
                     <h5 class="mb-4 font-weight-bold text-uppercase">Learn how to scrape</h5>
                     <ul class="list-group">
@@ -28,19 +17,31 @@
                     </ul>
                 </div>
 
+                <div class="col-md-4 col-sm-6 col-6 p-0 float-left mb-3">
+                    <h5 class="mb-4 font-weight-bold text-uppercase">About us</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="{{ url_for('about') }}">Who we are</a></li>
+                       <!--<li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
+                        <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
+                        <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>
+                        <li class="list-group-item bg-transparent border-0 p-0 mb-2"><a href="">Page 1</a></li>--> 
+                    </ul>
+                </div>
+
+                
                 <div class="col-md-3 col-sm-6 col-6 mb-3 p-0 float-left">
                     <h5 class="mb-4 font-weight-bold text-uppercase">Connect</h5>
                     <ul class="list-group">
                         <li class="list-group-item bg-transparent border-0 p-0 mb-2">
-                            <a href=""><i class="fa fa-linkedin mr-1"></i>
-                                LinkedIn</a>
+                            <a href="https://twitter.com/tilburgscience"><i class="fa fa-twitter mr-1"></i>
+                                Twitter</a>
                         </li>
                         <li class="list-group-item bg-transparent border-0 p-0 mb-2">
-                            <a href="" target="_blank"><i class="fa fa-github mr-1"></i>
-                                Github</a>
+                            <a href="https://github.com/tilburgsciencehub/apis-to-scrape" target="_blank"><i class="fa fa-github mr-1"></i>
+                                GitHub</a>
                         </li>
                         <li class="list-group-item bg-transparent border-0 p-0 mb-2">
-                            <a href="" target="_blank"><i class="fa fa-facebook mr-1"></i> Facebook</a>
+                            <a href="https://linkedin.com/c/tilburgsciencehub" target="_blank"><i class="fa fa-linkedin mr-1"></i> LinkedIn</a>
                         </li>
                         <li class="list-group-item bg-transparent border-0 p-0 mb-2">
                             <a href="" target="_blank"><i class="fa fa-youtube mr-1"></i> YouTube</a>
@@ -51,7 +52,7 @@
             </div>
             <div class="col-md-12">
                 <div class="py-4 d-flex justify-content-center align-items-center">
-                    <a class="mr-4" href="{{ url_for('privacy_terms') }}">Privacy & terms</a>
+                    <a class="mr-4" href="{{ url_for('privacy_terms') }}">Privacy & Terms of Use</a>
                 </div>
             </div>
         </div>
