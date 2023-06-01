@@ -45,3 +45,23 @@ pip install flask_sqlalchemy
 - Make your adjustments
 - Run the complete file top-down, and the databases will be updated.
 
+# Acknowledgements
+
+- Raw data with song names used in simulating the data: https://github.com/mahkaila/songnames
+- Photos
+  - Landing page
+    - Featured artist: A trumpet player from Caracas, Venezuela. Credits to [Ana Maria Arevalo Gosen for providing the photo](https://www.instagram.com/anitasinfiltro/).
+    - Recently played & featured artists
+      - https://picsum.photos/id/100/100/100
+      - The images are released under the Unsplash license, which allows for free and unrestricted use, including commercial use, without requiring attribution (although attribution is appreciated).
+     - Top 15
+       - https://picsum.photos/id/237/50/50
+       - License is same as above
+     - Recent users:
+       - Self-made icon
+   - Song Page: No Pictures
+   - Artist Page:
+     - https://images.unsplash.com/photo-1605722243979-fe0be8158232
+     - "Unsplash photos are made to be used freely. All photos can be downloaded and used for free for commercial and non-commercial purposes.             Attribution isn’t required"
+    - User Page:
+      -  Self-made icon
