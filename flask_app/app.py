@@ -76,8 +76,6 @@ class songs(db.Model):
 ### ROUTES ###
 
 # route for home
-
-
 @app.route('/')
 def index():
 
@@ -92,7 +90,7 @@ def index():
         songs.ArtistName,
         songs.Title,
         songs.SongID
-    ).join(songs, subquery.c.song_id == songs.SongID).all()
+    ).join(songs, subquery.c.song_id == songs.SongID)
 
     # top 15
     subquery = db.session.query(
