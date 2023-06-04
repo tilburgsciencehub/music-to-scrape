@@ -37,7 +37,7 @@ pip install flask_sqlalchemy
 ### Start the front end 
 - Open terminal
 - Go to the `flask_app` folder inside the repository
-- Run the following command: `gunicorn main:app --bind 127.0.0.1:8000`
+- Run the following command: `gunicorn app:app --bind 127.0.0.1:8000`
 - If you want to the Flask connection, press Ctrl + c in the terminal to quit.
 
 ### How to change the data
