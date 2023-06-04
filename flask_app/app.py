@@ -82,33 +82,44 @@ class songs(db.Model):
 def index():
 
     # recent tracks query
-    recent_tracks = db.session.query(listening.timestamp, songs.ArtistName, songs.Title, songs.ArtistID, songs.SongID)\
-        .join(songs, listening.song_id == songs.SongID)\
-        .order_by(listening.timestamp.desc())\
-        .limit(10)\
-        .all()
+    subquery = db.session.query(
+        listening.song_id,
+        listening.timestamp
+    ).order_by(listening.timestamp.desc()).limit(10).subquery()
 
-    # weekly top 15
-    top_songs = db.session.query(listening.song_id, songs.Title, songs.ArtistName, songs.ArtistID,
-                                 func.count(listening.song_id),
-                                 func.row_number().over(order_by=func.count(listening.song_id).desc()).label('rank'))\
-        .join(songs, listening.song_id == songs.SongID)\
-        .group_by(listening.song_id)\
-        .order_by(func.count(listening.song_id).desc())\
-        .limit(15)\
-        .all()
+    recent_tracks = db.session.query(
+        subquery.c.timestamp,
+        songs.ArtistName,
+        songs.Title,
+        songs.SongID
+    ).join(songs, subquery.c.song_id == songs.SongID).all()
+
+    # top 15
+    subquery = db.session.query(
+        listening.song_id,
+        func.count(listening.song_id).label('song_count')
+    ).join(listening.song).group_by(listening.song_id).subquery()
+
+    top_songs = db.session.query(
+        subquery.c.song_id,
+        songs.Title,
+        songs.ArtistName,
+        songs.ArtistID,
+        subquery.c.song_count,
+        func.rank().over(order_by=subquery.c.song_count.desc()).label('rank')
+    ).join(songs, subquery.c.song_id == songs.SongID).limit(15)
 
     # featured artists
     featured_artists = artists.query.filter_by(
         featured='1').order_by(func.random()).limit(8).all()
 
     # recent users
-    recent_users = db.session.query(listening.user, func.max(listening.timestamp).label("max_timestamp"), songs.ArtistName, songs.Title)\
-        .join(songs, listening.song_id == songs.SongID)\
-        .group_by(listening.user)\
-        .order_by(desc("max_timestamp"))\
-        .limit(6)\
-        .all()
+    recent_users = db.session.query(
+        listening.user,
+        func.max(listening.timestamp).label("max_timestamp"),
+        songs.ArtistName,
+        songs.Title
+    ).join(listening.song).group_by(listening.user).order_by(desc("max_timestamp")).limit(6)
 
     # render template
     return render_template('index.html', head='partials/head.html', header='partials/header.html', footer='partials/footer.html', tracks=recent_tracks, top_songs=top_songs, featured_artists=featured_artists, recent_users=recent_users)
