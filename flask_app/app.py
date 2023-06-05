@@ -93,19 +93,13 @@ def index():
     ).join(songs, subquery.c.song_id == songs.SongID)
 
     # top 15
-    subquery = db.session.query(
-        listening.song_id,
-        func.count(listening.song_id).label('song_count')
-    ).join(listening.song).group_by(listening.song_id).subquery()
-
-    top_songs = db.session.query(
-        subquery.c.song_id,
-        songs.Title,
-        songs.ArtistName,
-        songs.ArtistID,
-        subquery.c.song_count,
-        func.rank().over(order_by=subquery.c.song_count.desc()).label('rank')
-    ).join(songs, subquery.c.song_id == songs.SongID).limit(15)
+    top_songs = db.session.query(listening.song_id, songs.Title, songs.ArtistName, songs.ArtistID,
+                                 func.count(listening.song_id),
+                                 func.row_number().over(order_by=func.count(listening.song_id).desc()).label('rank'))\
+        .join(songs, listening.song_id == songs.SongID)\
+        .group_by(listening.song_id)\
+        .order_by(func.count(listening.song_id).desc())\
+        .limit(15)
 
     # featured artists
     featured_artists = artists.query.filter_by(
