@@ -5,7 +5,7 @@ library(RSQLite)
 
 set.seed(1234)
 warning(getwd())
-N_users = 20
+N_users = 1000
 
 # load artist and song names
 raw <- fread('https://raw.githubusercontent.com/mahkaila/songnames/master/SongCSV.csv')
