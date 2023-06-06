@@ -9,7 +9,7 @@ services:
         "&&",
         "supervisord",
         "-c",
-        "/app/app/supervisord.conf"
+        "/app/supervisord.conf"
       ]
     ports:
       - 8080:8080
