@@ -4,8 +4,8 @@ library(DBI)
 library(RSQLite)
 
 set.seed(1234)
-
-N_users = 1000
+warning(getwd())
+N_users = 20
 
 # load artist and song names
 raw <- fread('https://raw.githubusercontent.com/mahkaila/songnames/master/SongCSV.csv')
@@ -70,12 +70,12 @@ artists[, ':=' (sampled=NULL, popularity=NULL)]
 songs[, ':=' (artist_popularity=NULL)]
 
 # Remove existing database files if they exist
-db_file_fastapi <- "../../sql_app/apistoscrape.db"
+db_file_fastapi <- "sql_app/apistoscrape.db"
 if (file.exists(db_file_fastapi)) {
   file.remove(db_file_fastapi)
 }
 
-db_file_flask <- "../../flask_app/apistoscrape.db"
+db_file_flask <- "flask_app/apistoscrape.db"
 if (file.exists(db_file_flask)) {
   file.remove(db_file_flask)
 }
@@ -84,7 +84,7 @@ if (file.exists(db_file_flask)) {
 history$date <- as.character(history$date)
 
 #generate sqlite database for fastapi
-con_fastapi <- dbConnect(RSQLite::SQLite(), dbname = "../../sql_app/apistoscrape.db")
+con_fastapi <- dbConnect(RSQLite::SQLite(), dbname = "sql_app/apistoscrape.db")
 
 dbWriteTable(con_fastapi, "users", users)
 dbWriteTable(con_fastapi, "songs", songs)
@@ -94,7 +94,7 @@ dbWriteTable(con_fastapi, "listening", history)
 dbDisconnect(con_fastapi)
 
 #generate sqlite database for fastapi
-con_flask <- dbConnect(RSQLite::SQLite(), dbname = "../../flask_app/apistoscrape.db")
+con_flask <- dbConnect(RSQLite::SQLite(), dbname = "flask_app/apistoscrape.db")
 
 dbWriteTable(con_flask, "users", users)
 dbWriteTable(con_flask, "songs", songs)
@@ -104,4 +104,4 @@ dbWriteTable(con_flask, "listening", history, field.types = c(date = "TEXT"))
 dbDisconnect(con_flask)
 
 
-
+warning('Completed prepping database')
