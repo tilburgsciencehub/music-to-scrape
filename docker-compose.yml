@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  app:
+    build: .
+    command:
+      [
+        "Rscript",
+        "/app/src/simulate/simulate.R",
+        "&&",
+        "supervisord",
+        "-c",
+        "/app/app/supervisord.conf"
+      ]
+    ports:
+      - 8080:8080
+      - 8000:8000
+    tty: true
+    restart: always
