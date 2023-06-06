@@ -1,14 +1,28 @@
-# Music to scrape
+# Music-to-scrape
 
-We’re a fictitious music streaming service with a real website and API. Built for educational purposes, you can use us to learn web scraping! 
+We’re a __fictitious music streaming service with a real website and API__. Built for __educational purposes__, you can use us to __learn web scraping__! 
 
 ## Getting started
 
 We'll post a link to the website and API here eventually.
 
-## Running this project on your own computer/server
+## Running this project
 
-### Install packages and simulate data
+### Using Docker
+
+The easiest way to run our project is using Docker.
+
+- Install Docker and clone this repository.
+- Open the terminal at the root of the repository and run the following command: `docker compose up`.
+- Wait a few moments for the website and API to be launched.
+- Once these are launched, you can access them at these addresses:
+    - API: `http://localhost:8080`
+    - Front end: `http://localhost:8000`
+- Press Ctrl + C in the terminal to quit.
+
+### Manual setup (i.e., not using Docker)
+
+#### Install packages and simulate data
 
 - Clone this repository
 - Ensure you have R installed, and run `simulate.R` in `src/simulate` to generate the ficitious data.
@@ -25,7 +39,7 @@ pip install flask
 pip install flask_sqlalchemy
 ```
 
-### Start the API
+#### Start the API
 - Open terminal
 - Go to the `sql_app` folder inside the repository
 - Run the following command: `uvicorn main:app --port 8080`
@@ -34,23 +48,13 @@ pip install flask_sqlalchemy
     - `http://127.0.0.1:8080/docs`
     - `uvicorn` will show you which link is used when running the application.
 
-### Start the front end 
+#### Start the front end 
 - Open terminal
 - Go to the `flask_app` folder inside the repository
 - Run the following command: `gunicorn app:app --bind 127.0.0.1:8000`
 - If you want to the Flask connection, press Ctrl + c in the terminal to quit.
 
-### Launch API + front end with Docker
-- Install Docker and clone the repository.
-- Open the terminal at the root of the repository.
-- Run the following command: `docker compose up`.
-- Wait a few moments for the apps to be launched.
-- Once these are launched, you can access them at the addresses:
-    - API: `http://localhost:8080`
-    - Front end: `http://localhost:8000`
-- Press Ctrl + C in the terminal to quit the apps.
-
-### How to change the data
+#### Changing the data
 - Open the `simulate.R` file within the `src/simulate` folder
 - Make your adjustments
 - Run the complete file top-down, and the databases will be updated.
