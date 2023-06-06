@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  api:
+    build: .
+    command: sh -c "Rscript /app/src/simulate/simulate.R && cd sql_app && uvicorn main:app --host 0.0.0.0 --port 8080"
+    ports:
+      - 8080:8080
+    tty: true
+    restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  frontend:
+    build: .
+    command: sh -c "Rscript /app/src/simulate/simulate.R && cd flask_app && gunicorn app:app --bind 0.0.0.0:8000"
+    ports:
+      - 8000:8000
+    tty: true
+    restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
