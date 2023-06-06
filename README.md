@@ -1,6 +1,8 @@
+<img src="flask_app/static/images/logo.png" height="50">
+
 # Music-to-scrape
 
-We’re a __fictitious music streaming service with a real website and API__. Built for __educational purposes__, you can use us to __learn web scraping__! 
+We’re __music-to-scrape__, a fictitious music streaming service with a real website and API. Built for __educational purposes__, you can use us to __learn web scraping__! 
 
 ## Getting started
 
