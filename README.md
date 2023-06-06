@@ -27,7 +27,7 @@ pip install flask_sqlalchemy
 
 ### Start the API
 - Open terminal
-- Go to the `fastapi` folder inside the repository
+- Go to the `sql_app` folder inside the repository
 - Run the following command: `uvicorn main:app --port 8080`
   - If you want to the FastAPI connection, press Ctrl + C in the terminal to quit.
   - If you want to check the documentation, you can go to following address when uvicorn is started:
@@ -39,6 +39,16 @@ pip install flask_sqlalchemy
 - Go to the `flask_app` folder inside the repository
 - Run the following command: `gunicorn app:app --bind 127.0.0.1:8000`
 - If you want to the Flask connection, press Ctrl + c in the terminal to quit.
+
+### Launch API + front end with Docker
+- Install Docker and clone the repository.
+- Open the terminal at the root of the repository.
+- Run the following command: `docker compose up`.
+- Wait a few moments for the apps to be launched.
+- Once these are launched, you can access them at the addresses:
+    - API: `http://localhost:8080`
+    - Front end: `http://localhost:8000`
+- Press Ctrl + C in the terminal to quit the apps.
 
 ### How to change the data
 - Open the `simulate.R` file within the `src/simulate` folder
