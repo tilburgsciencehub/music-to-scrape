@@ -8,7 +8,7 @@ warning(getwd())
 N_users = 1000
 
 # load artist and song names
-raw <- fread('https://raw.githubusercontent.com/mahkaila/songnames/master/SongCSV.csv')
+raw <- fread("https://raw.githubusercontent.com/mahkaila/songnames/master/SongCSV.csv", quote="")
 
 for (col in colnames(raw)[which(unlist(lapply(raw, class)=='character'))]) raw[, (col):=gsub("b['|\"]","", get(col))]
 for (col in colnames(raw)[which(unlist(lapply(raw, class)=='character'))]) raw[, (col):=gsub("['|\"]$","", get(col))]
