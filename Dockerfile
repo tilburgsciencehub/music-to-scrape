@@ -9,7 +9,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN conda install -c r r-base r-data.table r-dbi r-rsqlite && \
+RUN conda update -n base -c defaults conda && \
+    conda install -c conda-forge -c r r-base=4.1.3 r-data.table r-dbi r-rsqlite && \
     R -e "install.packages('curl', repos='http://cran.rstudio.com/')" && \
     pip install fastapi fastapi-utils sqlalchemy pydantic uvicorn gunicorn flask flask_sqlalchemy
-

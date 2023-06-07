@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12">
                 <div class="ms_banner_img">
-                    <img src="{{ url_for('static', filename='images/copia.png') }}" alt="" class="img-fluid">
+                    <img src="{{ url_for('static', filename='images/copia.webp') }}" alt="Artist" width="330" height="490" class="img-fluid">
                 </div>
                 <div class="ms_banner_text center-vertical">
                     <h1>This Month’s</h1>
@@ -50,7 +50,7 @@
                         <div class="swiper-slide">
                             <a href="song?song-id={{ track.SongID }}"
                                 style="color:rgb(1, 51, 101) !important;text-decoration:none">
-                                <div class="card">
+                                <div class="card" style="border:none;">
                                     <img src="https://picsum.photos/id/100/100/100" class="card-img-top" alt="...">
                                     <div class="card-body center-text">
                                         <h5 class="card-title">{{ track.Title }}</h5>
@@ -93,7 +93,7 @@
                                 <div class="col-sm-3">
                                     <div class="center-vertical">
                                         <img src="https://picsum.photos/id/237/50/50"
-                                            class="align-self-center mobile-center">
+                                            class="align-self-center mobile-center" height="50" width="50">
                                     </div>
                                 </div>
                                 <div class="col-sm-7">
@@ -134,7 +134,7 @@
                         {% for artist in featured_artists %}
                         <div class="swiper-slide">
                             <a href="artist?artist-id={{ artist.ArtistID }}">
-                                <div class="card">
+                                <div class="card" style="border:none;">
                                     <img src="https://picsum.photos/id/100/100/100" class="card-img-top" alt="...">
                                     <div class="card-body center-text">
                                         <h5 class="card-title">{{ artist.ArtistName }}</h5>
