@@ -12,22 +12,28 @@ We'll post a link to the website and API here eventually.
 
 ### Using Docker
 
+#### Starting up the frontend and backend
+
 The easiest way to run our project is using Docker.
 
-- Install Docker and clone this repository.
-- Open the terminal at the root of the repository and run the following command: `docker compose up`.
-- Wait a few moments for the website and API to be launched.
-- Once these are launched, you can access them at these addresses:
-    - API: `http://localhost:8080`
+- [Install Docker](docs/install_docker.md) and clone this repository.
+- Open the terminal at the repository's root directory and run the following command: `docker compose up`.
+- Wait a bit for the website and API to be launched. If the process breaks, you likely haven't allocated enough memory (e.g., the built takes about 6 GB of memory)
+- Once docker has been launched, you can access the website and API locally at these addresses:
+    - API: `http://localhost:8080` (whereby localhost typically is `127.0.0.1`)
     - Front end: `http://localhost:8000`
 - Press Ctrl + C in the terminal to quit.
+
+#### Configuring server for public access and HTTPS traffic
+
+If you're running this project publicly, it's worthwhile configuring HTTPS access on your server. Following the [notes here](docs/server.md).
 
 ### Manual setup (i.e., not using Docker)
 
 #### Install packages and simulate data
 
 - Clone this repository
-- Ensure you have R installed, and run `simulate.R` in `src/simulate` to generate the ficitious data.
+- Ensure you have R installed, and run `simulate.R` in `src/simulate` to generate the fictitious data.
 - Install required Python packages
 
 ```
