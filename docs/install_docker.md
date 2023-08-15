@@ -5,10 +5,12 @@
 - Launch VM with Ubuntu
 - Ideally start with smaller server to run the setup, but be aware that you may need a bit of memory for the initial builds (say, 8 GB)
 - Attach hard disk with sufficient space
-
+- Download `.pem` key file and store at secure location
+  
 ## Installing Docker
+- SSH into the machine: `ssh -i key.pem ubuntu@ecX-XXXXXXXX.eu-central-1.compute.amazonaws.com`
 
-- follow Docker setup (see https://docs.docker.com/engine/install/ubuntu/)
+- Follow Docker setup (see https://docs.docker.com/engine/install/ubuntu/)
 
 ```
 for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
