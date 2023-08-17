@@ -3,9 +3,9 @@
 <!-- Header -->
 <header>
     <!-- Top Bar -->
-    <div class="top-bar">
-		<p>We are a demo site without real data - use us to learn collecting data with web scraping and APIs.</p>
-	</div>
+    <a href="about"><div class="top-bar">
+		<p>We are a fictitious music streaming service without real data - use us to learn collecting data with web scraping and APIs.</p>
+	</div></a>
     <!-- End Top Bar -->
 
     <!-- NavBar -->
@@ -34,6 +34,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="https://api.music-to-scrape.org/docs">API documentation</a>
+                        <a class="dropdown-item" href="{{ url_for('about.about')}}">About us</a>
                         <!--<a class="dropdown-item" href="#">Another action</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>

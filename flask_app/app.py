@@ -7,6 +7,7 @@ from routes.search import search_bp
 from routes.song import song_bp
 from routes.privacy_terms import privacy_terms_bp
 from routes.article import article_single_bp
+from routes.about import about_bp
 from routes.home import home_bp
 
 # BASIC SETTINGS
@@ -24,6 +25,9 @@ app.register_blueprint(artist_bp)
 
 # route for user
 app.register_blueprint(user_bp)
+
+# route for about page
+app.register_blueprint(about_bp)
 
 # route for search
 app.register_blueprint(search_bp)
