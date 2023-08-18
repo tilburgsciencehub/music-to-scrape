@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Main Container-->
+<div class="container">
+
+    <!-- Recently Played Row-->
+    <section name="recently_played" class="py-4">
+
+        <!-- Headline-->
+        <div class="row mb-3">
+            <h2>Learn how to scrape</h2>
+        </div>
+        <!-- End of Headline -->
+
+        <!-- Privacy & Terms -->
+        <div class="row">
+            <p> Hey there, curious coder! 🚀 Are you ready to dive into the fascinating world of web scraping? 🌐 Imagine being able to extract information from websites, like a digital treasure hunter! Web scraping is your key to unlocking data and insights from public websites and apps on the internet.</p>
+        </div>
+        
+        <div class="row mb-3">
+            <h4>Why Web Scraping is Super Cool</h4>
+            <p> Think about this – the internet is like an enormous library filled with information. But what if you could walk into this library, pick out the books you need, and magically copy the text onto your own pages? That's what web scraping does for you! Whether you're hunting for data, tracking prices, or just satisfying your curiosity, web scraping lets you gather and organize information from websites without manual copying and pasting.</p>
+        </div>
+        
+        <div class="row mb-3">
+            <h4>Let's Get Our Hands Dirty</h4>
+            <p> Let's start by extracting some data from this website, using your programming language of choice. Are you ready to roll? Open R or Python and paste the code snippets below. Let's go!</p>
+        </div>
+
+<!-- Codeblock -->
+<div class="row">
+    <div class="codeblock">
+        <div class="float-right">
+            <a class="copyCodeBtn" data-index="0"><i class="fa-solid fa-copy"
+                    style="color:#FE9C00;cursor: pointer;" onclick="copyCode()"></i></a>
+        </div>
+        <ul class="nav nav-tabs mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation"
+                style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                <a class="nav-link active"
+                    style="background-color: #F0F5F9;border: none; color:#FE9C00;text-decoration: underline;"
+                    id="r-tab" data-toggle="tab" href="#r" role="tab" aria-controls="r" aria-selected="true">R</a>
+            </li>
+            <li class="nav-item" role="presentation"
+                style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                <a class="nav-link" style="background-color: #F0F5F9;border: none; color:#FE9C00;"
+                    id="python-tab" data-toggle="tab" href="#python" role="tab" aria-controls="python"
+                    aria-selected="false">Python</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="r" role="tabpanel" aria-labelledby="r-tab">
+                <div class="highlight" style="background-color: #F0F5F9;">
+                    <pre class="justify-content-start"><code id="code-content">
+# Load the necessary libraries
+library(rvest)
+library(dplyr)
+
+# Specify the URL of the website
+url <- "https://music-to-scrape.org"
+
+# Read the webpage into R
+page <- read_html(url)
+
+# Extract the desired information using CSS selectors (here, songs from the weekly top 15)
+songs <- page %>%
+  html_nodes("section[name='weekly_15']") %>% html_elements('a') %>% html_element('p') %>% html_text()
+
+# Print out the scraped data
+print(songs)
+                    </code></pre>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="python" role="tabpanel" aria-labelledby="python-tab">
+                <div class="highlight" style="background-color: #F0F5F9;">
+                    <pre class="justify-content-start"><code id="code-content">
+# Import the required libraries
+import requests
+from bs4 import BeautifulSoup
+
+# Specify the URL of the website
+url = "https://music-to-scrape.org"
+
+# Send an HTTP GET request and get the webpage content
+response = requests.get(url)
+content = response.content
+
+# Parse the HTML content with BeautifulSoup
+soup = BeautifulSoup(content, 'html.parser')
+
+# Extract the desired information using CSS selectors (here, items from the weekly top 15)
+items = soup.find(attrs={'name':'weekly_15'}).find_all('p')
+
+# Print out the scraped items
+for item in items:
+    print(item.get_text())
+                                            
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+    </section>
+    <!-- End of Recently Played Section -->
+
+</div>
+<!-- End Main Container-->
+
+{% endblock %}
