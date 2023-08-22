@@ -2,7 +2,6 @@
 library(data.table)
 library(DBI)
 library(RSQLite)
-library(tidyverse)
 
 set.seed(1234)
 warning(getwd())
