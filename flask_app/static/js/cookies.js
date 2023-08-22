@@ -63,6 +63,7 @@ function hideCookiePreferences() {
 }
 
 function saveCookiePreferences() {
+    var cookieBanner = document.getElementById('cookie-banner');
     var analyticsCheckbox = document.getElementById('analytics-cookie');
 
     if (analyticsCheckbox.checked) {
@@ -74,6 +75,7 @@ function saveCookiePreferences() {
     }
 
     hideCookiePreferences();
+    cookieBanner.style.display = 'none';
 }
 
 window.onload = function () {
@@ -83,6 +85,7 @@ window.onload = function () {
     var analyticsCheckbox = document.getElementById('analytics-cookie');
 
     if (!getCookie('analytics_accepted')) {
+        console.log(getCookie('analytics_accepted'));
         cookieBanner.style.display = 'block';
 
         acceptButton.addEventListener('click', function () {
@@ -91,7 +94,7 @@ window.onload = function () {
         });
 
         rejectButton.addEventListener('click', function () {
-            setCookie('cookie_accepted', 'false', 365);
+            RejectAllCookies();
             cookieBanner.style.display = 'none';
         });
 
