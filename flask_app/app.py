@@ -7,6 +7,7 @@ from routes.search import search_bp
 from routes.song import song_bp
 from routes.privacy_terms import privacy_terms_bp
 from routes.article import article_tutorial_scraping_bp
+from routes.article import article_tutorial_api_bp
 from routes.about import about_bp
 from routes.home import home_bp
 
@@ -37,6 +38,10 @@ app.register_blueprint(privacy_terms_bp)
 
 # route for article
 app.register_blueprint(article_tutorial_scraping_bp)
+
+# route for article
+app.register_blueprint(article_tutorial_api_bp)
+
 
 # route for song page
 app.register_blueprint(song_bp)

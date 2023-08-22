@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Main Container-->
+<div class="container">
+
+    <!-- API Data Retrieval Section -->
+    <section name="api_data_retrieval" class="py-4">
+
+        <!-- Headline-->
+        <div class="row mb-3">
+            <h2>Learn how to retrieve data from an API</h2>
+        </div>
+        <!-- End of Headline -->
+
+        <!-- Introduction -->
+        <div class="row">
+            <p> Hey there, aspiring coder! 🚀 Are you ready to explore the world of working with APIs? 🌐 APIs (Application Programming Interfaces) provide a structured way to interact with services and retrieve data. In this tutorial, we will learn how to make API requests to fetch information from the music-to-scrape API! Check out its <a href="https://api.music-to-scrape.org/docs">documentation</a>!</p>
+        </div>
+
+        <div class="row mb-3">
+            <h4>Why Use APIs for Data Retrieval</h4>
+            <p> APIs offer a convenient way to access data from various sources programmatically. Instead of manually scraping websites, you can request specific data from APIs and receive structured information. This saves time and ensures you get accurate and up-to-date information.</p>
+        </div>
+
+        <div class="row mb-3">
+            <h4>Let's Dive In</h4>
+            <p> Let's start by making API requests to the music-to-scrape API using Python. Open your favorite Python environment and follow along with the code snippets below.</p>
+        </div>
+
+        <!-- Codeblock -->
+        <div class="row">
+            <div class="codeblock">
+                <div class="float-right">
+                    <a class="copyCodeBtn" data-index="0"><i class="fa-solid fa-copy"
+                            style="color:#FE9C00;cursor: pointer;" onclick="copyCode()"></i></a>
+                </div>
+                <div class="highlight" style="background-color: #F0F5F9;">
+                    <pre class="justify-content-start"><code id="code-content">
+
+# Import the required libraries
+import requests
+
+# Specify the URL of the API
+api_url = "https://api.music-to-scrape.org"
+
+# Remember, the documentation is available at https://api.music-to-scrape.org/docs!
+
+# From that API, we can pick an endpoint - think of it as a website, but then 
+# for computers to read!
+
+# Here, we extract the weekly top 15 songs.
+
+# Send an HTTP GET request to the API
+response = requests.get(api_url+'/charts/top-tracks?week=42&year=2023')
+
+# Check if the request was successful
+if response.status_code == 200:
+    # Parse the JSON response
+    data = response.json()
+    
+    # Extract the desired information (e.g., songs, albums, artists) from the JSON data
+    
+    for item in data['chart']:
+        print(item['name'] + ' - ' + item['artist'])
+else:
+    print("Failed to retrieve data. Status code:", response.status_code)
+
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    <!-- End of API Data Retrieval Section -->
+
+    <!-- Motivational Message -->
+    <div class="row mb-3">
+        <h4> </h4>
+        <p>Congratulations, you've taken your first steps into the world of API data retrieval! Remember, learning and coding are like a journey - there's always something new to discover and create. Keep on exploring our API at <a href="https://api.music-to-scrape.org/docs">https://api.music-to-scrape.org/docs</a>, or check out our <a href="/tutorial_scraping">tutorial on web scraping.</a></p>
+        <p>Happy coding!</p>
+    </div>
+
+<!-- End of Motivational Message -->
+</section>
+
+</div>
+<!-- End Main Container-->
+
+{% endblock %}
