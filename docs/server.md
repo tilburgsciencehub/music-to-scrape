@@ -11,12 +11,12 @@ services:
   frontend:
     # ... your existing configuration ...
     labels:
-      - "traefik.http.routers.frontend.rule=Host(`music-to-scrape.com`)"
+      - "traefik.http.routers.frontend.rule=Host(`music-to-scrape.org`)"
 
   backend:
     # ... your existing configuration ...
     labels:
-      - "traefik.http.routers.backend.rule=Host(`api.music-to-scrape.com`)"
+      - "traefik.http.routers.backend.rule=Host(`api.music-to-scrape.org`)"
 ```
 
 ### Step 2: Configure Route 53
@@ -26,9 +26,9 @@ In the Route 53 console, create
 - three CAA records stating `0 issue "letsencrypt.org"`
 
 Do this for the three subdomains:
-- `music-to-scrape.com` 
-- `api.music-to-scrape.com`
-- `www.music-to-scrape.com`
+- `music-to-scrape.org` 
+- `api.music-to-scrape.org`
+- `www.music-to-scrape.org`
 
 ### Step 3: Set Up Nginx as Reverse Proxy
 
@@ -42,15 +42,15 @@ sudo apt install nginx
 Create Nginx server blocks for each domain:
 
 ```bash
-sudo nano /etc/nginx/sites-available/music-to-scrape.com
+sudo nano /etc/nginx/sites-available/music-to-scrape.org
 ```
 
-Add the following configuration for `music-to-scrape.com`:
+Add the following configuration for `music-to-scrape.org`:
 
 ```nginx
 server {
     listen 80;
-    server_name music-to-scrape.com www.music-to-scrape.com;
+    server_name music-to-scrape.com www.music-to-scrape.org;
 
     location / {
         proxy_pass http://localhost:8000;  # Your Flask frontend container
@@ -61,18 +61,18 @@ server {
 }
 ```
 
-Create a similar configuration for `api.music-to-scrape.com`:
+Create a similar configuration for `api.music-to-scrape.org`:
 
 ```bash
-sudo nano /etc/nginx/sites-available/api.music-to-scrape.com
+sudo nano /etc/nginx/sites-available/api.music-to-scrape.org
 ```
 
-Add the following configuration for `api.music-to-scrape.com`:
+Add the following configuration for `api.music-to-scrape.org`:
 
 ```nginx
 server {
     listen 80;
-    server_name api.music-to-scrape.com;
+    server_name api.music-to-scrape.org;
 
     location / {
         proxy_pass http://localhost:8080;  # Your FastAPI backend container
@@ -86,8 +86,8 @@ server {
 Enable the configurations and restart Nginx:
 
 ```bash
-sudo ln -s /etc/nginx/sites-available/music-to-scrape.com /etc/nginx/sites-enabled/
-sudo ln -s /etc/nginx/sites-available/api.music-to-scrape.com /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/music-to-scrape.org /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/api.music-to-scrape.org /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl restart nginx
 ```
@@ -96,4 +96,4 @@ sudo systemctl restart nginx
 
 - Install `certbot`, following the instructions on [https://certbot.eff.org](https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal).
 
-After running `docker compose up`, your frontend should be accessible at `https://music-to-scrape.com`, and your FastAPI backend should be accessible at `https://api.music-to-scrape.com`.
+After running `docker compose up`, your frontend should be accessible at `https://music-to-scrape.org`, and your FastAPI backend should be accessible at `https://api.music-to-scrape.org`/`https://api.music-to-scrape.org/docs`.
