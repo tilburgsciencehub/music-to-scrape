@@ -6,7 +6,7 @@ We’re __music-to-scrape__, a fictitious music streaming service with a real we
 
 ## Getting started
 
-We'll post a link to the website and API here eventually.
+Head over to __[https://music-to-scrape.org]()__ to view our live website, or directly check out our __[API documentation](https://api.music-to-scrape.org/docs)__.
 
 ## Running this project
 
