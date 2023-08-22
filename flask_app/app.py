@@ -51,6 +51,10 @@ app.register_blueprint(song_bp)
 def static_css(path):
     return app.send_static_file('css/' + path)
 
+# Add a static route for JavaScript (JS)
+@app.route('/static/js/<path:path>')
+def static_js(path):
+    return app.send_static_file('js/' + path)
 
 if __name__ == '__main__':
     app.run(debug=True)

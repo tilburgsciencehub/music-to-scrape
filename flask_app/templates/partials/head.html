@@ -11,4 +11,27 @@
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
     <script src="https://kit.fontawesome.com/4e7776d591.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ url_for('static_css', path='style.css') }}">
+    <script src="{{ url_for('static_js', path='cookies.js') }}"></script>
 </head>
+<body>
+    <div id="cookie-banner">
+        <p>This website makes use of <a href="/privacy_terms">cookies</a> to improve your experience on our website.</p>
+        <button class="btn btn-primary mr-2" id="accept-cookies">Accept</button>
+        <button class="btn btn-secondary mr-2" id="reject-cookies">Deny</button>
+        <button class="btn btn-secondary" id="cookie-preferences" onclick="showCookiePreferences()">Manage Consent</button>
+    </div>
+
+    <div id="cookie-preferences-popup">
+        <h2>Manage Consent</h2>
+        <p>You have full control over your cookies at Music To Scrape:</p>
+        <ul style="list-style: none;padding-inline-start: 0px;">
+            <li style="display: flex;align-items: center;">
+                <input type="checkbox" id="analytics-cookie" style="margin-right:10px;">
+                <label for="analytics-cookie"><strong>Google Analytics:</strong> This code manages the deployment of various marketing and analytics tags on the website.</label>
+            </li>
+        </ul>
+        <p>Want to know more? Check our <a href="/privacy_terms">Privacy & Terms of Use</a></p>
+        <button class="btn btn-primary" onclick="saveCookiePreferences()">Save Consent</button>
+    </div>
+    
+    

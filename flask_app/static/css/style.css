@@ -350,6 +350,46 @@ img {
     animation: spin 1s linear infinite;
 }
 
+/* Cookie Popup */
+#cookie-banner {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #013365;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    z-index: 1000;
+}
+
+#cookie-preferences-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+}
+
+.btn-primary{
+    background-color: #FE9C00 !important;
+    border-radius: 10px !important;
+    color:white !important;
+    border: none !important;
+}
+
+.btn-secondary{
+    background-color: white !important;
+    border-radius: 10px !important;
+    border: none !important;
+}
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);
