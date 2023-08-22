@@ -9,6 +9,8 @@
   
 ## Installing Docker
 - SSH into the machine: `ssh -i key.pem ubuntu@ecX-XXXXXXXX.eu-central-1.compute.amazonaws.com`
+- Remember to get the permissions right for your key file: `chmod 400 key.pem`.
+
 
 - Follow Docker setup (see https://docs.docker.com/engine/install/ubuntu/)
 
