@@ -8,6 +8,8 @@ We’re __music-to-scrape__, a fictitious music streaming service with a real we
 
 Head over to __[https://music-to-scrape.org]()__ to view our live website, or directly check out our __[API documentation](https://api.music-to-scrape.org/docs)__.
 
+<img src="screenshot.png" alt="drawing" width="600"/>
+
 ## Running this project
 
 ### Using Docker
