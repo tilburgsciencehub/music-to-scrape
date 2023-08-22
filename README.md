@@ -6,7 +6,7 @@ We’re __music-to-scrape__, a fictitious music streaming service with a real we
 
 ## Getting started
 
-We'll post a link to the website and API here eventually.
+Head over to __[https://music-to-scrape.org]()__ to view our live website, or directly check out our __[API documentation](https://api.music-to-scrape.org/docs)__.
 
 ## Running this project
 
@@ -17,7 +17,7 @@ We'll post a link to the website and API here eventually.
 The easiest way to run our project is using Docker.
 
 - [Install Docker](docs/install_docker.md) and clone this repository.
-- Open the terminal at the repository's root directory and run the following command: `docker compose up`.
+- Open the terminal at the repository's root directory and run the following commands: `docker-compose build` and `docker compose up`. If you have already built the image, it's enough to start it with `docker compose up`.
 - Wait a bit for the website and API to be launched. If the process breaks, you likely haven't allocated enough memory (e.g., the built takes about 6 GB of memory)
 - Once docker has been launched, you can access the website and API locally at these addresses:
     - API: `http://localhost:8080` (whereby localhost typically is `127.0.0.1`)
