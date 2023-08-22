@@ -1,8 +1,23 @@
-
 {% extends 'base.html' %}
 
 {% block content %}
 
+<style>
+    .codeblock-head .nav-link.active.show {
+    background-color: #F0F5F9 !important;
+    text-decoration: underline;
+    }
+
+    .copied-notification {
+    background-color: #F0F5F9;
+    border-radius: 10px; 
+    padding: 5px;
+    font-size: 12px;
+    opacity: 0; /* Start with zero opacity */
+    transition: opacity 0.6s; /* Add a transition for fading */
+}
+
+</style>
 <!-- Main Container-->
 <div class="container">
 
@@ -33,24 +48,25 @@
 <!-- Codeblock -->
 <div class="row">
     <div class="codeblock">
-        <div class="float-right">
-            <a class="copyCodeBtn" data-index="0"><i class="fa-solid fa-copy"
+        <div class="float-right d-flex">
+            <a class="copyCodeBtn ml-3" data-index="0"><i class="fa-solid fa-copy"
                     style="color:#FE9C00;cursor: pointer;" onclick="copyCode()"></i></a>
         </div>
-        <ul class="nav nav-tabs mb-3" id="pills-tab" role="tablist">
+        <ul class="nav nav-tabs mb-3 codeblock-head" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation"
                 style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
-                <a class="nav-link active"
-                    style="background-color: #F0F5F9;border: none; color:#FE9C00;text-decoration: underline;"
+                <a class="nav-link active show" style="border: none; color:#FE9C00; background-color: white;"
                     id="r-tab" data-toggle="tab" href="#r" role="tab" aria-controls="r" aria-selected="true">R</a>
             </li>
             <li class="nav-item" role="presentation"
                 style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
-                <a class="nav-link" style="background-color: #F0F5F9;border: none; color:#FE9C00;"
+                <a class="nav-link" style="border: none; color:#FE9C00;background-color: white;"
                     id="python-tab" data-toggle="tab" href="#python" role="tab" aria-controls="python"
                     aria-selected="false">Python</a>
             </li>
         </ul>
+          
+        
         <div class="tab-content">
             <div class="tab-pane fade show active" id="r" role="tabpanel" aria-labelledby="r-tab">
                 <div class="highlight" style="background-color: #F0F5F9;">
@@ -105,17 +121,44 @@ for item in items:
     </div>
 </div>
 
-<br>
- <!-- Motivational Message -->
- <div class="row mb-3">
-    <h4> </h4>
-    <p>Congratulations, you've taken your first steps into the world of web scraping! </p>
-    <p>Keep honing your skills and applying them to exciting projects. If you're eager for more, you can continue your learning journey by exploring the website or, or by checking out our tutorial on <a href="/tutorial_api">API data retrieval</a>.</a></p>
-    <p>Happy coding!</p>
+<script>
+    function copyCode() {
+        // Get the active tab's content
+        const activeTabContent = document.querySelector('.tab-pane.active code');
 
-</div>
+        if (activeTabContent) {
+            // Create a range to select the text
+            const range = document.createRange();
+            range.selectNode(activeTabContent);
 
-<!-- End of Motivational Message -->
+            // Create a selection object and add the range to it
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+
+            // Copy the selected text
+            document.execCommand('copy');
+
+            // Clear the selection
+            selection.removeAllRanges();
+
+            // Create the "Copied Code!" div
+            const copiedCodeDiv = document.createElement('div');
+            copiedCodeDiv.textContent = 'Copied Code!';
+            copiedCodeDiv.classList.add('copied-notification'); // Add the class for fading
+            copiedCodeDiv.style.opacity = 1; // Start fading by setting opacity to 1
+            
+            // Insert the "Copied Code!" div before the copy button
+            const copyButton = document.querySelector('.copyCodeBtn');
+            copyButton.parentNode.insertBefore(copiedCodeDiv, copyButton);
+
+            // Start the fading effect by gradually reducing opacity
+            setTimeout(() => {
+                copiedCodeDiv.style.opacity = 0;
+            }, 2000); // After 2 seconds, the notification will fade out
+        }
+    }
+</script>
 
     </section>
     <!-- End of Recently Played Section -->
