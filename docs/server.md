@@ -1,4 +1,4 @@
-# Configure server for being reachable on top-level domain (EC2)
+# Configure server for being reachable on the top-level domain (EC2)
 
 (thanks to ChatGPT..., using this prompt: "I'm running a flask frontend and fast API backend on ports 8000 and 8080 on an ec2 server. I launched both with docker compose. I have access to Route 53. I would now like to make the frontend available at HTTPS at a top level domain (music-to-scrape.com) and the api fast api (originally port 8080) at api.music-to-scrape.com. How do I do that?"
 
@@ -97,3 +97,9 @@ sudo systemctl restart nginx
 - Install `certbot`, following the instructions on [https://certbot.eff.org](https://certbot.eff.org/instructions?ws=nginx&os=ubuntufocal).
 
 After running `docker compose up`, your frontend should be accessible at `https://music-to-scrape.org`, and your FastAPI backend should be accessible at `https://api.music-to-scrape.org`/`https://api.music-to-scrape.org/docs`.
+
+## After restarting the VM
+
+- After restart, you need to renew the certbot certificates (mostly restarts change the server's IP address): `certbot renew --force-renewal`.
+- Restart nginx: `sudo systemctl restart nginx`
+- Update IP address at AWS Route 53
