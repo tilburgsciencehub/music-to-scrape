@@ -2,6 +2,23 @@
 
 {% block content %}
 
+<style>
+    .codeblock-head .nav-link.active.show {
+    background-color: #F0F5F9 !important;
+    text-decoration: underline;
+    }
+
+    .copied-notification {
+    background-color: #F0F5F9;
+    border-radius: 10px; 
+    padding: 5px;
+    font-size: 12px;
+    opacity: 0; /* Start with zero opacity */
+    transition: opacity 0.6s; /* Add a transition for fading */
+}
+
+</style>
+
 <!-- Main Container-->
 <div class="container">
 
@@ -29,16 +46,71 @@
             <p> Let's start by making API requests to the music-to-scrape API using Python. Open your favorite Python environment and follow along with the code snippets below.</p>
         </div>
 
-        <!-- Codeblock -->
-        <div class="row">
-            <div class="codeblock">
-                <div class="float-right">
-                    <a class="copyCodeBtn" data-index="0"><i class="fa-solid fa-copy"
-                            style="color:#FE9C00;cursor: pointer;" onclick="copyCode()"></i></a>
-                </div>
+
+<!-- Codeblock -->
+<div class="row">
+    <div class="codeblock">
+        <div class="float-right d-flex">
+            <a class="copyCodeBtn ml-3" data-index="0"><i class="fa-solid fa-copy"
+                    style="color:#FE9C00;cursor: pointer;" onclick="copyCode()"></i></a>
+        </div>
+        <ul class="nav nav-tabs mb-3 codeblock-head" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation"
+                style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                <a class="nav-link active show" style="border: none; color:#FE9C00; background-color: white;"
+                    id="r-tab" data-toggle="tab" href="#r" role="tab" aria-controls="r" aria-selected="true">R</a>
+            </li>
+            <li class="nav-item" role="presentation"
+                style="border-top-left-radius: 10px;border-top-right-radius: 10px;">
+                <a class="nav-link" style="border: none; color:#FE9C00;background-color: white;"
+                    id="python-tab" data-toggle="tab" href="#python" role="tab" aria-controls="python"
+                    aria-selected="false">Python</a>
+            </li>
+        </ul>
+          
+        
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="r" role="tabpanel" aria-labelledby="r-tab">
                 <div class="highlight" style="background-color: #F0F5F9;">
                     <pre class="justify-content-start"><code id="code-content">
+# Load the required library
+library(httr)
+library(dplyr)
 
+# Specify the URL of the API
+api_url <- "https://api.music-to-scrape.org"
+
+# Remember, the documentation is available at https://api.music-to-scrape.org/docs!
+
+# From that API, we can pick an endpoint - think of it as a website, but then 
+# for computers to read!
+
+# Here, we extract the weekly top 15 songs.
+
+# Send an HTTP GET request to the API
+response <- GET(paste0(api_url, '/charts/top-tracks?week=42&year=2023'))
+
+# Check if the request was successful
+if (response$status_code == 200) {
+    # Parse the JSON response
+    data <- content(response, "parsed")
+    
+    # Compile data in a table and select columns
+    song_data <- data$chart %>% bind_rows() %>% select(name, artist)
+    
+} else {
+    cat("Failed to retrieve data. Status code:", response$status_code, "\n")
+    song_data <- NULL
+}
+
+# View the resulting song data
+song_data
+                    </code></pre>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="python" role="tabpanel" aria-labelledby="python-tab">
+                <div class="highlight" style="background-color: #F0F5F9;">
+                    <pre class="justify-content-start"><code id="code-content">
 # Import the required libraries
 import requests
 
@@ -66,12 +138,55 @@ if response.status_code == 200:
         print(item['name'] + ' - ' + item['artist'])
 else:
     print("Failed to retrieve data. Status code:", response.status_code)
-
+                                            
                     </code></pre>
                 </div>
             </div>
         </div>
-    <!-- End of API Data Retrieval Section -->
+    </div>
+</div>
+
+<script>
+    function copyCode() {
+        // Get the active tab's content
+        const activeTabContent = document.querySelector('.tab-pane.active code');
+
+        if (activeTabContent) {
+            // Create a range to select the text
+            const range = document.createRange();
+            range.selectNode(activeTabContent);
+
+            // Create a selection object and add the range to it
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+
+            // Copy the selected text
+            document.execCommand('copy');
+
+            // Clear the selection
+            selection.removeAllRanges();
+
+            // Create the "Copied Code!" div
+            const copiedCodeDiv = document.createElement('div');
+            copiedCodeDiv.textContent = 'Copied Code!';
+            copiedCodeDiv.classList.add('copied-notification'); // Add the class for fading
+            copiedCodeDiv.style.opacity = 1; // Start fading by setting opacity to 1
+            
+            // Insert the "Copied Code!" div before the copy button
+            const copyButton = document.querySelector('.copyCodeBtn');
+            copyButton.parentNode.insertBefore(copiedCodeDiv, copyButton);
+
+            // Start the fading effect by gradually reducing opacity
+            setTimeout(() => {
+                copiedCodeDiv.style.opacity = 0;
+            }, 2000); // After 2 seconds, the notification will fade out
+        }
+    }
+</script>
+
+
+
 
     <!-- Motivational Message -->
     <div class="row mb-3">
