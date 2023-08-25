@@ -17,10 +17,10 @@
                 <div class="about_artist">
                     <h5>Location:</h5>
                     <p>{{ artist_info.ArtistLocation }}</p>
-                    <h5>Number of tracks:</h5>
-                    <p>{{ num_songs }}</p>
-                    <h5>Number of Playlists:</h5>
-                    <p>24</p>
+                    <h5>Number of plays:</h5>
+                    <p>{{ num_plays }}</p>
+                    <!--<h5>Number of Playlists:</h5>
+                    <p>24</p>-->
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
                         <tr>
                             <th>#</th>
                             <th>Song Title</th>
-                            <th>Artist</th>
+                            <!--<th>Artist</th>-->
                             <th>Number of Plays</th>
                         </tr>
                     </thead>
@@ -48,7 +48,7 @@
                         <tr onclick="window.location.href = 'song?song-id={{ song.song_id}}';">
                             <td>{{ song.rank }}</td>
                             <td>{{ song.Title }}</td>
-                            <td>{{ song.ArtistName }}</td>
+                            <!--<td>{{ song.ArtistName }}</td>-->
                             <td>{{ song.count }}</td>
                         </tr>
                         {% endfor %}

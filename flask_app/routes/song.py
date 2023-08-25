@@ -4,6 +4,7 @@ from models import listening, songs, users
 from datetime import datetime
 from urllib.parse import urlparse, urlunparse, parse_qsl
 from sqlalchemy import func, desc, extract
+import time
 
 song_bp = Blueprint('song', __name__)
 
@@ -14,15 +15,32 @@ def song():
     # get artist id parameter
     song_id = request.args.get('song-id')
 
+    # get current time stamp
+    currunix = int(time.time())
+
     # get artist info
     song_info = songs.query.filter_by(SongID=song_id).first()
 
+    def convert(seconds):
+        seconds = seconds % (24 * 3600)
+        hour = seconds // 3600
+        seconds %= 3600
+        minutes = seconds // 60
+        seconds %= 60
+        if (hour==0):
+            return "%02d:%02d" % (minutes, seconds)
+        else:
+            return "%d:%02d:%02d" % (hour, minutes, seconds)
+    
+    song_info.Duration_Minutes=convert(song_info.Duration)
+    song_info.Tempo = int(song_info.Tempo)
     # num plays
-    num_plays = listening.query.filter_by(song_id=song_id).count()
-
+    num_plays = listening.query.filter_by(song_id=song_id).filter(listening.timestamp <= currunix).count()
+    
     # top listeners
     top_listeners = db.session.query(listening.user, func.count(listening.unique_id).label("play_count")) \
         .filter(listening.song_id == song_id) \
+        .filter(listening.timestamp <= currunix) \
         .group_by(listening.user) \
         .order_by(desc("play_count")) \
         .limit(5) \
@@ -32,18 +50,21 @@ def song():
     age_10_29_count = db.session.query(func.count(func.distinct(listening.user))) \
     .join(users, listening.user == users.username) \
     .filter(listening.song_id == song_id) \
+    .filter(listening.timestamp <= currunix) \
     .filter(users.age < 29) \
     .scalar()
 
     age_30_49_count = db.session.query(func.count(func.distinct(listening.user))) \
         .join(users, listening.user == users.username) \
         .filter(listening.song_id == song_id) \
+        .filter(listening.timestamp <= currunix) \
         .filter(users.age.between(30, 50)) \
         .scalar()
 
     age_above_49_count = db.session.query(func.count(func.distinct(listening.user))) \
         .join(users, listening.user == users.username) \
         .filter(listening.song_id == song_id) \
+        .filter(listening.timestamp <= currunix) \
         .filter(users.age > 50) \
         .scalar()
     
@@ -57,7 +78,8 @@ def song():
             func.count().label('plays')
         ).join(users, listening.user == users.username
         ).filter(listening.song_id == song_id
-        ).filter(extract('year', listening.date) == current_year
+        ).filter(listening.timestamp <= currunix
+        #).filter(extract('year', listening.date) == current_year
         ).group_by(func.extract('month', listening.date)
         ).order_by(func.extract('month', listening.date)
         ).all()
@@ -68,6 +90,7 @@ def song():
         func.count().label('plays')
     ).join(listening, listening.user == users.username
     ).filter(listening.song_id == song_id
+    ).filter(listening.timestamp <= currunix
     ).group_by(users.country
     ).all()
 
@@ -84,6 +107,7 @@ def song():
         func.count(func.distinct(listening.user)).label('unique_listeners')
     ).join(listening, listening.user == users.username
     ).filter(listening.song_id == song_id
+    ).filter(listening.timestamp <= currunix
     ).group_by(users.country
     ).all()
 

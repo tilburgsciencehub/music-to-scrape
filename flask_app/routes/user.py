@@ -3,6 +3,7 @@ from database import init_app, db
 from models import listening, artists, songs, users
 from datetime import datetime, timedelta
 from urllib.parse import urlparse, urlunparse, parse_qsl
+import time
 
 user_bp = Blueprint('user', __name__)
 
@@ -12,6 +13,9 @@ def user_page():
 
     # get username
     username = request.args.get('username')
+
+    # get current time stamp
+    currunix = int(time.time())
 
     # get artist info
     user_info = users.query.filter_by(username=username).first()
@@ -77,9 +81,10 @@ def user_page():
         join(songs, listening.song_id == songs.SongID).\
         filter(listening.user == username).\
         filter(listening.date >= start_date.date(), listening.date <= end_date.date()).\
+        filter(listening.timestamp <= currunix).\
         group_by(listening.timestamp).\
         order_by(listening.timestamp.desc()).\
-        limit(10).all()
+        all()
 
     # Create a list to store the formatted data
     formatted_songs = []

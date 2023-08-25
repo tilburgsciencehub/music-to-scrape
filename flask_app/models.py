@@ -6,7 +6,7 @@ from sqlalchemy.sql import text
 class listening(db.Model):
     user = db.Column(db.String)
     date = db.Column(db.Date)
-    timestamp = db.Column(db.String)
+    timestamp = db.Column(db.Integer)
     artist_id = db.Column(db.String, db.ForeignKey('artists.ArtistID'))
     song_id = db.Column(db.String, db.ForeignKey('songs.SongID'))
     unique_id = db.Column(db.String, primary_key=True)

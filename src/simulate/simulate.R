@@ -10,6 +10,9 @@ N_users = 500
 # load artist and song names
 raw <- fread("https://raw.githubusercontent.com/mahkaila/songnames/master/SongCSV.csv", quote="")
 
+# remove any artist/song with wrongly encoded names
+raw <- raw[!grepl('\\\\x', ArtistName)&!grepl('\\\\x',Title)]
+
 # clean-up byte-look-alike strings
 selected_cols = colnames(raw)[which(unlist(lapply(raw, class)=='character'))]
 for (col in selected_cols) raw[, (col):=gsub("b['|\"]","", get(col))]
@@ -31,7 +34,7 @@ setkey(artists, ArtistID)
 songs[artists, artist_popularity:=i.popularity]
 
 # set time horizon
-dates = seq(from=as.Date('2023-07-01'), to = as.Date('2024-06-01'), by = '1 day')
+dates = seq(from=as.Date('2022-12-01'), to = as.Date('2024-01-01'), by = '1 day')
 
 usernames = paste0('user', 1:N_users)
 user_active = runif(length(usernames)) # probability that a user, on any given day listens
