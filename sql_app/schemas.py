@@ -60,7 +60,7 @@ class RecentTracks(BaseModel):
 
 class TopArtistBase(BaseModel):
     name: str
-    count: int
+    plays: int
 
 class TopArtistsUser(BaseModel):
     username: str
@@ -68,7 +68,7 @@ class TopArtistsUser(BaseModel):
 
 class TopTrackBase(BaseModel):
     name: str
-    count: int
+    plays: int
 
 class TopTracksUser(BaseModel):
     username: str
@@ -95,7 +95,7 @@ class WeeklyArtistUserChart(BaseModel):
 class ChartTopTracksBase(BaseModel):
     name: str
     artist: str
-    count: int
+    plays: int
 
 class ChartTopTracks(BaseModel):
     unix_start: int
