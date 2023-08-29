@@ -173,24 +173,54 @@ def featured_artist(limit: int = 5, session: Session = Depends(get_db)):
 
 #chart.getTopTracks
 @router.get("/charts/top-tracks", response_model= ChartTopTracks)
-def chart_get_top_tracks(week: int, limit: int = 5, session: Session = Depends(get_db), year: int = 2023):
+def chart_get_top_tracks(unixtimestamp: int = None, limit: int = 5, session: Session = Depends(get_db)):
+    """
+    Get a list of the most frequently listened songs in a week, starting at `unixtimestamp`.
+
+    Parameters:
+    - `unixtimestamp`: Timestamp; if left empty, the current date/time is used.
+    - `limit`: Number of data points to return (default is 5; max is 100).
+    
+    Returned data:
+    - `chart`: List with requested data
+    - `unix_start`: Timestamp of the beginning of the 1-week period
+    - `unix_end`: Timestamp of the end of the 1-week period
+
+    """
 
     try:
-        top_tracks = get_chart_top_tracks(session, limit, year, week)
+        top_tracks = get_chart_top_tracks(session, limit, unixtimestamp)
     
-        return {"week": week, "chart": top_tracks}
+        return {"chart": top_tracks['tracks'],
+                'unix_start': top_tracks['unix_start'],
+                'unix_end': top_tracks['unix_end']}
     
     except CarInfoException as cie:
         raise HTTPException(**cie.__dict__)
     
 #chart.getTopArtists
 @router.get("/charts/top-artists", response_model= ChartTopArtists)
-def chart_get_top_artists(week: int, limit: int = 5, session: Session = Depends(get_db), year: int = 2023):
+def chart_get_top_artists(unixtimestamp: int = None, limit: int = 5, session: Session = Depends(get_db)):
+    """
+    Get a list of the most frequently listened artists in a week, starting at `unixtimestamp`.
 
+    Parameters:
+    - `unixtimestamp`: Timestamp; if left empty, the current date/time is used.
+    - `limit`: Number of data points to return (default is 5; max is 100).
+
+    Returned data:
+    - `chart`: List with requested data
+    - `unix_start`: Timestamp of the beginning of the 1-week period
+    - `unix_end`: Timestamp of the end of the 1-week period
+
+    """
     try:
-        top_artists = get_chart_top_artists(session, limit, year, week)
+        top_artists = get_chart_top_artists(session, limit, unixtimestamp)
+        
+        return {"chart": top_artists['artists'],
+                'unix_start': top_artists['unix_start'],
+                'unix_end': top_artists['unix_end']}
     
-        return {"week": week, "chart": top_artists}
     
     except CarInfoException as cie:
         raise HTTPException(**cie.__dict__)

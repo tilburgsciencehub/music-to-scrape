@@ -98,16 +98,18 @@ class ChartTopTracksBase(BaseModel):
     count: int
 
 class ChartTopTracks(BaseModel):
-    week: int
+    unix_start: int
+    unix_end: int
     chart: List[ChartTopTracksBase]
 
 # response classes Chart Top Artists
 class ChartTopArtistsBase(BaseModel):
     name: str
-    count: int
+    plays: int
 
 class ChartTopArtists(BaseModel):
-    week: int
+    unix_start: int
+    unix_end: int
     chart: List[ChartTopArtistsBase]
 
 #response class for Top tracks from Artist

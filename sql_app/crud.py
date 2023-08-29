@@ -294,27 +294,17 @@ def get_top_tracks_for_artist(session: Session, artist: str, limit: int = 5):
     else:
         return tracks
 
-# function for chart.getTopTracks (for a given week, the charts)
-def get_chart_top_tracks(session: Session, limit: int, year: int, week: int):
-
-    # Get the date of the first day of the given year
-    first_day = datetime.datetime(year, 1, 1).date()
-
-    # Get the date of the first Monday of the year (week 1)
-    first_monday = first_day + \
-        datetime.timedelta(days=(7 - first_day.weekday()))
-
-    # Get the start date of the requested week
-    start_date = first_monday + datetime.timedelta(weeks=(week - 1))
-    start_datetime = datetime.datetime.combine(start_date, datetime.time())
-
-    # Get the end date of the requested week
-    end_date = start_date + datetime.timedelta(days=6)
-    end_datetime = datetime.datetime.combine(end_date, datetime.time())
+# function for chart.getTopTracks (for a given unixtimestamp, the charts)
+def get_chart_top_tracks(session: Session, limit: int, 
+                         unixtimestamp: int = None):
+    currtime = int(time.time())
+    
+    if unixtimestamp is None: unixtimestamp = currtime
+    if unixtimestamp > currtime: unixtimestamp = currtime
 
     # Convert the dates to Unix timestamps
-    unix_start_date = int(start_datetime.timestamp())
-    unix_end_date = int(end_datetime.timestamp())
+    unix_start_date = unixtimestamp
+    unix_end_date = max(unixtimestamp + 24 * 3600 * 7, currtime)
 
     # query
     chart = session.query(UserListening.song_id, func.count(UserListening.song_id)).filter(
@@ -334,36 +324,26 @@ def get_chart_top_tracks(session: Session, limit: int, year: int, week: int):
         tracks.append({
             "name": track,
             "artist": artist,
-            "count": count
+            "plays": count
         })
 
     if chart is None:
         raise CarInfoNotFoundError
 
     else:
-        return tracks
+        return {'tracks':tracks, 'unix_start':unix_start_date, 'unix_end': unix_end_date}
 
 # function for chart.getTopArtists (for a given week, the charts)
-def get_chart_top_artists(session: Session, limit: int, year: int, week: int):
+def get_chart_top_artists(session: Session, limit: int, unixtimestamp: int = None):
 
-    # Get the date of the first day of the given year
-    first_day = datetime.datetime(year, 1, 1).date()
-
-    # Get the date of the first Monday of the year (week 1)
-    first_monday = first_day + \
-        datetime.timedelta(days=(7 - first_day.weekday()))
-
-    # Get the start date of the requested week
-    start_date = first_monday + datetime.timedelta(weeks=(week - 1))
-    start_datetime = datetime.datetime.combine(start_date, datetime.time())
-
-    # Get the end date of the requested week
-    end_date = start_date + datetime.timedelta(days=6)
-    end_datetime = datetime.datetime.combine(end_date, datetime.time())
+    currtime = int(time.time())
+    
+    if unixtimestamp is None: unixtimestamp = currtime
+    if unixtimestamp > currtime: unixtimestamp = currtime
 
     # Convert the dates to Unix timestamps
-    unix_start_date = int(start_datetime.timestamp())
-    unix_end_date = int(end_datetime.timestamp())
+    unix_start_date = unixtimestamp
+    unix_end_date = max(unixtimestamp + 24 * 3600 * 7, currtime)
 
     # query
     chart = session.query(UserListening.artist_id, func.count(UserListening.artist_id)).filter(
@@ -380,14 +360,14 @@ def get_chart_top_artists(session: Session, limit: int, year: int, week: int):
         artist_name = artist_query[0]
         artists.append({
             "name": artist_name,
-            "count": count
+            "plays": count
         })
 
     if chart is None:
         raise CarInfoNotFoundError
 
     else:
-        return artists
+        return {'artists':artists, 'unix_start':unix_start_date, 'unix_end': unix_end_date}
 
 # function for user.getRecentlyActive
 def get_recent_active_users(session: Session, _limit: int):
