@@ -150,10 +150,9 @@ def get_artist_top_tracks(artist: str, limit: int = 5, session: Session = Depend
     
 #artist.getInfo
 @router.get("/artist/info", response_model = ArtistInfo)
-def artist_info(artist: str, session: Session = Depends(get_db)):
-
+def artist_info(artistid: str, session: Session = Depends(get_db)):
     try:
-        artists = get_artist_info(session, artist)
+        artists = get_artist_info(session, artistid)
         return artists
 
     except CarInfoException as cie:

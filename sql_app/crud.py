@@ -398,7 +398,7 @@ def get_recent_active_users(session: Session, _limit: int):
 # function for artist.featured
 def get_featured_artists(session: Session, _limit: int):
 
-    featured_artists = session.query(Artists.ArtistName, Artists.featured).\
+    featured_artists = session.query(Artists.ArtistName, Artists.featured, Artists.ArtistID).\
         filter(Artists.featured == '1').\
         order_by(func.random()).\
         limit(_limit).\
@@ -410,6 +410,7 @@ def get_featured_artists(session: Session, _limit: int):
 
         artists.append({
             "artist": artist[0],
+            "artist_id": artist[2],
             "featured": 'TRUE'
         })
     
@@ -421,8 +422,7 @@ def get_featured_artists(session: Session, _limit: int):
         return artists
     
 # function for artist.getInfo
-def get_artist_info(session: Session,artist: str):
-
+def get_artist_info(session: Session,artistid: str):
     today = datetime.datetime.today()
     start_of_week = today - timedelta(days=today.weekday())
     end_of_week = start_of_week + timedelta(days=6)
@@ -431,25 +431,25 @@ def get_artist_info(session: Session,artist: str):
     end_date_unix = int(end_of_week.timestamp())
 
     # replace _ with space
-    if "_" in artist:
-        artist = artist.replace("_", " ")
+    if "_" in artistid:
+        artistid = artistid.replace("_", " ")
 
     else:
         pass
 
-    artist_info = session.query(Artists.ArtistID, Artists.ArtistName, Artists.featured, Artists.artistlocation).filter(Artists.ArtistName == artist).first()
+    artist_info = session.query(Artists.ArtistID, Artists.ArtistName, Artists.featured, Artists.artistlocation).filter(Artists.ArtistID == artistid).first()
 
-    artist_id = artist_info[0]
+    artist_name = artist_info[1]
     count_plays = session.query(
-        UserListening).filter_by(artist_id = artist_id).count()
+        UserListening).filter_by(artist_id = artistid).count()
 
     count_songs = session.query(
-        Songs).filter_by(artistid = artist_id).count()
+        Songs).filter_by(artistid = artistid).count()
     
-    count_plays_last_week = session.query(UserListening).filter_by(artist_id=artist_id).filter(UserListening.timestamp >= start_date_unix, UserListening.timestamp <= end_date_unix).count()
+    count_plays_last_week = session.query(UserListening).filter_by(artist_id=artistid).filter(UserListening.timestamp >= start_date_unix, UserListening.timestamp <= end_date_unix).count()
 
     top_songs = session.query(UserListening.song_id, Songs.title, func.count(UserListening.song_id).label('plays')).\
-        filter(UserListening.artist_id == artist_id).\
+        filter(UserListening.artist_id == artistid).\
         join(UserListening.song).\
         group_by(UserListening.song_id).\
         order_by(desc('plays')).\

@@ -127,7 +127,7 @@ class RecentActiveUsers(BaseModel):
 
 class ArtistFeaturedArtist(BaseModel):
     artist: str
-    featured: str
+    artist_id: str
 
 class ArtistFeaturedList(BaseModel):
     artists: List[ArtistFeaturedArtist]
