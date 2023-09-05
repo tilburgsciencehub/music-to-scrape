@@ -2,7 +2,7 @@ version: "3.8"
 services:
   api:
     build: .
-    command: sh -c "Rscript /app/src/simulate/simulate.R && cd sql_app && uvicorn main:app --host 0.0.0.0 --port 8080"
+    command: sh -c "Rscript /app/src/simulate/simulate.R && cd sql_app && uvicorn main:app --host 0.0.0.0 --port 8080 --workers 4"
     ports:
       - 8080:8080
     tty: true
@@ -17,7 +17,7 @@ services:
 
   frontend:
     build: .
-    command: sh -c "Rscript /app/src/simulate/simulate.R && cd flask_app && gunicorn app:app --bind 0.0.0.0:8000"
+    command: sh -c "Rscript /app/src/simulate/simulate.R && cd flask_app && gunicorn app:app --bind 0.0.0.0:8000 --workers 4"
     ports:
       - 8000:8000
     tty: true
