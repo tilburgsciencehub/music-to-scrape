@@ -19,7 +19,7 @@ Head over to __[https://music-to-scrape.org]()__ to view our live website, or di
 The easiest way to run our project is using Docker.
 
 - [Install Docker](docs/install_docker.md) and clone this repository.
-- Open the terminal at the repository's root directory and run the following commands: `docker-compose build` and `docker compose up`. If you have already built the image, it's enough to start it with `docker compose up`.
+- Open the terminal at the repository's root directory and run the following commands: `docker compose build` and `docker compose up`.
 - Wait a bit for the website and API to be launched. If the process breaks, you likely haven't allocated enough memory (e.g., the built takes about 6 GB of memory)
 - Once docker has been launched, you can access the website and API locally at these addresses:
     - API: `http://localhost:8080` (whereby localhost typically is `127.0.0.1`)
@@ -29,6 +29,12 @@ The easiest way to run our project is using Docker.
 #### Configuring server for public access and HTTPS traffic
 
 If you're running this project publicly, it's worthwhile configuring HTTPS access on your server. Following the [notes here](docs/server.md).
+
+TLDR:
+
+- If you have already built the image, it's enough to start it with `docker compose up -d`.
+- If you want to rebuild, use `docker compose build` first.
+- Unsure whether a docker container with the site is running already? Check with `docker ps`; stop unnecessary images using `docker stop IMAGEID`.
 
 ### Manual setup (i.e., not using Docker)
 
