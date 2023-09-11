@@ -3,6 +3,7 @@ from database import init_app, db
 from models import listening, artists, songs
 from sqlalchemy import func, desc
 import time
+import random
 
 home_bp = Blueprint('home', __name__)
 
@@ -48,5 +49,22 @@ def index():
     ).filter(listening.timestamp <= currunix) \
     .join(listening.song).group_by(listening.user).order_by(desc("max_timestamp")).limit(6)
 
+    # make song information disappear 
+    recent_users_update = []
+    cntr=0
+    for user in recent_users:
+        cntr+=1
+        user_dict = dict(zip(user.keys(), user))
+
+        # Add the new data point to the dictionary
+        if 1 <= cntr <= 5 and random.choice([True, False]):
+            user_dict['show_song'] = False
+        else:
+            user_dict['show_song'] = True
+
+        # Append the updated dictionary to the list
+        recent_users_update.append(user_dict)
+       
+
     # render template
-    return render_template('index.html', head='partials/head.html', loading='partials/loading.html', header='partials/header.html', footer='partials/footer.html', tracks=recent_tracks, top_songs=top_songs, featured_artists=featured_artists, recent_users=recent_users)
+    return render_template('index.html', head='partials/head.html', loading='partials/loading.html', header='partials/header.html', footer='partials/footer.html', tracks=recent_tracks, top_songs=top_songs, featured_artists=featured_artists, recent_users=recent_users_update)

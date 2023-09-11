@@ -36,7 +36,35 @@ songs[artists, artist_popularity:=i.popularity]
 # set time horizon
 dates = seq(from=as.Date('2022-12-01'), to = as.Date('2024-01-01'), by = '1 day')
 
-usernames = paste0('user', 1:N_users)
+# generate user names
+generate_fake_usernames <- function(num_usernames = 1000, min_word_length = 5, max_word_length = 10, num_numbers = 2) {
+  # Define a list of random words or fragments
+  words <- c("Gamer", "Ninja", "Coder", "Geek", "Panda", "Cyber", "Pixel", "Rocket", "Wizard", "Dragon", "Star", "Cosmic", "Moon", "Tech", "Sonic", "Galaxy", "Stealth", "Shadow", "Vector")
+  
+  # Initialize an empty vector to store generated usernames
+  usernames <- character(0)
+  
+  # Generate the specified number of usernames
+  for (i in 1:num_usernames) {
+    # Randomly select words and numbers to create a username
+    username_parts <- sample(words, sample(min_word_length:max_word_length, 1))
+    username_parts <- c(username_parts, sample(0:9, num_numbers))
+    
+    # Combine the selected parts into a single username
+    username <- paste(username_parts, collapse = "")
+    
+    # Append the username to the vector
+    usernames <- c(usernames, username)
+  }
+  
+  return(usernames)
+}
+
+# Generate 1000 fake usernames; hard-code starcoder49 so it can be used in my tutorials.
+set.seed(1234)
+fake_usernames <- unique(c('StarCoder49', generate_fake_usernames(num_usernames = floor(1000*1.2), min_word_length=1, max_word_length = 2)))
+
+usernames = fake_usernames[1:N_users] #paste0('user', 1:N_users)
 user_active = runif(length(usernames)) # probability that a user, on any given day listens
 usage_intensity = rpois(length(usernames), 12) # approximate number of songs consumed
 
