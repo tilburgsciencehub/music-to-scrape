@@ -34,7 +34,7 @@ setkey(artists, ArtistID)
 songs[artists, artist_popularity:=i.popularity]
 
 # set time horizon
-dates = seq(from=as.Date('2022-12-01'), to = as.Date('2024-01-01'), by = '1 day')
+dates = seq(from=as.Date('2023-12-01'), to = as.Date('2025-01-01'), by = '1 day')
 
 # generate user names
 generate_fake_usernames <- function(num_usernames = 1000, min_word_length = 5, max_word_length = 10, num_numbers = 2) {
