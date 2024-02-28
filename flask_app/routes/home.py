@@ -66,6 +66,17 @@ def index():
     featured_artists = list(featured_artists)
 
     # recent users
+
+    recent_users = db.session.query(
+        listening.user,
+        func.max(listening.timestamp).label("max_timestamp"),
+        songs.ArtistName,
+        songs.Title
+    ).filter(listening.timestamp <= currunix) \
+    .join(listening.song).group_by(listening.user).order_by(desc("max_timestamp")).limit(6)
+
+    """
+    # recent users
     subquery1 = (
         db.session.query(
             listening.user,
@@ -84,7 +95,7 @@ def index():
     subquery2 = (
         db.session.query(
             subquery1.c.user,
-            func.max(listening.song_id).label('song_id'),
+            listening.song_id,
             subquery1.c.max_timestamp,
         )
         .filter(listening.timestamp == subquery1.c.max_timestamp)
@@ -99,7 +110,7 @@ def index():
         songs.ArtistName,
         songs.Title,
     ).join(songs, subquery2.c.song_id == songs.SongID)
-
+    """
     # make song information disappear
     recent_users_update = []
     cntr = 0
