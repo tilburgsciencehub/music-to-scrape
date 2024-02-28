@@ -2,8 +2,7 @@ FROM continuumio/miniconda3 AS dependencies
 
 RUN apt-get update && \
     apt-get install -y libcurl4-openssl-dev && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    find /var/*/apt -type f -delete
 
 RUN conda update -n base -c defaults conda && \
     conda install -c conda-forge -c r r-base=4.1.3 r-data.table r-dbi r-rsqlite && \
@@ -12,5 +11,6 @@ RUN conda update -n base -c defaults conda && \
 
 FROM dependencies AS final
 
-WORKDIR /app
 COPY . /app
+WORKDIR /app
+RUN Rscript src/simulate/simulate.R

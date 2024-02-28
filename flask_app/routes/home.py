@@ -7,53 +7,104 @@ import random
 
 home_bp = Blueprint('home', __name__)
 
+
 # route for home
 @home_bp.route('/')
 def index():
-
     # get current time stamp
     currunix = int(time.time())
 
     # recently played tracks query
-    subquery = db.session.query(
-        listening.song_id,
-        listening.timestamp
-    ).filter(listening.timestamp <= currunix).order_by(listening.timestamp.desc()).limit(10).subquery()
+    subquery = (
+        db.session.query(listening.song_id, listening.timestamp)
+        .filter(listening.timestamp <= currunix)
+        .order_by(listening.timestamp.desc())
+        .limit(10)
+        .subquery()
+    )
 
     recent_tracks = db.session.query(
         subquery.c.timestamp.label("timestamp"),
         songs.ArtistName,
         songs.Title,
-        songs.SongID
+        songs.SongID,
     ).join(songs, subquery.c.song_id == songs.SongID)
-    
+
+    recent_tracks = list(recent_tracks)
+
     # top 15
-    top_songs = db.session.query(listening.song_id, songs.Title, songs.ArtistName, songs.ArtistID,
-                                 func.count(listening.song_id),
-                                 func.row_number().over(order_by=func.count(listening.song_id).desc()).label('rank'))\
-        .join(songs, listening.song_id == songs.SongID)\
-        .group_by(listening.song_id)\
-        .order_by(func.count(listening.song_id).desc())\
+    subquery = (
+        db.session.query(
+            listening.song_id,
+            func.count(listening.song_id).label('count'),
+        )
+        .group_by(listening.song_id)
+        .subquery()
+    )
+
+    top_songs = (
+        db.session.query(
+            subquery.c.song_id,
+            songs.Title,
+            songs.ArtistName,
+            songs.ArtistID,
+            subquery.c.count,
+            func.row_number().over(order_by=subquery.c.count.desc()).label('rank'),
+        )
+        .join(songs, subquery.c.song_id == songs.SongID)
+        .order_by(subquery.c.count.desc())
         .limit(15)
+    )
+
+    top_songs = list(top_songs)
 
     # featured artists
-    featured_artists = artists.query.filter_by(
-        featured='1').order_by(func.random()).limit(8).all()
+    featured_artists = (
+        artists.query.filter_by(featured='1').order_by(func.random()).limit(8).all()
+    )
+
+    featured_artists = list(featured_artists)
 
     # recent users
-    recent_users = db.session.query(
-        listening.user,
-        func.max(listening.timestamp).label("max_timestamp"),
-        songs.ArtistName,
-        songs.Title
-    ).filter(listening.timestamp <= currunix) \
-    .join(listening.song).group_by(listening.user).order_by(desc("max_timestamp")).limit(6)
+    subquery1 = (
+        db.session.query(
+            listening.user,
+            func.max(listening.timestamp).label('max_timestamp'),
+        )
+        .filter(listening.timestamp <= currunix)
+        .group_by(listening.user)
+        .order_by('max_timestamp')
+        .limit(6)
+        .subquery()
+    )
 
-    # make song information disappear 
+    # One user may have more than one listening events with the same timestamp.
+    # Only keep one of them, to prevent this user from appearing in the list more
+    # than once.
+    subquery2 = (
+        db.session.query(
+            subquery1.c.user,
+            func.max(listening.song_id).label('song_id'),
+            subquery1.c.max_timestamp,
+        )
+        .filter(listening.timestamp == subquery1.c.max_timestamp)
+        .filter(listening.user == subquery1.c.user)
+        .group_by(subquery1.c.user, subquery1.c.max_timestamp)
+        .subquery()
+    )
+
+    recent_users = db.session.query(
+        subquery2.c.user,
+        subquery2.c.max_timestamp,
+        songs.ArtistName,
+        songs.Title,
+    ).join(songs, subquery2.c.song_id == songs.SongID)
+
+    # make song information disappear
     recent_users_update = []
-    cntr=0
+    cntr = 0
     for user in recent_users:
-        cntr+=1
+        cntr += 1
         user_dict = dict(zip(user.keys(), user))
 
         # Add the new data point to the dictionary
@@ -64,7 +115,16 @@ def index():
 
         # Append the updated dictionary to the list
         recent_users_update.append(user_dict)
-       
 
     # render template
-    return render_template('index.html', head='partials/head.html', loading='partials/loading.html', header='partials/header.html', footer='partials/footer.html', tracks=recent_tracks, top_songs=top_songs, featured_artists=featured_artists, recent_users=recent_users_update)
+    return render_template(
+        'index.html',
+        head='partials/head.html',
+        loading='partials/loading.html',
+        header='partials/header.html',
+        footer='partials/footer.html',
+        tracks=recent_tracks,
+        top_songs=top_songs,
+        featured_artists=featured_artists,
+        recent_users=recent_users_update,
+    )

@@ -192,13 +192,15 @@ add_indices(con_fastapi)
 
 dbDisconnect(con_fastapi)
 
-#generate sqlite database for fastapi
+#generate sqlite database for flask
 con_flask <- dbConnect(RSQLite::SQLite(), dbname = "flask_app/apistoscrape.db")
 
 dbWriteTable(con_flask, "users", users)
 dbWriteTable(con_flask, "songs", songs)
 dbWriteTable(con_flask, "artists", artists, field.types = c(featured = "TEXT"))
 dbWriteTable(con_flask, "listening", history, field.types = c(date = "TEXT"))
+
+dbExecute(con_flask, "CREATE INDEX listening_user_timestamp ON listening (user, timestamp)")
 
 add_indices(con_flask)
 
