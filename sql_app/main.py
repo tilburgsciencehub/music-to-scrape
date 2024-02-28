@@ -19,13 +19,13 @@ Our API is freely accessible, which means you do not have to authenticate with t
 
 ## Visit our website
 
-In case you haven't done so, visit our website at [https://music-to-scrape.com]() to see our mock front end and learn more about this project.
+In case you haven't done so, visit our website at [https://music-to-scrape.org]() to see our mock front end and learn more about this project.
 
 
 """
 
 # Initialize the app docs_url=None, redoc_url="/docs"
-app = FastAPI(description = description, title = "Music To Scrape API", version = '0.1', docs_url=None, redoc_url="/docs",
+app = FastAPI(description = description, title = "Music To Scrape API", version = '0.11', docs_url=None, redoc_url="/docs",
               contact = {"name": "Hannes Datta",
                          "url": "https://hannesdatta.com",
                          "email": "h.datta@tilburguniversity.edu"}
