@@ -19,9 +19,7 @@ Our API is freely accessible, which means you do not have to authenticate with t
 
 ## Visit our website
 
-In case you haven't done so, visit our website at [https://music-to-scrape.org]() to see our mock front end and learn more about this project.
-
-
+In case you haven't done so, visit our website at <a href="https://music-to-scrape.org">https://music-to-scrape.org</a> to see our mock front end and learn more about this project.
 """
 
 # Initialize the app docs_url=None, redoc_url="/docs"
