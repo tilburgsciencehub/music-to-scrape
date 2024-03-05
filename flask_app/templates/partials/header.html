@@ -32,13 +32,23 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="https://api.music-to-scrape.org/docs">API documentation</a>
-                        <a class="dropdown-item" href="{{ url_for('about.about')}}">About us</a>
+                        <a class="dropdown-item" href="https://odcm.hannesdatta.com">Open education course</a>
+                        <a class="dropdown-item" href="https://doi.org/10.1016/j.jretai.2024.02.002">Article in Journal of Retailing</a>
+                        <a class="dropdown-item" href="https://web-scraping.org">Marketing research using web data</a>
+                        <a class="dropdown-item" href="https://github.com/tilburgsciencehub/music-to-scrape">GitHub repository of this project</a>
+                        <a class="dropdown-item" href="https://tilburgsciencehub.com">Tilburg Science Hub</a>
                         <!--<a class="dropdown-item" href="#">Another action</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
                         -->
                     </div>
                 </li>
+                
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('about.about')}}">About</a>
+                </li>
+            
+                
             </ul>
             <form action="{{ url_for('search.search') }}" class="form-inline my-2 my-lg-0" method="get">
                 <input class="form-control mr-sm-2" name="query" type="search" placeholder="Search for artists, songs, and users" aria-label="Search" style="width:300px">
