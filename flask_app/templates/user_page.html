@@ -9,7 +9,7 @@
     <section>
         <div class="row my-3">
             <div class="col-lg-4 album_single_img d-flex align-items-center justify-content-center">
-                <img src="{{ url_for('static', filename='images/icon-user.png') }}" class="img-fluid-user">
+                <img src="https://api.dicebear.com/8.x/avataaars/svg?seed={{user_info.username}}&backgroundColor=ffdfbf&accessoriesColor=25557c,262e33,3c4f5c,5199e4,65c9ff,929598,b1e2ff,e6e6e6,ff488e,ff5c5c,ffafb9,ffdeb5,ffffb1,ffffff,a7ffc4&clothesColor=262e33,3c4f5c,5199e4,65c9ff,929598,b1e2ff,e6e6e6,ff488e,ffafb9,ffffb1,ffffff,25557c&clothing=blazerAndShirt,blazerAndSweater,collarAndSweater,graphicShirt,hoodie,shirtCrewNeck,overall,shirtScoopNeck,shirtVNeck&eyebrows=default,defaultNatural,flatNatural,frownNatural,raisedExcited,raisedExcitedNatural,unibrowNatural,upDown,upDownNatural&eyes=closed,default,eyeRoll,happy,hearts,side,surprised,wink,winkWacky,xDizzy&mouth=default,grimace,smile,tongue,twinkle" class="img-fluid-user">
             </div>
             <div class="col-lg-8 album_single_text mt-5">
                 <h2>{{ user_info.username }}</h2>

@@ -52,7 +52,7 @@
                             <a href="song?song-id={{ track.SongID }}"
                                 style="color:rgb(1, 51, 101) !important;text-decoration:none">
                                 <div class="card" style="border:none;">
-                                    <img src="https://picsum.photos/id/100/100/100" class="card-img-top" alt="...">
+                                    <img src="https://api.dicebear.com/8.x/shapes/svg?seed={{track.SongID}}&backgroundColor=0a5b83,1c799f,69d2e7,f1f4dc&shape1Color[]&shape2Color=f1f4dc&shape3Color=f1f4dc,69d2e7,1c799f" class="card-img-top" alt="...">
                                     <div class="card-body center-text">
                                         <h5 class="card-title">{{ track.Title }}</h5>
                                         <p class="card-text">{{ track.ArtistName }}</p>
@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="center-vertical">
-                                        <img src="https://picsum.photos/id/237/50/50"
+                                        <img src="https://api.dicebear.com/8.x/shapes/svg?seed={{song.song_id}}&backgroundColor=0a5b83,1c799f,69d2e7,f1f4dc&shape1Color[]&shape2Color=f1f4dc&shape3Color=f1f4dc,69d2e7,1c799f"
                                             class="align-self-center mobile-center" height="50" width="50">
                                     </div>
                                 </div>
@@ -137,7 +137,7 @@
                         <div class="swiper-slide">
                             <a href="artist?artist-id={{ artist.ArtistID }}">
                                 <div class="card" style="border:none;">
-                                    <img src="https://picsum.photos/id/100/100/100" class="card-img-top" alt="...">
+                                    <img src="https://api.dicebear.com/8.x/thumbs/svg?seed={{artist.ArtistID}}&backgroundColor=0a5b83,1c799f,69d2e7,f1f4dc&shapeColor=0a5b83,1c799f,69d2e7,f1f4dc" class="card-img-top" alt="...">
                                     <div class="card-body center-text">
                                         <h5 class="card-title">{{ artist.ArtistName }}</h5>
                                     </div>
@@ -166,7 +166,7 @@
                     <a href="user?username={{ user.user }}">
                         <div class="avatar-container">
                             <div class="avatar">
-                                <img src="{{ url_for('static', filename='images/icon-user.png') }}">
+                                <img src="https://api.dicebear.com/8.x/avataaars/svg?seed={{user.user}}&backgroundColor=ffdfbf&accessoriesColor=25557c,262e33,3c4f5c,5199e4,65c9ff,929598,b1e2ff,e6e6e6,ff488e,ff5c5c,ffafb9,ffdeb5,ffffb1,ffffff,a7ffc4&clothesColor=262e33,3c4f5c,5199e4,65c9ff,929598,b1e2ff,e6e6e6,ff488e,ffafb9,ffffb1,ffffff,25557c&clothing=blazerAndShirt,blazerAndSweater,collarAndSweater,graphicShirt,hoodie,shirtCrewNeck,overall,shirtScoopNeck,shirtVNeck&eyebrows=default,defaultNatural,flatNatural,frownNatural,raisedExcited,raisedExcitedNatural,unibrowNatural,upDown,upDownNatural&eyes=closed,default,eyeRoll,happy,hearts,side,surprised,wink,winkWacky,xDizzy&mouth=default,grimace,smile,tongue,twinkle">
                             </div>
                             {% if user.show_song %}
                             <span class="avatar-span">{{ user.ArtistName }} - {{ user.Title }}</span>
