@@ -165,13 +165,17 @@
                 <div class="col-sm-2 d-flex justify-content-center mobile-user-margin">
                     <a href="user?username={{ user.user }}">
                         <div class="avatar-container">
-                            <div class="avatar">
-                                <img src="{{ url_for('static', filename='images/icon-user.png') }}">
-                            </div>
-                            {% if user.show_song %}
-                            <span class="avatar-span">{{ user.ArtistName }} - {{ user.Title }}</span>
-                            {% endif %}
-                            <h5 style="text-align:center;margin-left: -10px;margin-top: 5px;">{{ user.user }}</h5>
+                              {% if user.avatar %}
+                              <div class="avatar">
+                                  {{ user.avatar | safe }}
+                              </div>
+                              {% else %}
+                              <img src="{{ url_for('static', filename='images/icon-user.png') }}" class="avatar">
+                              {% endif %}
+                              {% if user.show_song %}
+                              <span class="avatar-span">{{ user.ArtistName }} - {{ user.Title }}</span>
+                              {% endif %}
+                              <h5 style="text-align:center;margin-left: -10px;margin-top: 5px;">{{ user.user }}</h5>
                         </div>
                     </a>
                 </div>
