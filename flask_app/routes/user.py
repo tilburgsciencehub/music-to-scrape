@@ -4,13 +4,15 @@ from models import listening, artists, songs, users
 from datetime import datetime, timedelta
 from urllib.parse import urlparse, urlunparse, parse_qsl
 import time
+import requests
 
 user_bp = Blueprint('user', __name__)
+avatar = []
 
 # route for artist
 @user_bp.route('/user')
 def user_page():
-
+  
     # get username
     username = request.args.get('username')
 
@@ -19,6 +21,16 @@ def user_page():
 
     # get artist info
     user_info = users.query.filter_by(username=username).first()
+    
+    # get avatar
+    def fetch_avatar(username):
+      api_url = f"https://api.multiavatar.com/{username}"
+      response = requests.get(api_url)
+      if response.status_code == 200:
+        return response.content.decode('utf-8')
+      else:
+        return None
+      
 
     # get the weeknumber and year
     week = request.args.get('week')
@@ -99,4 +111,4 @@ def user_page():
             (title, artist_name, formatted_date, formatted_time))
 
     # render template
-    return render_template('user_page.html', head='partials/head.html', loading='partials/loading_empty.html', header='partials/header.html', footer='partials/footer.html', user_info=user_info, top_songs=formatted_songs, nav_dict=nav_dict, start_date=start_date.date(), end_date=end_date.date(), current_week=current_week)
+    return render_template('user_page.html', head='partials/head.html', loading='partials/loading_empty.html', header='partials/header.html', footer='partials/footer.html', user_info=user_info, avatar=fetch_avatar(username), top_songs=formatted_songs, nav_dict=nav_dict, start_date=start_date.date(), end_date=end_date.date(), current_week=current_week)

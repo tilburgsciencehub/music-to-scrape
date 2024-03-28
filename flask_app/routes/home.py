@@ -4,9 +4,18 @@ from models import listening, artists, songs
 from sqlalchemy import func, desc
 import time
 import random
+import requests
 
 home_bp = Blueprint('home', __name__)
 
+# Function to fetch avatar for a user
+def fetch_avatar(username):
+    api_url = f"https://api.multiavatar.com/{username}"
+    response = requests.get(api_url)
+    if response.status_code == 200:
+      return response.content.decode('utf-8')
+    else:
+      return None
 
 # route for home
 @home_bp.route('/')
@@ -116,6 +125,9 @@ def index():
             user_dict['show_song'] = False
         else:
             user_dict['show_song'] = True
+
+        # Fetch avatar for the user
+        user_dict['avatar'] = fetch_avatar(user_dict['user'])
 
         # Append the updated dictionary to the list
         recent_users_update.append(user_dict)

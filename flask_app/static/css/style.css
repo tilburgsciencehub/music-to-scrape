@@ -156,9 +156,11 @@ a:hover {
 }
 
 .img-fluid {
-    max-width: 100%;
-    width:70%;
-    height: auto;
+    box-shadow: none !important;
+    border-radius: none !important;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
 }
 
 img {

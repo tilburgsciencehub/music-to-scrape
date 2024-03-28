@@ -2,6 +2,7 @@
 
 {% block content %}
 
+
 <!-- Main Container-->
 <div class="container">
 
@@ -9,7 +10,13 @@
     <section>
         <div class="row my-3">
             <div class="col-lg-4 album_single_img d-flex align-items-center justify-content-center">
-                <img src="{{ url_for('static', filename='images/icon-user.png') }}" class="img-fluid-user">
+                {% if avatar %}
+                  <div class="img-fluid-user">
+                    {{ avatar | safe }}
+                  </div>
+                {% else %}
+                  <img src="{{ url_for('static', filename='images/icon-user.png') }}" class="img-fluid-user">
+                {% endif %}
             </div>
             <div class="col-lg-8 album_single_text mt-5">
                 <h2>{{ user_info.username }}</h2>
