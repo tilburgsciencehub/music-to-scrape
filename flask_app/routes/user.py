@@ -7,6 +7,8 @@ import time
 import requests
 
 user_bp = Blueprint('user', __name__)
+
+# make empty container to store api svg in
 avatar = []
 
 # route for artist
