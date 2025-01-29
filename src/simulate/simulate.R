@@ -71,6 +71,7 @@ usage_intensity = rpois(length(usernames), 12) # approximate number of songs con
 # simulate data
 
 history = rbindlist(lapply(usernames, function(user) {
+  print(user)
   play = data.table(date=dates, active=runif(length(dates))<=user_active[which(user==usernames)])
   play[, nsongs:=pmax(1,rpois(.N,usage_intensity[which(user==usernames)]))]
   play[, date_unix:=as.numeric(as.POSIXct(date))]
@@ -82,7 +83,7 @@ history = rbindlist(lapply(usernames, function(user) {
   timestamps = rep(play[active==T]$timestamp_session_start, play[active==T]$nsongs)
   my_dates = rep(play[active==T]$date, play[active==T]$nsongs)
 
-  selected_songs=songs[match(sample(songs$SongID, sum(play[active==T]$nsongs), prob=songs$artist_popularity, replace = TRUE),SongID)]
+  selected_songs=songs[match(sample(songs$SongID, sum(play[active==T]$nsongs), prob=songs$artist_popularity, replace=T),SongID)]
   selected_songs[, date:=my_dates]
   selected_songs[, session_start_unix:=timestamps]
 
