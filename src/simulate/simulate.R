@@ -65,14 +65,12 @@ set.seed(1234)
 fake_usernames <- unique(c('StarCoder49', generate_fake_usernames(num_usernames = floor(1000*1.2), min_word_length=1, max_word_length = 2)))
 
 usernames = fake_usernames[1:N_users] #paste0('user', 1:N_users)
-user_active = runif(length(usernames)) # probability that a user, on any given day listens
+user_active = runif(length(usernames), min = .1, max=1) # probability that a user, on any given day listens
 usage_intensity = rpois(length(usernames), 12) # approximate number of songs consumed
 
 # simulate data
-
 history = rbindlist(lapply(usernames, function(user) {
-  print(user)
-  play = data.table(date=dates, active=runif(length(dates))<=user_active[which(user==usernames)])
+  play <- data.table(date=dates, active=runif(length(dates))<=user_active[which(user==usernames)])
   play[, nsongs:=pmax(1,rpois(.N,usage_intensity[which(user==usernames)]))]
   play[, date_unix:=as.numeric(as.POSIXct(date))]
   play[active==F, nsongs:=0]
@@ -84,6 +82,8 @@ history = rbindlist(lapply(usernames, function(user) {
   my_dates = rep(play[active==T]$date, play[active==T]$nsongs)
 
   selected_songs=songs[match(sample(songs$SongID, sum(play[active==T]$nsongs), prob=songs$artist_popularity, replace=T),SongID)]
+
+  stopifnot(nrow(selected_songs)>0)
   selected_songs[, date:=my_dates]
   selected_songs[, session_start_unix:=timestamps]
 
