@@ -82,7 +82,7 @@ history = rbindlist(lapply(usernames, function(user) {
   timestamps = rep(play[active==T]$timestamp_session_start, play[active==T]$nsongs)
   my_dates = rep(play[active==T]$date, play[active==T]$nsongs)
 
-  selected_songs=songs[match(sample(songs$SongID, sum(play[active==T]$nsongs), prob=songs$artist_popularity),SongID)]
+  selected_songs=songs[match(sample(songs$SongID, sum(play[active==T]$nsongs), prob=songs$artist_popularity, replace = TRUE),SongID)]
   selected_songs[, date:=my_dates]
   selected_songs[, session_start_unix:=timestamps]
 
