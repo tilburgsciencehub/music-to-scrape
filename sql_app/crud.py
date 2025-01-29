@@ -371,7 +371,9 @@ def get_chart_top_artists(session: Session, limit: int, unixtimestamp: int = Non
 
 # function for user.getRecentlyActive
 def get_recent_active_users(session: Session, _limit: int):
+    currunix = int(time.time())
     subquery = session.query(UserListening.user, func.max(UserListening.timestamp).label("max_timestamp")) \
+        .filter(UserListening.timestamp <= currunix) \
         .group_by(UserListening.user) \
         .subquery()
 
