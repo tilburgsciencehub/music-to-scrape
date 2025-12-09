@@ -2,6 +2,7 @@
 from fastapi import FastAPI
 import api
 import uvicorn
+from fastapi.openapi.docs import get_redoc_html
 
 
 description = """
@@ -23,7 +24,7 @@ In case you haven't done so, visit our website at <a href="https://music-to-scra
 """
 
 # Initialize the app docs_url=None, redoc_url="/docs"
-app = FastAPI(description = description, title = "Music To Scrape API", version = '0.11', docs_url=None, redoc_url="/docs",
+app = FastAPI(description = description, title = "Music To Scrape API", version = '0.11', docs_url=None, redoc_url=None, #"/docs",
               contact = {"name": "Hannes Datta",
                          "url": "https://hannesdatta.com",
                          "email": "h.datta@tilburguniversity.edu"}
@@ -34,6 +35,15 @@ app.include_router(api.router)
 @app.get("/")
 async def root():
     return {"message": "Welcome to the API of Music-to-scrape"}
+
+@app.get("/docs", include_in_schema=False)
+def custom_redoc():
+    return get_redoc_html(
+        openapi_url="/openapi.json",
+        title="Music To Scrape API",
+        redoc_js_url="https://cdn.jsdelivr.net/npm/redoc/bundles/redoc.standalone.js"
+    )
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8080)
