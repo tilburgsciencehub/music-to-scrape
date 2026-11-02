@@ -1,5 +1,8 @@
 # Import FastAPI
+from pathlib import Path
+
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 import api
 import uvicorn
 from fastapi.openapi.docs import get_redoc_html
@@ -30,6 +33,7 @@ app = FastAPI(description = description, title = "Music To Scrape API", version 
                          "email": "h.datta@tilburguniversity.edu"}
               )
 
+app.mount("/static", StaticFiles(directory=Path(__file__).parent / "static"), name="static")
 app.include_router(api.router)
 
 @app.get("/")
@@ -41,7 +45,7 @@ def custom_redoc():
     return get_redoc_html(
         openapi_url="/openapi.json",
         title="Music To Scrape API",
-        redoc_js_url="https://cdn.jsdelivr.net/npm/redoc/bundles/redoc.standalone.js"
+        redoc_js_url="/static/redoc.standalone.js"
     )
 
 

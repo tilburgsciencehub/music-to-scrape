@@ -1,0 +1,8 @@
+pip install fastapi
+pip install fastapi_utils
+pip install sqlalchemy
+pip install pydantic
+pip install uvicorn
+pip install gunicorn
+pip install flask
+pip install flask_sqlalchemy
