@@ -13,7 +13,7 @@ services:
         max-size: "10m"
         max-file: "3"
     labels:
-      - "traefik.http.routers.backend.rule=Host(`api.music-to-scrape.com`)"
+      - "traefik.http.routers.backend.rule=Host(`api.music-to-scrape.org`)"
 
   frontend:
     build: .
@@ -28,4 +28,4 @@ services:
         max-size: "10m"
         max-file: "3"
     labels:
-      - "traefik.http.routers.frontend.rule=Host(`music-to-scrape.com`)"
+      - "traefik.http.routers.frontend.rule=Host(`music-to-scrape.org`)"
