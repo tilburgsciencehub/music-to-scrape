@@ -6,6 +6,7 @@ RUN apt-get update && \
 
 RUN conda update -n base -c defaults conda && \
     conda install -c conda-forge -c r r-base=4.1.3 r-data.table=1.14.8 r-dbi=1.1.3 r-rsqlite=2.3.1 && \
+    conda clean -afy && \
     R -e "install.packages('curl', repos='http://cran.rstudio.com/')" && \
     pip install typing-inspect==0.9.0 fastapi==0.115.7 fastapi-utils==0.8.0 SQLAlchemy==1.4.54 pydantic==2.10.6 uvicorn==0.34.0 gunicorn==23.0.0 flask==3.1.0 flask_sqlalchemy==3.0.5
 
